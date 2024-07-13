@@ -2,13 +2,13 @@
 /***************************************************************
  *  created: 24.08.17 - 13:07
  *  Copyright notice
- *  (c) 2017 Gregory Jo Erdmann <gregory.jo@gjo-se.com>
+ *  (c] 2017 Gregory Jo Erdmann <gregory.jo@gjo-se.com>
  *  All rights reserved
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ *  (at your option] any later version.
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
  *  This script is distributed in the hope that it will be useful,
@@ -22,35 +22,39 @@ $ext   = 'gjo_products';
 $lll   = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
 $table = 'tx_gjoproducts_domain_model_productsetvariantgroup';
 
-return array(
+return [
 
-    'ctrl' => array(
-        'title'         => $lll . $table,
-        'label'         => 'table_headline',
-        'tstamp'        => 'tstamp',
-        'crdate'        => 'crdate',
-        'dividers2tabs' => true,
-        'searchFields'  => 'headline',
-        'iconfile'      => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
+    'ctrl' => [
+        'title' => $lll . $table,
+        'label' => 'table_headline',
+
+        'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
+        'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
+        'sortby' => 'sorting',
+        'searchFields' => 'headline',
         'hideTable'     => true,
 
-        'languageField'            => 'sys_language_uid',
-        'transOrigPointerField'    => 'l10n_parent',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'delete' => 'deleted',
+        'origUid' => 't3_origuid',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
+        'translationSource' => 'l10n_source',
+    ],
 
-        'delete'        => 'deleted',
-        'enablecolumns' => array(
-            'disabled' => 'hidden'
-        ),
-    ),
+    'columns' => [
 
-    'columns' => array(
-
-        'product_set' => array(
-            'config' => array(
+        'product_set' => [
+            'config' => [
                 'type' => 'passthrough',
-            ),
-        ),
+            ],
+        ],
 
         'product_set_variants' => [
             'label'  => $lll . $table . '.product_set_variants',
@@ -150,10 +154,10 @@ return array(
             ]
         ],
 
-        'l10n_parent'      => array(
+        'l10n_parent'      => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
             'label'       => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-            'config'      => array(
+            'config'      => [
                 'type'                => 'select',
                 'renderType'          => 'selectSingle',
                 'items'               => [
@@ -165,23 +169,23 @@ return array(
                 'foreign_table'       => $table,
                 'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
                 'default' => 0,
-            ),
+            ],
 
-        ),
-        'l10n_diffsource'  => array(
-            'config' => array(
+        ],
+        'l10n_diffsource'  => [
+            'config' => [
                 'type' => 'passthrough',
-            ),
-        ),
+            ],
+        ],
 
-        'hidden' => array(
+        'hidden' => [
             'label'   => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config'  => array(
+            'config'  => [
                 'type' => 'check',
-            ),
-        ),
+            ],
+        ],
 
-    ),
+    ],
 
     'types' => [
         '1' => [
@@ -196,7 +200,7 @@ return array(
         ]
     ],
 
-    'palettes' => array(
-        '1' => array('showitem' => ''),
-    ),
-);
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+];
