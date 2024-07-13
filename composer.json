@@ -1,0 +1,32 @@
+{
+    "name": "gjo-se/gjo-products",
+    "type": "typo3-cms-extension",
+    "description": "Gjo-Products",
+    "authors": [
+        {
+            "name": "Gregory Jo Erdmann",
+            "email": "gregory.jo@gjo-se.com",
+            "homepage": "https://www.gjo-se.com",
+            "role": "maintainer"
+        }
+    ],
+    "license": ["GPL-2.0-or-later"],
+    "require": {
+        "php": "^8.3",
+        "typo3/cms-core": "^12.4"
+    },
+    "require-dev": {
+    },
+    "conflict": {
+    },
+    "autoload": {
+        "psr-4": {
+            "GjoSe\\GjoProducts\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "gjo_products"
+        }
+    }
+}
