@@ -30,7 +30,7 @@ return [
 
         'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
         'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
-        'sortby' => 'sorting',
+        'default_sortby' => 'name ASC',
         'searchFields' => 'name',
         'hideTable'        => true,
 
@@ -142,9 +142,5 @@ return [
                             hidden,
             ',
         ]
-    ],
-
-    'palettes' => [
-        '1' => ['showitem' => ''],
     ],
 ];
