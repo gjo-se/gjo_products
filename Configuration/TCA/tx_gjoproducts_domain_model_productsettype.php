@@ -116,9 +116,26 @@ return [
                 'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0]',
             ],
         ],
-        'l10n_diffsource'  => [
+
+        'l10n_source' => [
+            'displayCond' => 'FIELD:sys_language_uid:>:0',
+            'label' => 'Translation source',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['label' => '', 'value' => 0],
+                ],
+                'foreign_table' => $table,
+                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
+                'default' => 0,
+            ],
+        ],
+
+        'l10n_diffsource' => [
             'config' => [
                 'type' => 'passthrough',
+                'default' => '',
             ],
         ],
 
@@ -132,7 +149,7 @@ return [
     ],
 
     'types' => [
-        '1' => [
+        '0' => [
             'showitem' => '
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
                             product_group,

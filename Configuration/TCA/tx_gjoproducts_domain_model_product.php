@@ -58,41 +58,41 @@ return [
             ]
         ],
 
-        'article_number' => [
-            'label' => $lll . $table . '.article_number',
-            'config' => [
-                'type' => 'input'
-            ]
-        ],
-
-        'additional_information' => [
-            'label' => $lll . $table . '.additional_information',
-            'config' => [
-                'type' => 'input'
-            ]
-        ],
+//        'article_number' => [
+//            'label' => $lll . $table . '.article_number',
+//            'config' => [
+//                'type' => 'input'
+//            ]
+//        ],
+//
+//        'additional_information' => [
+//            'label' => $lll . $table . '.additional_information',
+//            'config' => [
+//                'type' => 'input'
+//            ]
+//        ],
 
         // TODO: überarbeiten!!
-        'image' => [
-            'label' => $lll . $table . '.image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'image',
-                [
-                    'maxitems' => 1,
-                    'overrideChildTca' => [
-                        'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                            --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                            --palette--;;filePalette'
-                            ],
-                        ],
-                    ],
-
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
-        ],
+//        'image' => [
+//            'label' => $lll . $table . '.image',
+//            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+//                'image',
+//                [
+//                    'maxitems' => 1,
+//                    'overrideChildTca' => [
+//                        'types' => [
+//                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+//                                'showitem' => '
+//                                            --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+//                                            --palette--;;filePalette'
+//                            ],
+//                        ],
+//                    ],
+//
+//                ],
+//                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+//            ),
+//        ],
 
         ###############################################################################
 
@@ -116,14 +116,31 @@ return [
                     ],
                 ],
                 'foreign_table' => $table,
-                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0]',
+                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
                 'default' => 0,
             ],
 
         ],
+
+        'l10n_source' => [
+            'displayCond' => 'FIELD:sys_language_uid:>:0',
+            'label' => 'Translation source',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['label' => '', 'value' => 0],
+                ],
+                'foreign_table' => $table,
+                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
+                'default' => 0,
+            ],
+        ],
+
         'l10n_diffsource' => [
             'config' => [
                 'type' => 'passthrough',
+                'default' => '',
             ],
         ],
 
@@ -137,13 +154,10 @@ return [
     ],
 
     'types' => [
-        '1' => [
+        '0' => [
             'showitem' => '
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
                             name, 
-                            article_number, 
-                            additional_information,
-                            image,                            
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                             hidden,
             ',
