@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="05.09.17T13:55Z" product-name="gjo_tiger">
+		<header/>
+		<body>
+
+            ***************************
+            **** SCA               ****
+            ***************************
+
+
+            <trans-unit id="flexforms.sca.Product.showProductGroupTeaser" >
+                <source>Product -> showProductGroupTeaser</source>
+            </trans-unit>
+            <trans-unit id="flexforms.sca.Product.showProductGroup" >
+                <source>Product->showProductGroup</source>
+            </trans-unit>
+            <trans-unit id="flexforms.sca.Product.showProductSet" >
+                <source>Product->showProductSet</source>
+            </trans-unit>
+            <trans-unit id="flexforms.sca.Product.productFinder" >
+                <source>Product->productFinder</source>
+            </trans-unit>
+
+
+
+            ***************************
+            **** Settings          ****
+            ***************************
+
+            <trans-unit id="flexforms.settings.productGroup" >
+                <source>Produktgruppe</source>
+            </trans-unit>
+            <trans-unit id="flexforms.settings.productSet" >
+                <source>ProductSet</source>
+            </trans-unit>
+            <trans-unit id="flexforms.settings.isShop" >
+                <source>Bereich Shop</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

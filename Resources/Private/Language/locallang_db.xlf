@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="de" datatype="plaintext" original="messages" date="2017-08-24T13:30:30Z" product-name="gjo_tiger">
+		<header/>
+		<body>
+
+            ### ProductGroup ####
+
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup">
+                <source>ProductGroup</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.header">
+                <source>Überschrift</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.sub_header">
+                <source>Zweite Überschrift</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.description">
+                <source>Beschreibung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.image">
+                <source>Bild</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.teaser">
+                <source>Teaser</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.teaser_header">
+                <source>Teaser Überschrift</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.teaser_description">
+                <source>Teaser Beschreibung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.teaser_image">
+                <source>Teaser Bild</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.product_set_type">
+                <source>ProduktSetTypes</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.product_set_types">
+                <source>ProduktSetTypes</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productgroup.pages" >
+                <source>Seite</source>
+            </trans-unit>
+
+
+            ### ProductSetType ####
+
+            <trans-unit id="tx_gjoproducts_domain_model_productsettype">
+                <source>ProductSetType</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsettype.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsettype.description">
+                <source>Beschreibung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsettype.product_group">
+                <source>ProductGroup</source>
+            </trans-unit>
+
+
+            ### ProductSubGroup ####
+
+            <trans-unit id="tx_gjoproducts_domain_model_productsubgroup">
+                <source>ProductSubGroup</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsubgroup.name">
+                <source>Name</source>
+            </trans-unit>
+
+
+
+            ### Product ####
+
+            <trans-unit id="tx_gjoproducts_domain_model_product">
+                <source>Product</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_product.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_product.article_number">
+                <source>Artikel Nummer</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_product.additional_information">
+                <source>Zusatz-Informationen</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_product.image">
+                <source>Bild</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_product.product_sub_group">
+                <source>ProductSubGroup</source>
+            </trans-unit>
+
+
+            ### ProductSetVariantGroup ####
+
+
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariantgroup">
+                <source>ProductSetVariantGroup</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariantgroup.product_set_variants">
+                <source>Product-Set-Varianten</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariantgroup.headline">
+                <source>Überschrift</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariantgroup.description">
+                <source>Beschreibung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariantgroup.table_headline">
+                <source>Paket-Inhalt Überschrift</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariantgroup.products">
+                <source>Produkte</source>
+            </trans-unit>
+
+
+            ### ProductSetVariant ####
+
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant.tabs.price">
+                <source>Preise</source>
+            </trans-unit>
+
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant">
+                <source>Product-Set-Variant</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant.article_number">
+                <source>Artikel-Nummer</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant.material">
+                <source>Material, Farbe</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant.length">
+                <source>Länge</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant.version">
+                <source>Ausführung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant.price" >
+                <source>Preis</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productsetvariant.tax" >
+                <source>MWST-Satz</source>
+            </trans-unit>
+
+
+            ### ProductSet ####
+
+            <trans-unit id="tx_gjoproducts_domain_model_productset">
+                <source>ProductSet</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.anchor">
+                <source>Anchor-Link / Sprungmarke</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.is_accessory_kit">
+                <source>Ist Ergänzungs-Set</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.is_featured">
+                <source>Promo Artikel</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.description">
+                <source>Beschreibung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.image">
+                <source>Bild</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.icon">
+                <source>Icon</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.show_technicalnots">
+                <source>Zeige Technische Hinweise</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.minimum_door_weight">
+                <source>Minimales Türgewicht</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.maximum_door_weight">
+                <source>Maximales Türgewicht</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.height">
+                <source>Aufbauhöhe</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.minimum_door_thickness">
+                <source>min. Türstärke</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.maximum_door_thickness">
+                <source>max. Türstärke</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.minimum_door_width">
+                <source>Minimale Türbreite</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.maximum_door_width">
+                <source>Maximale Türbreite</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.minimum_door_width_soft_close">
+                <source>Minimale Türbreite einseitig gedämpft - kurz</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.minimum_door_width_soft_close_long">
+                <source>Minimale Türbreite einseitig gedämpft - lang</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.minimum_door_width_soft_close_both">
+                <source>Minimale Türbreite beidseitig gedämpft</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.voltage">
+                <source>Betriebsspannung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.show_din">
+                <source>zeige DIN EN 1527</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.use_categorie">
+                <source>Nutzungskategorie</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.durability">
+                <source>Dauer der Funktionsfähigkeit</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.door_weight">
+                <source>Türmasse</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.fire_resistance">
+                <source>Feuerbeständigkeit</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.safety">
+                <source>Sicherheit</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.corrosion_resistance">
+                <source>Korrosionsverhalten</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.security">
+                <source>Schutz</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.door_type">
+                <source>Türart</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.initial_friction">
+                <source>Anfangsreibung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.invitation_to_tender">
+                <source>Ausschreibungstext</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.download">
+                <source>Downloads Produktinformationen</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.download_engineering_drawing">
+                <source>Downloads Technische Zeichnungen</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.image_engineering_drawing">
+                <source>Bilder Technische Zeichnungen</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.product_set_type">
+                <source>ProductSetType</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.product_set_variant_groups">
+                <source>Produkt-Set-Variant-Gruppen</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.products">
+                <source>Products</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.accessorykit_groups">
+                <source>Ergänzungs-Sets</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.pages" >
+                <source>Seite</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_material_wood" >
+                <source>Holz</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_material_glas" >
+                <source>Glas</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_wingcount" >
+                <source>Mögliche Anzahl Flügel</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_montage_in" >
+                <source>Montage IN der Wand</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_montage_wall" >
+                <source>Wand-Montage</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_montage_ceiling" >
+                <source>Decken-Montage</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_design_customer" >
+                <source>bauseitig</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_design_alu" >
+                <source>Alu Schiene</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_design_design" >
+                <source>Design Beschlag</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_soft_close" >
+                <source>Dämpfung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_et3" >
+                <source>Automatik</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_tclose" >
+                <source>T-Close</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_tmaster" >
+                <source>T-Master</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_tfold" >
+                <source>T-Fold</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_synchron" >
+                <source>Synchron</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_telescop2" >
+                <source>Teleskop 2</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.filter_telescop3" >
+                <source>Teleskop 3</source>
+            </trans-unit>
+
+            <trans-unit id="tx_gjoproducts_domain_model_productset.select">
+                <source>Bitte wählen...</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.tabs.products">
+                <source>Produkte</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.tabs.variants">
+                <source>Varianten</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.tabs.technicalNotes">
+                <source>Technische Hinweise</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.tabs.dinEn1527">
+                <source>DIN EN 1527</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.tabs.invitation_to_tender">
+                <source>Ausschreibungstext</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.tabs.downloads">
+                <source>Downloads</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.tabs.accessory_kit">
+                <source>Ergänzungs-Sets</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.tabs.filter">
+                <source>Filter</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.palettes.basics">
+                <source>Basics</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.palettes.material">
+                <source>Material</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.palettes.design">
+                <source>Design</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.palettes.configuration">
+                <source>Ausstattung</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_productset.palettes.montage">
+                <source>Montage</source>
+            </trans-unit>
+
+            ### ProductsetaccessorykitGroup ####
+
+            <trans-unit id="tx_gjoproducts_domain_model_accessorykitgroup">
+                <source>Ergänzungs-Sets</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_accessorykitgroup.headline">
+                <source>Überschrift</source>
+            </trans-unit>
+            <trans-unit id="tx_gjoproducts_domain_model_accessorykitgroup.accessory_kits">
+                <source>Ergänzungs-Sets</source>
+            </trans-unit>
+
+            ###############################
+            ###### CropVariants      ######
+            ###############################
+
+            <trans-unit id="cropVariant.mobile">
+                <source>Mobil XS</source>
+            </trans-unit>
+            <trans-unit id="cropVariant.tablet">
+                <source>Tablet SM - 576</source>
+            </trans-unit>
+            <trans-unit id="cropVariant.laptop">
+                <source>Laptop MD - 768</source>
+            </trans-unit>
+            <trans-unit id="cropVariant.desktop">
+                <source>Desktop LG - 992</source>
+            </trans-unit>
+            <trans-unit id="cropVariant.wideScreen">
+                <source>Widescreen XL - 1200</source>
+            </trans-unit>
+
+		</body>
+	</file>
+</xliff>

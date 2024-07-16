@@ -1,32 +1,32 @@
 CREATE TABLE tx_gjoproducts_domain_model_product
 (
-    name                   varchar(150) DEFAULT ''  NOT NULL,
-    article_number         varchar(150) DEFAULT ''  NOT NULL,
-    additional_information varchar(150) DEFAULT ''  NOT NULL,
-    image                  int(11)      DEFAULT '0' NOT NULL
+    name                   varchar(150)     DEFAULT ''  NOT NULL,
+    article_number         varchar(150)     DEFAULT ''  NOT NULL,
+    additional_information varchar(150)     DEFAULT ''  NOT NULL,
+    image                  int(11) unsigned DEFAULT '0' NOT NULL,
 );
 
 CREATE TABLE tx_gjoproducts_domain_model_productgroup
 (
-    product_set_types  int(11) unsigned                NOT NULL DEFAULT '0',
-    pages              INT(11) unsigned                NOT NULL DEFAULT '0',
+    product_set_types  int(11) unsigned NOT NULL DEFAULT '0',
+    pages              INT(11) unsigned NOT NULL DEFAULT '0',
 
-    header             varchar(150)                    NOT NULL DEFAULT '',
-    sub_header         varchar(150)                    NOT NULL DEFAULT '',
-    description        TEXT                            NULL,
-    image              int(11) unsigned                NOT NULL DEFAULT '0',
-    teaser_header      varchar(150)                    NOT NULL DEFAULT '',
-    teaser_description TEXT                            NULL,
-    teaser_image       int(11) unsigned                NOT NULL DEFAULT '0',
+    header             varchar(150)     NOT NULL DEFAULT '',
+    sub_header         varchar(150)     NOT NULL DEFAULT '',
+    description        TEXT             NULL,
+    image              int(11) unsigned NOT NULL DEFAULT '0',
+    teaser_header      varchar(150)     NOT NULL DEFAULT '',
+    teaser_description TEXT             NULL,
+    teaser_image       int(11) unsigned NOT NULL DEFAULT '0',
 );
 
 CREATE TABLE tx_gjoproducts_domain_model_productsettype
 (
-    product_group    int(11) unsigned                NOT NULL DEFAULT '0',
-    product_sets     INT(11) unsigned                NOT NULL DEFAULT '0',
+    product_group int(11) unsigned NOT NULL DEFAULT '0',
+    product_sets  INT(11) unsigned NOT NULL DEFAULT '0',
 
-    name             varchar(150)                    NOT NULL DEFAULT '',
-    description      TEXT                            NULL,
+    name          varchar(150)     NOT NULL DEFAULT '',
+    description   TEXT             NULL,
 );
 
 CREATE TABLE tx_gjoproducts_domain_model_productset
@@ -89,21 +89,21 @@ CREATE TABLE tx_gjoproducts_domain_model_productset
 
 CREATE TABLE tx_gjoproducts_domain_model_productsetvariantgroup
 (
-    product_set          int(11) unsigned                NOT NULL DEFAULT '0',
-    products             int(11) unsigned                NOT NULL DEFAULT '0',
-    product_set_variants int(11) unsigned                NOT NULL DEFAULT '0',
+    product_set          int(11) unsigned NOT NULL DEFAULT '0',
+    products             int(11) unsigned NOT NULL DEFAULT '0',
+    product_set_variants int(11) unsigned NOT NULL DEFAULT '0',
 
-    headline             varchar(150)                    NOT NULL DEFAULT '',
-    description          TEXT                            NULL,
-    table_headline       varchar(150)                    NOT NULL DEFAULT '',
+    headline             varchar(150)     NOT NULL DEFAULT '',
+    description          TEXT             NULL,
+    table_headline       varchar(150)     NOT NULL DEFAULT '',
 );
 
 CREATE TABLE tx_gjoproducts_domain_model_accessorykitgroup
 (
-    product_set      int(11) unsigned                NOT NULL DEFAULT '0',
-    accessory_kits   int(11) unsigned                NOT NULL DEFAULT '0',
+    product_set    int(11) unsigned NOT NULL DEFAULT '0',
+    accessory_kits int(11) unsigned NOT NULL DEFAULT '0',
 
-    headline         varchar(150)                    NOT NULL DEFAULT '',
+    headline       varchar(150)     NOT NULL DEFAULT '',
 );
 
 CREATE TABLE tx_gjoproducts_domain_model_productsetvariant

@@ -18,149 +18,179 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-$ext = 'gjo_products';
-$lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
-$table = 'tx_gjoproducts_domain_model_product';
+use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 
-return [
+return call_user_func(function()
+{
+    $ext = 'gjo_products';
+    $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
+    $table = 'tx_gjoproducts_domain_model_product';
 
-    'ctrl' => [
-        'title' => $lll . $table,
-        'label' => 'name',
-        'label_alt' => 'article_number, additional_information',
-        'label_alt_force' => 1,
+    $defaultCropSettings = CroppingUtility::getDefaultCropSettings();
 
-        'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
-        'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
-        'default_sortby' => 'name ASC, article_number ASC, additional_information ASC',
-        'searchFields' => 'name, article_number',
+    $mobileCropSettings           = $defaultCropSettings;
+    $mobileCropSettings['title']  = $lll . 'cropVariant.mobile';
+    $tabletCropSettings           = $defaultCropSettings;
+    $tabletCropSettings['title']  = $lll . 'cropVariant.tablet';
+    $laptopCropSettings           = $defaultCropSettings;
+    $laptopCropSettings['title']  = $lll . 'cropVariant.laptop';
+    $desktopCropSettings          = $defaultCropSettings;
+    $desktopCropSettings['title'] = $lll . 'cropVariant.desktop';
+    $wideScreenCropSettings          = $defaultCropSettings;
+    $wideScreenCropSettings['title'] = $lll . 'cropVariant.wideScreen';
 
-        'enablecolumns' => [
-            'disabled' => 'hidden',
+    return [
+
+        'ctrl' => [
+            'title' => $lll . $table,
+            'label' => 'name',
+            'label_alt' => 'article_number, additional_information',
+            'label_alt_force' => 1,
+
+            'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
+            'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
+            'default_sortby' => 'name ASC, article_number ASC, additional_information ASC',
+            'searchFields' => 'name, article_number',
+
+            'enablecolumns' => [
+                'disabled' => 'hidden',
+            ],
+
+            'tstamp' => 'tstamp',
+            'crdate' => 'crdate',
+            'delete' => 'deleted',
+            'origUid' => 't3_origuid',
+            'languageField' => 'sys_language_uid',
+            'transOrigPointerField' => 'l10n_parent',
+            'transOrigDiffSourceField' => 'l10n_diffsource',
+            'translationSource' => 'l10n_source',
         ],
 
-        'tstamp' => 'tstamp',
-        'crdate' => 'crdate',
-        'delete' => 'deleted',
-        'origUid' => 't3_origuid',
-        'languageField' => 'sys_language_uid',
-        'transOrigPointerField' => 'l10n_parent',
-        'transOrigDiffSourceField' => 'l10n_diffsource',
-        'translationSource' => 'l10n_source',
-    ],
+        'columns' => [
 
-    'columns' => [
+            'name' => [
+                'label' => $lll . $table . '.name',
+                'description' => $lll . $table . '.name',
+                'l10n_mode' => 'prefixLangTitle',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
 
-        'name' => [
-            'label' => $lll . $table . '.name',
-            'config' => [
-                'type' => 'input'
-            ]
-        ],
+            'article_number' => [
+                'label' => $lll . $table . '.article_number',
+                'description' => $lll . $table . '.article_number',
+                'l10n_mode' => 'prefixLangTitle',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
 
-//        'article_number' => [
-//            'label' => $lll . $table . '.article_number',
-//            'config' => [
-//                'type' => 'input'
-//            ]
-//        ],
-//
-//        'additional_information' => [
-//            'label' => $lll . $table . '.additional_information',
-//            'config' => [
-//                'type' => 'input'
-//            ]
-//        ],
+            'additional_information' => [
+                'label' => $lll . $table . '.additional_information',
+                'description' => $lll . $table . '.additional_information',
+                'l10n_mode' => 'prefixLangTitle',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
 
-        // TODO: überarbeiten!!
-//        'image' => [
-//            'label' => $lll . $table . '.image',
-//            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-//                'image',
-//                [
-//                    'maxitems' => 1,
-//                    'overrideChildTca' => [
-//                        'types' => [
-//                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-//                                'showitem' => '
-//                                            --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-//                                            --palette--;;filePalette'
-//                            ],
-//                        ],
-//                    ],
-//
-//                ],
-//                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-//            ),
-//        ],
+            'image' => [
+                'label' => $lll . $table . '.image',
+                'config' => [
+                    'type' => 'file',
+                    'maxitems' => 6,
+                    'allowed' => 'common-media-types',
+                    'overrideChildTca' => [
+                        'columns' => [
+                            'crop' => [
+                                'config' => [
+                                    'cropVariants' => [
+                                        'mobile' => $mobileCropSettings,
+                                        'tablet' => $tabletCropSettings,
+                                        'laptop' => $laptopCropSettings,
+                                        'desktop' => $desktopCropSettings,
+                                        'wideScreen' => $wideScreenCropSettings,
+                                    ],
+                                ],
+                            ],
 
-        ###############################################################################
-
-        'sys_language_uid' => [
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'language',
-            ]
-        ],
-
-        'l10n_parent' => [
-            'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    [
-                        'label' => '',
-                        'value' => 0
+                        ],
                     ],
                 ],
-                'foreign_table' => $table,
-                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
-                'default' => 0,
             ],
 
-        ],
+            ###############################################################################
 
-        'l10n_source' => [
-            'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'Translation source',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    ['label' => '', 'value' => 0],
+            'sys_language_uid' => [
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
+                'config' => [
+                    'type' => 'language',
+                ]
+            ],
+
+            'l10n_parent' => [
+                'displayCond' => 'FIELD:sys_language_uid:>:0',
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'items' => [
+                        [
+                            'label' => '',
+                            'value' => 0
+                        ],
+                    ],
+                    'foreign_table' => $table,
+                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
+                    'default' => 0,
                 ],
-                'foreign_table' => $table,
-                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
-                'default' => 0,
+
             ],
+
+            'l10n_source' => [
+                'displayCond' => 'FIELD:sys_language_uid:>:0',
+                'label' => 'Translation source',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'items' => [
+                        ['label' => '', 'value' => 0],
+                    ],
+                    'foreign_table' => $table,
+                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
+                    'default' => 0,
+                ],
+            ],
+
+            'l10n_diffsource' => [
+                'config' => [
+                    'type' => 'passthrough',
+                    'default' => '',
+                ],
+            ],
+
+            'hidden' => [
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
         ],
 
-        'l10n_diffsource' => [
-            'config' => [
-                'type' => 'passthrough',
-                'default' => '',
-            ],
-        ],
-
-        'hidden' => [
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
-
-    ],
-
-    'types' => [
-        '0' => [
-            'showitem' => '
+        'types' => [
+            '0' => [
+                'showitem' => '
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                            name, 
+                            name,
+                            article_number,
+                            additional_information,
+                            image,
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                             hidden,
             ',
-        ]
-    ],
-];
+            ]
+        ],
+    ];
+});
