@@ -20,23 +20,23 @@
 
 use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 
-return call_user_func(function()
-{
+return call_user_func(function () {
+
     $ext = 'gjo_products';
     $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
     $table = 'tx_gjoproducts_domain_model_product';
 
     $defaultCropSettings = CroppingUtility::getDefaultCropSettings();
 
-    $mobileCropSettings           = $defaultCropSettings;
-    $mobileCropSettings['title']  = $lll . 'cropVariant.mobile';
-    $tabletCropSettings           = $defaultCropSettings;
-    $tabletCropSettings['title']  = $lll . 'cropVariant.tablet';
-    $laptopCropSettings           = $defaultCropSettings;
-    $laptopCropSettings['title']  = $lll . 'cropVariant.laptop';
-    $desktopCropSettings          = $defaultCropSettings;
+    $mobileCropSettings = $defaultCropSettings;
+    $mobileCropSettings['title'] = $lll . 'cropVariant.mobile';
+    $tabletCropSettings = $defaultCropSettings;
+    $tabletCropSettings['title'] = $lll . 'cropVariant.tablet';
+    $laptopCropSettings = $defaultCropSettings;
+    $laptopCropSettings['title'] = $lll . 'cropVariant.laptop';
+    $desktopCropSettings = $defaultCropSettings;
     $desktopCropSettings['title'] = $lll . 'cropVariant.desktop';
-    $wideScreenCropSettings          = $defaultCropSettings;
+    $wideScreenCropSettings = $defaultCropSettings;
     $wideScreenCropSettings['title'] = $lll . 'cropVariant.wideScreen';
 
     return [
@@ -49,7 +49,7 @@ return call_user_func(function()
 
             'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
             'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
-            'default_sortby' => 'name ASC, article_number ASC, additional_information ASC',
+            'default_sortby' => 'name ASC, article_number ASC',
             'searchFields' => 'name, article_number',
 
             'enablecolumns' => [

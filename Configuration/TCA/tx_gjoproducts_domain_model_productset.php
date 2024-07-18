@@ -18,626 +18,725 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-$ext   = 'gjo_products';
-$lll   = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
-$table = 'tx_gjoproducts_domain_model_productset';
+use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 
-return [
+return call_user_func(function () {
 
-    'ctrl' => [
-        'title' => $lll . $table,
-        'label' => 'name',
+    $ext = 'gjo_products';
+    $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
+    $table = 'tx_gjoproducts_domain_model_productset';
 
-        'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
-        'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
-        'default_sortby' => 'name ASC',
-        'searchFields' => 'name',
+    $defaultCropSettings = CroppingUtility::getDefaultCropSettings();
 
-        'enablecolumns' => [
-            'disabled' => 'hidden',
-        ],
+    $mobileCropSettings = $defaultCropSettings;
+    $mobileCropSettings['title'] = $lll . 'cropVariant.mobile';
+    $tabletCropSettings = $defaultCropSettings;
+    $tabletCropSettings['title'] = $lll . 'cropVariant.tablet';
+    $laptopCropSettings = $defaultCropSettings;
+    $laptopCropSettings['title'] = $lll . 'cropVariant.laptop';
+    $desktopCropSettings = $defaultCropSettings;
+    $desktopCropSettings['title'] = $lll . 'cropVariant.desktop';
+    $wideScreenCropSettings = $defaultCropSettings;
+    $wideScreenCropSettings['title'] = $lll . 'cropVariant.wideScreen';
 
-        'tstamp' => 'tstamp',
-        'crdate' => 'crdate',
-        'delete' => 'deleted',
-        'origUid' => 't3_origuid',
-        'languageField' => 'sys_language_uid',
-        'transOrigPointerField' => 'l10n_parent',
-        'transOrigDiffSourceField' => 'l10n_diffsource',
-        'translationSource' => 'l10n_source',
-    ],
+    return [
 
-    'columns' => [
+        'ctrl' => [
+            'title' => $lll . $table,
+            'label' => 'name',
 
-        'product_set_variant_groups' => [
-            'label'  => $lll . $table . '.product_set_variant_groups',
-            'config' => [
-                'type'          => 'inline',
-                'foreign_table' => 'tx_gjoproducts_domain_model_productsetvariantgroup',
-                'foreign_field' => 'product_set',
-                'maxitems'      => 9999,
-                'appearance'    => [
-                    'collapseAll'                     => 1,
-                    'expandSingle'                    => 1,
-                    'levelLinksPosition'              => 'top',
-                    'showSynchronizationLink'         => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink'         => 1,
-                    'useSortable'                     => true,
-                    'enabledControls'                 => [
-                        'info'     => true,
-                        'new'      => true,
-                        'dragdrop' => true,
-                        'sort'     => true,
-                        'hide'     => true,
-                        'delete'   => true,
-                        'localize' => true,
-                    ],
-                ],
+            'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
+            'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
+            'default_sortby' => 'name ASC',
+            'searchFields' => 'name',
+
+            'enablecolumns' => [
+                'disabled' => 'hidden',
             ],
+
+            'tstamp' => 'tstamp',
+            'crdate' => 'crdate',
+            'delete' => 'deleted',
+            'origUid' => 't3_origuid',
+            'languageField' => 'sys_language_uid',
+            'transOrigPointerField' => 'l10n_parent',
+            'transOrigDiffSourceField' => 'l10n_diffsource',
+            'translationSource' => 'l10n_source',
         ],
 
-        'accessorykit_groups' => [
-            'label'  => $lll . $table . '.accessorykit_groups',
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'config' => [
-                'type'          => 'inline',
-                'foreign_table' => 'tx_gjoproducts_domain_model_accessorykitgroup',
-                'foreign_field' => 'product_set',
-                'maxitems'      => 9999,
-                'appearance'    => [
-                    'collapseAll'                     => 1,
-                    'expandSingle'                    => 1,
-                    'levelLinksPosition'              => 'top',
-                    'showSynchronizationLink'         => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink'         => 1,
-                    'useSortable'                     => true,
-                    'enabledControls'                 => [
-                        'info'     => true,
-                        'new'      => true,
-                        'dragdrop' => true,
-                        'sort'     => true,
-                        'hide'     => true,
-                        'delete'   => true,
-                        'localize' => true,
-                    ],
-                ],
-            ],
-        ],
+        'columns' => [
 
-        'pages' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.pages',
-            'config' => [
-                'type'          => 'group',
-                'allowed'       => 'pages',
-                'size'          => 1,
-                'maxitems'      => 1,
-                'minitems'      => 0,
-                'default' => 0,
-            ],
-        ],
-
-        'name' => [
-            'label'  => $lll . $table . '.name',
-            'config' => [
-                'type' => 'input'
-            ]
-        ],
-
-        'anchor' => [
-            'label'  => $lll . $table . '.anchor',
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:true',
-            'config' => [
-                'type' => 'input'
-            ]
-        ],
-
-        'is_accessory_kit' => [
-            'label'  => $lll . $table . '.is_accessory_kit',
-            'onChange' => 'reload',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
-
-        'is_featured' => [
-            'label'  => $lll . $table . '.is_featured',
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
-
-        'description' => [
-            'label'  => $lll . $table . '.description',
-            'config' => [
-                'type'           => 'text',
-                'cols'           => 40,
-                'rows'           => 6,
-                'enableRichtext' => true
-            ],
-        ],
-
-        'image' => [
-            'label'  => $lll . $table . '.image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'image',
-                [
-                    'maxitems'         => 2,
-                    'overrideChildTca' => [
-                        'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                            --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                            --palette--;;filePalette'
-                            ],
+            'product_set_variant_groups' => [
+                'label' => $lll . $table . '.product_set_variant_groups',
+                'description' => $lll . $table . '.product_set_variant_groups',
+                'config' => [
+                    'type' => 'inline',
+                    'foreign_table' => 'tx_gjoproducts_domain_model_productsetvariantgroup',
+                    'foreign_field' => 'product_set', // passthrough
+                    'maxitems' => 9999,
+                    'appearance' => [
+                        'collapseAll' => 1,
+                        'expandSingle' => 1,
+                        'levelLinksPosition' => 'top',
+                        'showSynchronizationLink' => 1,
+                        'showPossibleLocalizationRecords' => 1,
+                        'showAllLocalizationLink' => 1,
+                        'useSortable' => true,
+                        'enabledControls' => [
+                            'info' => true,
+                            'new' => true,
+                            'dragdrop' => true,
+                            'sort' => true,
+                            'hide' => true,
+                            'delete' => true,
+                            'localize' => true,
                         ],
                     ],
-
                 ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
-        ],
+            ],
 
-        'icon' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:true',
-            'label'  => $lll . $table . '.icon',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'icon',
-                [
-                    'maxitems'         => 1,
-                    'overrideChildTca' => [
-                        'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                            --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                            --palette--;;filePalette'
-                            ],
+            'accessorykit_groups' => [
+                'label' => $lll . $table . '.accessorykit_groups',
+                'description' => $lll . $table . '.accessorykit_groups',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'inline',
+                    'foreign_table' => 'tx_gjoproducts_domain_model_accessorykitgroup',
+                    'foreign_field' => 'product_set', // passthrough
+                    'maxitems' => 9999,
+                    'appearance' => [
+                        'collapseAll' => 1,
+                        'expandSingle' => 1,
+                        'levelLinksPosition' => 'top',
+                        'showSynchronizationLink' => 1,
+                        'showPossibleLocalizationRecords' => 1,
+                        'showAllLocalizationLink' => 1,
+                        'useSortable' => true,
+                        'enabledControls' => [
+                            'info' => true,
+                            'new' => true,
+                            'dragdrop' => true,
+                            'sort' => true,
+                            'hide' => true,
+                            'delete' => true,
+                            'localize' => true,
                         ],
                     ],
-
                 ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
-        ],
-
-
-        'show_technicalnots' => [
-            'label'    => $lll . $table . '.show_technicalnots',
-            'config'   => [
-                'type' => 'check',
             ],
-            'onChange' => 'reload',
-        ],
 
-        'minimum_door_weight' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.minimum_door_weight',
-            'config'      => [
-                'type' => 'input',
-
-            ]
-        ],
-
-        'maximum_door_weight' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.maximum_door_weight',
-            'config'      => [
-                'type' => 'input',
-
-            ]
-        ],
-
-        'height' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.height',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'minimum_door_thickness' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.minimum_door_thickness',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'maximum_door_thickness' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.maximum_door_thickness',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'minimum_door_width' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.minimum_door_width',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'maximum_door_width' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.maximum_door_width',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'minimum_door_width_soft_close' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.minimum_door_width_soft_close',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'minimum_door_width_soft_close_long' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.minimum_door_width_soft_close_long',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'minimum_door_width_soft_close_both' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.minimum_door_width_soft_close_both',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'voltage' => [
-            'displayCond' => 'FIELD:show_technicalnots:REQ:true',
-            'label'       => $lll . $table . '.voltage',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'show_din' => [
-            'label'    => $lll . $table . '.show_din',
-            'config'   => [
-                'type' => 'check',
-            ],
-            'onChange' => 'reload',
-        ],
-
-        'use_categorie' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.use_categorie',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'durability' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.durability',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'door_weight' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.door_weight',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'fire_resistance' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.fire_resistance',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'safety' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.safety',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'corrosion_resistance' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.corrosion_resistance',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'security' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.security',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'door_type' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.door_type',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'initial_friction' => [
-            'displayCond' => 'FIELD:show_din:REQ:true',
-            'label'       => $lll . $table . '.initial_friction',
-            'config'      => [
-                'type' => 'input'
-            ]
-        ],
-
-        'invitation_to_tender' => [
-            'label'  => $lll . $table . '.invitation_to_tender',
-            'config' => [
-                'type'           => 'text',
-                'cols'           => 40,
-                'rows'           => 6,
-                'enableRichtext' => true
-            ],
-        ],
-
-        'download' => [
-            'label'  => $lll . $table . '.download',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'download',
-                [
-                    'maxitems' => 99
+            'pages' => [
+                'label' => $lll . $table . '.pages',
+                'description' => $lll . $table . '.pages',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'group',
+                    'allowed' => 'pages',
+                    'size' => 1,
+                    'maxitems' => 1,
+                    'minitems' => 0,
                 ],
-                'pdf, dwg, dxf'
-            ),
-        ],
+            ],
 
-        'download_engineering_drawing' => [
-            'label'  => $lll . $table . '.download_engineering_drawing',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'download_engineering_drawing',
-                [
-                    'maxitems' => 99
+            'name' => [
+                'label' => $lll . $table . '.name',
+                'description' => $lll . $table . '.name',
+                'l10n_mode' => 'prefixLangTitle',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'anchor' => [
+                'label' => $lll . $table . '.anchor',
+                'description' => $lll . $table . '.name',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'is_accessory_kit' => [
+                'label' => $lll . $table . '.is_accessory_kit',
+                'description' => $lll . $table . '.is_accessory_kit',
+                'onChange' => 'reload',
+                'config' => [
+                    'type' => 'check',
                 ],
-                'pdf, dwg, dxf'
-            ),
-        ],
+            ],
 
-        'image_engineering_drawing' => [
-            'label'  => $lll . $table . '.image_engineering_drawing',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'image_engineering_drawing',
-                [
-                    'maxitems'         => 10,
+            'is_featured' => [
+                'label' => $lll . $table . '.is_featured',
+                'description' => $lll . $table . '.is_featured',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'description' => [
+                'label' => $lll . $table . '.description',
+                'description' => $lll . $table . '.description',
+                'config' => [
+                    'type' => 'text',
+                    'cols' => 40,
+                    'rows' => 6,
+                    'enableRichtext' => true
+                ],
+            ],
+
+            'image' => [
+                'label' => $lll . $table . '.image',
+                'description' => $lll . $table . '.image',
+                'config' => [
+                    'type' => 'file',
+                    'maxitems' => 2,
+                    'allowed' => 'common-media-types',
                     'overrideChildTca' => [
-                        'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                            --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                            --palette--;;filePalette'
+                        'columns' => [
+                            'crop' => [
+                                'config' => [
+                                    'cropVariants' => [
+                                        'mobile' => $mobileCropSettings,
+                                        'tablet' => $tabletCropSettings,
+                                        'laptop' => $laptopCropSettings,
+                                        'desktop' => $desktopCropSettings,
+                                        'wideScreen' => $wideScreenCropSettings,
+                                    ],
+                                ],
                             ],
+
                         ],
                     ],
-
                 ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
-        ],
-
-        'filter_montage_wall' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_montage_wall',
-            'config' => [
-                'type' => 'check',
             ],
-        ],
 
-        'filter_montage_ceiling' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_montage_ceiling',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
+            'icon' => [
+                'label' => $lll . $table . '.icon',
+                'description' => $lll . $table . '.icon',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:true',
+                'config' => [
+                    'type' => 'file',
+                    'maxitems' => 1,
+                    'allowed' => 'common-media-types',
+                    'overrideChildTca' => [
+                        'columns' => [
+                            'crop' => [
+                                'config' => [
+                                    'cropVariants' => [
+                                        'mobile' => $mobileCropSettings,
+                                        'tablet' => $tabletCropSettings,
+                                        'laptop' => $laptopCropSettings,
+                                        'desktop' => $desktopCropSettings,
+                                        'wideScreen' => $wideScreenCropSettings,
+                                    ],
+                                ],
+                            ],
 
-        'filter_montage_in' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_montage_in',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
-
-        ###############################################################################
-
-        'sys_language_uid' => [
-            'label'   => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'language',
-            ]
-        ],
-
-        'l10n_parent'      => [
-            'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label'       => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-            'config'      => [
-                'type'                => 'select',
-                'renderType'          => 'selectSingle',
-                'items'               => [
-                    [
-                        'label' => '',
-                        'value' => 0
+                        ],
                     ],
                 ],
-                'foreign_table'       => $table,
-                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
-                'default' => 0,
             ],
-        ],
 
-        'l10n_source' => [
-            'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'Translation source',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    ['label' => '', 'value' => 0],
-                ],
-                'foreign_table' => $table,
-                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
-                'default' => 0,
-            ],
-        ],
-
-        'l10n_diffsource' => [
-            'config' => [
-                'type' => 'passthrough',
-                'default' => '',
-            ],
-        ],
-
-        'hidden' => [
-            'label'   => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config'  => [
-                'type' => 'check',
-            ],
-        ],
-
-        'filter_material_wood' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_material_wood',
-            'config' => [
-                'type' => 'check'
-            ]
-        ],
-
-        'filter_material_glas' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_material_glas',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
-
-        'filter_wingcount' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_wingcount',
-            'config' => [
-                'type'       => 'select',
-                'renderType' => 'selectSingleBox',
-                'items'      => [
-                    ['label' => '1-flügelig','value' => 1],
-                    ['label' => '2-flügelig','value' => 2],
-                    ['label' => '3-flügelig','value' => 3]
+            'show_technicalnots' => [
+                'label' => $lll . $table . '.show_technicalnots',
+                'description' => $lll . $table . '.show_technicalnots',
+                'onChange' => 'reload',
+                'config' => [
+                    'type' => 'check',
                 ],
             ],
-        ],
 
-        'filter_design_customer' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_design_customer',
-            'config' => [
-                'type' => 'check',
+            'minimum_door_weight' => [
+                'label' => $lll . $table . '.minimum_door_weight',
+                'description' => $lll . $table . '.minimum_door_weight',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input',
+
+                ]
             ],
-        ],
 
-        'filter_design_alu' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_design_alu',
-            'config' => [
-                'type' => 'check',
+            'maximum_door_weight' => [
+                'label' => $lll . $table . '.maximum_door_weight',
+                'description' => $lll . $table . '.maximum_door_weight',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input',
+
+                ]
             ],
-        ],
 
-        'filter_design_design' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_design_design',
-            'config' => [
-                'type' => 'check',
+            'height' => [
+                'label' => $lll . $table . '.height',
+                'description' => $lll . $table . '.height',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
-        ],
 
-        'filter_soft_close' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_soft_close',
-            'config' => [
-                'type' => 'check',
+            'minimum_door_thickness' => [
+                'label' => $lll . $table . '.minimum_door_thickness',
+                'description' => $lll . $table . '.minimum_door_thickness',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
-        ],
 
-        'filter_et3' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_et3',
-            'config' => [
-                'type' => 'check',
+            'maximum_door_thickness' => [
+                'label' => $lll . $table . '.maximum_door_thickness',
+                'description' => $lll . $table . '.maximum_door_thickness',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
-        ],
 
-        'filter_tclose' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_tclose',
-            'config' => [
-                'type' => 'check',
+            'minimum_door_width' => [
+                'label' => $lll . $table . '.minimum_door_width',
+                'description' => $lll . $table . '.minimum_door_width',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
-        ],
 
-        'filter_tmaster' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_tmaster',
-            'config' => [
-                'type' => 'check',
+            'maximum_door_width' => [
+                'label' => $lll . $table . '.maximum_door_width',
+                'description' => $lll . $table . '.maximum_door_width',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
-        ],
 
-        'filter_tfold' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_tfold',
-            'config' => [
-                'type' => 'check',
+            'minimum_door_width_soft_close' => [
+                'label' => $lll . $table . '.minimum_door_width_soft_close',
+                'description' => $lll . $table . '.minimum_door_width_soft_close',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
-        ],
 
-        'filter_synchron' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_synchron',
-            'config' => [
-                'type' => 'check',
+            'minimum_door_width_soft_close_long' => [
+                'label' => $lll . $table . '.minimum_door_width_soft_close_long',
+                'description' => $lll . $table . '.minimum_door_width_soft_close_long',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
-        ],
 
-        'filter_telescop2' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_telescop2',
-            'config' => [
-                'type' => 'check',
+            'minimum_door_width_soft_close_both' => [
+                'label' => $lll . $table . '.minimum_door_width_soft_close_both',
+                'description' => $lll . $table . '.minimum_door_width_soft_close_both',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
-        ],
 
-        'filter_telescop3' => [
-            'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
-            'label'  => $lll . $table . '.filter_telescop3',
-            'config' => [
-                'type' => 'check',
+            'voltage' => [
+                'label' => $lll . $table . '.voltage',
+                'description' => $lll . $table . '.voltage',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_technicalnots:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
             ],
+
+            'show_din' => [
+                'label' => $lll . $table . '.show_din',
+                'description' => $lll . $table . '.show_din',
+                'onChange' => 'reload',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'use_categorie' => [
+                'label' => $lll . $table . '.use_categorie',
+                'description' => $lll . $table . '.use_categorie',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'durability' => [
+                'label' => $lll . $table . '.durability',
+                'description' => $lll . $table . '.durability',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'door_weight' => [
+                'label' => $lll . $table . '.door_weight',
+                'description' => $lll . $table . '.door_weight',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'fire_resistance' => [
+                'label' => $lll . $table . '.fire_resistance',
+                'description' => $lll . $table . '.fire_resistance',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'safety' => [
+                'label' => $lll . $table . '.safety',
+                'description' => $lll . $table . '.safety',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'corrosion_resistance' => [
+                'label' => $lll . $table . '.corrosion_resistance',
+                'description' => $lll . $table . '.corrosion_resistance',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'security' => [
+                'label' => $lll . $table . '.security',
+                'description' => $lll . $table . '.security',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'door_type' => [
+                'label' => $lll . $table . '.door_type',
+                'description' => $lll . $table . '.door_type',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'initial_friction' => [
+                'label' => $lll . $table . '.initial_friction',
+                'description' => $lll . $table . '.initial_friction',
+                'l10n_mode' => 'prefixLangTitle',
+                'displayCond' => 'FIELD:show_din:REQ:true',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
+
+            'invitation_to_tender' => [
+                'label' => $lll . $table . '.invitation_to_tender',
+                'description' => $lll . $table . '.invitation_to_tender',
+                'config' => [
+                    'type' => 'text',
+                    'cols' => 40,
+                    'rows' => 6,
+                    'enableRichtext' => true
+                ],
+            ],
+
+            'download' => [
+                'label' => $lll . $table . '.download',
+                'description' => $lll . $table . '.download',
+                'config' => [
+                    'type' => 'file',
+                    'maxitems' => 99,
+                    'allowed' => 'pdf, dwg, dxf',
+                ],
+            ],
+
+            'download_engineering_drawing' => [
+                'label' => $lll . $table . '.download_engineering_drawing',
+                'description' => $lll . $table . '.download_engineering_drawing',
+                'config' => [
+                    'type' => 'file',
+                    'maxitems' => 99,
+                    'allowed' => 'pdf, dwg, dxf',
+                ],
+            ],
+
+            'image_engineering_drawing' => [
+                'label' => $lll . $table . '.image_engineering_drawing',
+                'description' => $lll . $table . '.image_engineering_drawing',
+                'config' => [
+                    'type' => 'file',
+                    'maxitems' => 10,
+                    'allowed' => 'common-media-types',
+                    'overrideChildTca' => [
+                        'columns' => [
+                            'crop' => [
+                                'config' => [
+                                    'cropVariants' => [
+                                        'mobile' => $mobileCropSettings,
+                                        'tablet' => $tabletCropSettings,
+                                        'laptop' => $laptopCropSettings,
+                                        'desktop' => $desktopCropSettings,
+                                        'wideScreen' => $wideScreenCropSettings,
+                                    ],
+                                ],
+                            ],
+
+                        ],
+                    ],
+                ],
+            ],
+
+            'filter_montage_wall' => [
+                'label' => $lll . $table . '.filter_montage_wall',
+                'description' => $lll . $table . '.filter_montage_wall',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_montage_ceiling' => [
+                'label' => $lll . $table . '.filter_montage_ceiling',
+                'description' => $lll . $table . '.filter_montage_ceiling',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_montage_in' => [
+                'label' => $lll . $table . '.filter_montage_in',
+                'description' => $lll . $table . '.filter_montage_in',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_material_wood' => [
+                'label' => $lll . $table . '.filter_material_wood',
+                'description' => $lll . $table . '.filter_material_wood',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check'
+                ]
+            ],
+
+            'filter_material_glas' => [
+                'label' => $lll . $table . '.filter_material_glas',
+                'description' => $lll . $table . '.filter_material_glas',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_wingcount' => [
+                'label' => $lll . $table . '.filter_wingcount',
+                'description' => $lll . $table . '.filter_wingcount',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingleBox',
+                    'items' => [
+                        ['label' => '1-flügelig', 'value' => 1],
+                        ['label' => '2-flügelig', 'value' => 2],
+                        ['label' => '3-flügelig', 'value' => 3]
+                    ],
+                ],
+            ],
+
+            'filter_design_customer' => [
+                'label' => $lll . $table . '.filter_design_customer',
+                'description' => $lll . $table . '.filter_design_customer',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_design_alu' => [
+                'label' => $lll . $table . '.filter_design_alu',
+                'description' => $lll . $table . '.filter_design_alu',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_design_design' => [
+                'label' => $lll . $table . '.filter_design_design',
+                'description' => $lll . $table . '.filter_design_design',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_soft_close' => [
+                'label' => $lll . $table . '.filter_soft_close',
+                'description' => $lll . $table . '.filter_soft_close',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_et3' => [
+                'label' => $lll . $table . '.filter_et3',
+                'description' => $lll . $table . '.filter_et3',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_tclose' => [
+                'label' => $lll . $table . '.filter_tclose',
+                'description' => $lll . $table . '.filter_tclose',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_tmaster' => [
+                'label' => $lll . $table . '.filter_tmaster',
+                'description' => $lll . $table . '.filter_tmaster',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_tfold' => [
+                'label' => $lll . $table . '.filter_tfold',
+                'description' => $lll . $table . '.filter_tfold',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_synchron' => [
+                'label' => $lll . $table . '.filter_synchron',
+                'description' => $lll . $table . '.filter_synchron',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_telescop2' => [
+                'label' => $lll . $table . '.filter_telescop2',
+                'description' => $lll . $table . '.filter_telescop2',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            'filter_telescop3' => [
+                'label' => $lll . $table . '.filter_telescop3',
+                'description' => $lll . $table . '.filter_telescop3',
+                'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
+            ###############################################################################
+
+            'sys_language_uid' => [
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
+                'config' => [
+                    'type' => 'language',
+                ]
+            ],
+
+            'l10n_parent' => [
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
+                'displayCond' => 'FIELD:sys_language_uid:>:0',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'items' => [
+                        [
+                            'label' => '',
+                            'value' => 0
+                        ],
+                    ],
+                    'foreign_table' => $table,
+                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
+                    'default' => 0,
+                ],
+
+            ],
+
+            'l10n_source' => [
+                'label' => 'Translation source',
+                'displayCond' => 'FIELD:sys_language_uid:>:0',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'items' => [
+                        ['label' => '', 'value' => 0],
+                    ],
+                    'foreign_table' => $table,
+                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
+                    'default' => 0,
+                ],
+            ],
+
+            'l10n_diffsource' => [
+                'config' => [
+                    'type' => 'passthrough',
+                    'default' => '',
+                ],
+            ],
+
+            'hidden' => [
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
         ],
 
-    ],
-
-    'types' => [
-        '0' => [
-            'showitem' => '
+        'types' => [
+            '0' => [
+                'showitem' => '
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
                               --palette--;' . $lll . $table . '.palettes.basics;basics,
                               is_featured,
@@ -690,32 +789,32 @@ return [
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                             hidden,
             ',
-        ]
-    ],
+            ]
+        ],
 
-    'palettes' => [
-        'basics'      => [
-            'showitem' => '
+        'palettes' => [
+            'basics' => [
+                'showitem' => '
                 name,
                 is_accessory_kit
         '
-        ],
-        'material'      => [
-            'showitem' => '
+            ],
+            'material' => [
+                'showitem' => '
                 filter_material_wood,
                 filter_material_glas
         '
-        ],
-        'design'        => [
-            'showitem' => '
+            ],
+            'design' => [
+                'showitem' => '
                 filter_design_customer,
                 filter_design_alu,
                 filter_design_design
       
          '
-        ],
-        'configuration' => [
-            'showitem' => '
+            ],
+            'configuration' => [
+                'showitem' => '
                   filter_soft_close,
                   filter_et3,
                   filter_tfold,
@@ -725,14 +824,14 @@ return [
                   filter_tclose,
                   filter_tmaster
         '
-        ],
-        'montage'       => [
-            'showitem' => '
+            ],
+            'montage' => [
+                'showitem' => '
                 filter_montage_wall,
                 filter_montage_ceiling,
                 filter_montage_in
         '
+            ],
         ],
-    ],
-
-];
+    ];
+});

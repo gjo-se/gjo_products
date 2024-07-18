@@ -88,9 +88,6 @@
             <trans-unit id="tx_gjoproducts_domain_model_product.image">
                 <source>Bild</source>
             </trans-unit>
-            <trans-unit id="tx_gjoproducts_domain_model_product.product_sub_group">
-                <source>ProductSubGroup</source>
-            </trans-unit>
 
 
             ### ProductSetVariantGroup ####

@@ -18,133 +18,138 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-$ext = 'gjo_products';
-$lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
-$table = 'tx_gjoproducts_domain_model_accessorykitgroup';
+return call_user_func(function () {
 
-return [
+    $ext = 'gjo_products';
+    $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
+    $table = 'tx_gjoproducts_domain_model_accessorykitgroup';
 
-    'ctrl' => [
-        'title' => $lll . $table,
-        'label' => 'headline',
+    return [
 
-        'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
-        'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
-        'hideTable' => true,
+        'ctrl' => [
+            'title' => $lll . $table,
+            'label' => 'headline',
 
-        'enablecolumns' => [
-            'disabled' => 'hidden',
-        ],
+            'rootLevel' => 0, // 0 = PageTree, 1 = Root, -1 = All
+            'iconfile' => 'EXT:' . $ext . '/Resources/Public/Icons/products_icon.png',
+            'hideTable' => true,
 
-        'tstamp' => 'tstamp',
-        'crdate' => 'crdate',
-        'delete' => 'deleted',
-        'origUid' => 't3_origuid',
-        'languageField' => 'sys_language_uid',
-        'transOrigPointerField' => 'l10n_parent',
-        'transOrigDiffSourceField' => 'l10n_diffsource',
-        'translationSource' => 'l10n_source',
-    ],
-
-    'columns' => [
-
-        'product_set' => [
-            'config' => [
-                'type' => 'passthrough',
+            'enablecolumns' => [
+                'disabled' => 'hidden',
             ],
+
+            'tstamp' => 'tstamp',
+            'crdate' => 'crdate',
+            'delete' => 'deleted',
+            'origUid' => 't3_origuid',
+            'languageField' => 'sys_language_uid',
+            'transOrigPointerField' => 'l10n_parent',
+            'transOrigDiffSourceField' => 'l10n_diffsource',
+            'translationSource' => 'l10n_source',
         ],
 
-        'accessory_kits' => [
-            'label' => $lll . $table . '.accessory_kits',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_gjoproducts_domain_model_productset',
-                'foreign_table_where' => 'tx_gjoproducts_domain_model_productset.is_accessory_kit = 1 ORDER BY name',
-                'MM' => 'tx_gjoproducts_productset_accessorykit_mm',
-                'MM_opposite_field' => 'name',
-                'size' => 10,
-                'autoSizeMax' => 30,
-                'maxitems' => 14,
-                'multiple' => 0
+        'columns' => [
+
+            'product_set' => [
+                'config' => [
+                    'type' => 'passthrough',
+                ],
             ],
-        ],
 
-        'headline' => [
-            'label' => $lll . $table . '.headline',
-            'config' => [
-                'type' => 'input'
-            ]
-        ],
+            'accessory_kits' => [
+                'label' => $lll . $table . '.accessory_kits',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectMultipleSideBySide',
+                    'foreign_table' => 'tx_gjoproducts_domain_model_productset',
+                    'foreign_table_where' => 'tx_gjoproducts_domain_model_productset.is_accessory_kit = 1 ORDER BY name',
+                    'MM' => 'tx_gjoproducts_productset_accessorykit_mm',
+                    'MM_opposite_field' => 'name',
+                    'size' => 10,
+                    'autoSizeMax' => 30,
+                    'maxitems' => 14,
+                    'multiple' => 0
+                ],
+            ],
 
-        ###############################################################################
+            'headline' => [
+                'label' => $lll . $table . '.headline',
+                'description' => $lll . $table . '.headline',
+                'l10n_mode' => 'prefixLangTitle',
+                'config' => [
+                    'type' => 'input'
+                ]
+            ],
 
-        'sys_language_uid' => [
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'language',
-            ]
-        ],
+            ###############################################################################
 
-        'l10n_parent' => [
-            'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    [
-                        'label' => '',
-                        'value' => 0
+            'sys_language_uid' => [
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
+                'config' => [
+                    'type' => 'language',
+                ]
+            ],
+
+            'l10n_parent' => [
+                'displayCond' => 'FIELD:sys_language_uid:>:0',
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'items' => [
+                        [
+                            'label' => '',
+                            'value' => 0
+                        ],
                     ],
+                    'foreign_table' => $table,
+                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
+                    'default' => 0,
                 ],
-                'foreign_table' => $table,
-                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
-                'default' => 0,
+
             ],
 
-        ],
-
-        'l10n_source' => [
-            'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'Translation source',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    ['label' => '', 'value' => 0],
+            'l10n_source' => [
+                'displayCond' => 'FIELD:sys_language_uid:>:0',
+                'label' => 'Translation source',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'items' => [
+                        ['label' => '', 'value' => 0],
+                    ],
+                    'foreign_table' => $table,
+                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
+                    'default' => 0,
                 ],
-                'foreign_table' => $table,
-                'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
-                'default' => 0,
             ],
+
+            'l10n_diffsource' => [
+                'config' => [
+                    'type' => 'passthrough',
+                    'default' => '',
+                ],
+            ],
+
+            'hidden' => [
+                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+                'config' => [
+                    'type' => 'check',
+                ],
+            ],
+
         ],
 
-        'l10n_diffsource' => [
-            'config' => [
-                'type' => 'passthrough',
-                'default' => '',
-            ],
-        ],
-
-        'hidden' => [
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
-
-    ],
-
-    'types' => [
-        '0' => [
-            'showitem' => '
+        'types' => [
+            '0' => [
+                'showitem' => '
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
                             headline, 
                             accessory_kits,
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                             hidden,
             ',
-        ]
-    ],
-];
+            ]
+        ],
+    ];
+});
