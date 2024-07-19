@@ -1,0 +1,92 @@
+plugin.tx_gjotiger {
+    view {
+        templateRootPath = {$plugin.tx_gjotiger.view.templateRootPath}
+        layoutRootPath = {$plugin.tx_gjotiger.view.layoutRootPath}
+        partialRootPaths {
+            10 = {$plugin.tx_gjotiger.view.partialRootPath}
+            20 = {$plugin.tx_gjoboilerplate.view.partialRootPath}
+            30 = {$plugin.tx_gjointroduction.view.partialRootPath}
+        }
+    }
+
+    settings {
+
+        placeholder{
+            imageActive75 = https://via.placeholder.com/75/000
+            imageDefault75 = https://via.placeholder.com/75/f8f9fa
+            imageDisabled75 = https://via.placeholder.com/75/dee2e6/?text=disabled
+
+            imageDefault100 = https://via.placeholder.com/100/f8f9fa
+            imageDisabled100 = https://via.placeholder.com/100/dee2e6/?text=disabled
+
+            imageDefault120 = https://via.placeholder.com/120/f8f9fa
+            imageDisabled120 = https://via.placeholder.com/120/dee2e6/?text=disabled
+
+            imageDefault150 = https://via.placeholder.com/150/f8f9fa
+            imageDisabled150 = https://via.placeholder.com/150/dee2e6/?text=disabled
+        }
+
+
+        // Konfigurator-Filter-Button Bedingungen
+        productset{
+            alu-80 {
+                softClose {
+                    minimumDoorWidthWood = 640
+                    telescop2 = 1
+                    telescop3 = 1
+                }
+                synchron {
+                    maximumDoorWidth = 1000
+                    softClose = 1
+                    telescop2 = 1
+                    telescop3 = 1
+                }
+                telescop2 {
+                    minimumDoorWidth = 600
+                    maximumDoorWidth = 1200
+                    minimumDoorThickness = 35
+                    maximumDoorThickness = 50
+                }
+                telescop3 {
+                    minimumDoorWidth = 600
+                    maximumDoorWidth = 1200
+                    minimumDoorThickness = 35
+                    maximumDoorThickness = 50
+                    maximumDoorWeight = 55
+                }
+            }
+            alu-250 {
+                synchron {
+                    maximumDoorWeight = 200
+                }
+            }
+
+        }
+        site {
+            pid {
+                shop = {$plugin.tx_gjointroduction.settings.site.pid.shop}
+                shippingCosts = {$plugin.tx_gjointroduction.settings.site.pid.shippingCosts}
+            }
+        }
+        #            wird nicht genutzt?!
+        #            pages.productDetail = 80
+
+
+    }
+
+    persistence {
+ 
+
+
+    }
+}
+
+config.tx_extbase {
+    objects {
+
+    }
+}
+
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:gjo_tiger/Configuration/TypoScript/_autocomplete.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:gjo_tiger/Configuration/TypoScript/_ajaxListProducts.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:gjo_tiger/Configuration/TypoScript/_ajaxGetProductSetVariant.ts">

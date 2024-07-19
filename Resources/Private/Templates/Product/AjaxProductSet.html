@@ -1,0 +1,44 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers">
+
+    <f:layout name="Default"/>
+
+    <f:section name="main">
+
+        <f:if condition="{productSetsArr}">
+            <f:then>
+                <ul class="productSets px-24 pt-12 pb-32 mb-0">
+                    <f:for each="{productSetsArr}" as="productSet" iteration="iteration">
+                        <li>
+                            <f:link.page pageUid="{productSet.pageUid}">
+                                &#8594; {productSet.name}
+                            </f:link.page>
+                            <f:if condition="{productSet.accessoryKits}">
+                                <ul>
+                                    <f:for each="{productSet.accessoryKits}" as="accessoryKit">
+                                        <li>
+                                            <f:link.page pageUid="{productSet.pageUid}" section="{accessoryKit.anchor}">
+                                                &#8594; {accessoryKit.name}
+                                            </f:link.page>
+
+                                        </li>
+                                    </f:for>
+                                </ul>
+                            </f:if>
+                        </li>
+                    </f:for>
+                </ul>
+
+            </f:then>
+            <f:else>
+                <div class="no-productSets px-24 pt-12 pb-32 mb-0 font-size-16 text-white">
+                    <p>{searchNoProductSetsFound1}</p>
+                    <p>{searchNoProductSetsFound2}</p>
+                </div>
+            </f:else>
+        </f:if>
+
+    </f:section>
+
+</div>

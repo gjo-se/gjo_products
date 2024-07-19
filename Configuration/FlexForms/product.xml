@@ -1,0 +1,118 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.settings</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <switchableControllerActions>
+                        <TCEforms>
+                            <label>LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode</label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <items>
+                                    <numIndex index="0">
+                                        <numIndex index="0">
+                                            LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
+                                        </numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">
+                                            LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroupTeaser
+                                        </numIndex>
+                                        <numIndex index="1">Product->showProductGroupTeaser</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2">
+                                        <numIndex index="0">
+                                            LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroup
+                                        </numIndex>
+                                        <numIndex index="1">Product->showProductGroup</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3">
+                                        <numIndex index="0">
+                                            LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductSet
+                                        </numIndex>
+                                        <numIndex index="1">Product->showProductSet</numIndex>
+                                    </numIndex>
+                                    <numIndex index="4">
+                                        <numIndex index="0">
+                                            LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.productFinder
+                                        </numIndex>
+                                        <numIndex index="1">Product->productFinder</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </switchableControllerActions>
+
+                    <settings.productGroup>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productGroup
+                            </label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Product->showProductGroupTeaser</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Product->showProductGroup</numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>select</type>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
+                                        </numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                </items>
+                                <foreign_table>tx_gjotiger_domain_model_productgroup</foreign_table>
+                                <foreign_table_where>AND tx_gjotiger_domain_model_productgroup.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjotiger_domain_model_productgroup.header</foreign_table_where>
+                            </config>
+                        </TCEforms>
+                    </settings.productGroup>
+
+                    <settings.productSet>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productSet
+                            </label>
+                            <displayCond>FIELD:switchableControllerActions:=:Product->showProductSet</displayCond>
+                            <config>
+                                <type>select</type>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
+                                        </numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                </items>
+                                <foreign_table>tx_gjotiger_domain_model_productset</foreign_table>
+                                <foreign_table_where>AND tx_gjotiger_domain_model_productset.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjotiger_domain_model_productset.name</foreign_table_where>
+                            </config>
+                        </TCEforms>
+                    </settings.productSet>
+
+                    <settings.isShop>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.settings.isShop
+                            </label>
+                            <displayCond>FIELD:switchableControllerActions:=:Product->productFinder</displayCond>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.isShop>
+
+
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

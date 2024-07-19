@@ -1,0 +1,10 @@
+plugin.tx_gjotiger {
+    view {
+        templateRootPath = EXT:gjo_tiger/Resources/Private/Templates/
+        partialRootPath = EXT:gjo_tiger/Resources/Private/Partials/
+        layoutRootPath = EXT:gjo_tiger/Resources/Private/Layouts/
+    }
+
+    settings {
+    }
+}

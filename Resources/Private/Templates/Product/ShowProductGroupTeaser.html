@@ -1,0 +1,64 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers">
+
+    <f:layout name="Default"/>
+
+    <f:section name="main">
+        <f:if condition="{productGroup}">
+            <div class="product-set-group-teaser">
+                <div class="row">
+                    <div class="col-12 p-0 px-16 pt-16">
+                        <div class="card">
+                            <div class="view overlay">
+                                <f:for each="{productGroup.image}" as="image" iteration="iteration">
+                                    <f:if condition="{iteration.cycle} == '1' ">
+                                        <f:link.page pageUid="{productGroup.pages.uid}">
+                                            <gjoSe:media.media file="{image}"
+                                                               class="img-fluid"
+                                                               alt="{productGroup.header}"
+                                                               width="1100"
+                                                               breakpoints="{
+                                                    0: {cropVariant: 'wideScreen', media: '(min-width: 1200px)', srcset: {0: 1100}},
+                                                    1: {cropVariant: 'desktop', media: '(min-width: 992px)', srcset: {0: 950}},
+                                                    2: {cropVariant: 'laptop', media: '(min-width: 768px)', srcset: {0: 720}},
+                                                    3: {cropVariant: 'tablet', media: '(min-width: 576px)', srcset: {0: 540}},
+                                                    4: {cropVariant: 'mobile', media: '(min-width: 300px)', srcset: {0: 350}}
+                                         		}"/>
+                                            <div class="mask rgba-orange-light"></div>
+                                        </f:link.page>
+                                    </f:if>
+                                </f:for>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <h3>
+                                {productGroup.header}
+                            </h3>
+                            <h4>
+                                {productGroup.subHeader}
+                            </h4>
+                            <f:format.raw>
+                                <f:format.crop maxCharacters="120">{productGroup.description}</f:format.crop>
+                            </f:format.raw>
+
+                            <div class="clearfix">
+                                <f:link.page pageUid="{productGroup.pages.uid}">
+                                    <button type="button"
+                                            class="btn btn-tiger-default float-right waves-effect waves-light">
+                                        <f:translate key="LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:products.seeProduct"/>
+                                    </button>
+                                </f:link.page>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </f:if>
+
+    </f:section>
+
+</div>

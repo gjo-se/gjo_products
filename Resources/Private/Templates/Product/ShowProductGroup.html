@@ -1,0 +1,109 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers">
+
+    <f:layout name="Default"/>
+
+    <f:section name="main">
+
+        <div class="product-set-group">
+
+            <div class="card px-16 pt-16">
+                <div class="view">
+                    <f:for each="{productGroup.image}" as="image" iteration="iteration">
+                        <f:if condition="{iteration.cycle} == '1' ">
+                            <gjoSe:media.media file="{image}"
+                                               class="img-fluid"
+                                               alt="{productGroup.header}"
+                                               width="1100"
+                                               breakpoints="{
+                                                0: {cropVariant: 'wideScreen', media: '(min-width: 1200px)', srcset: {0: 1100}},
+                                                1: {cropVariant: 'desktop', media: '(min-width: 992px)', srcset: {0: 950}},
+                                                2: {cropVariant: 'laptop', media: '(min-width: 768px)', srcset: {0: 720}},
+                                                3: {cropVariant: 'tablet', media: '(min-width: 576px)', srcset: {0: 540}},
+                                                4: {cropVariant: 'mobile', media: '(min-width: 300px)', srcset: {0: 350}}
+                                            }"/>
+                        </f:if>
+                    </f:for>
+                </div>
+
+                <div class="card-body pb-0">
+                    <h3>
+                        {productGroup.header}
+                    </h3>
+                    <h4>
+                        {productGroup.subHeader}
+                    </h4>
+                    <f:format.raw>
+                        {productGroup.description}
+                    </f:format.raw>
+                </div>
+            </div>
+
+            <div class="skin-white">
+
+                <div>
+                    <h2>
+                        <f:translate key="LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productSetGroup.toTheRightProduct"/>
+                        :
+                    </h2>
+                </div>
+
+                <div class="row">
+                    <f:for each="{productGroup.productSetTypes}" as="productSetType" iteration="iteration">
+                        <div class="col-md">
+                            <div class="card">
+                                <div class="card-body pt-0 pb-24 px-16">
+                                    <h4 class="card-title">
+                                        {productSetType.name}
+                                    </h4>
+                                    <ul class="font-size-16">
+                                        <f:for each="{productSetType.productSets}" as="productSet" iteration="iteration">
+                                            <li>
+                                                <f:link.page pageUid="{productSet.pages.uid}">{productSet.name} &#8599;</f:link.page>
+                                            </li>
+                                        </f:for>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </f:for>
+                </div>
+            </div>
+
+            <div>
+                <h2>{productGroup.teaserHeader}</h2>
+            </div>
+
+            <div class="card product-set-group-image-teaser pb-32">
+                <div class="view pb-24">
+                    <f:for each="{productGroup.teaserImage}" as="image" iteration="iteration">
+                        <f:if condition="{iteration.cycle} == '1' ">
+                            <f:for each="{productGroup.teaserImage}" as="image">
+                                <gjoSe:media.media file="{image}"
+                                                   class="img-fluid"
+                                                   alt="{productGroup.header}"
+                                                   width="1100"
+                                                   breakpoints="{
+                                                        0: {cropVariant: 'wideScreen', media: '(min-width: 1200px)', srcset: {0: 1100}},
+                                                        1: {cropVariant: 'desktop', media: '(min-width: 992px)', srcset: {0: 950}},
+                                                        2: {cropVariant: 'laptop', media: '(min-width: 768px)', srcset: {0: 720}},
+                                                        3: {cropVariant: 'tablet', media: '(min-width: 576px)', srcset: {0: 540}},
+                                                        4: {cropVariant: 'mobile', media: '(min-width: 300px)', srcset: {0: 350}}
+                                         		}"/>
+                            </f:for>
+                        </f:if>
+                    </f:for>
+                </div>
+
+                <div class="card-body p-0 px-16">
+                    <f:format.raw>{productGroup.teaserDescription}</f:format.raw>
+                </div>
+            </div>
+        </div>
+
+
+    </f:section>
+
+</div>
