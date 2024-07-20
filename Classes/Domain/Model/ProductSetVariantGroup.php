@@ -1,5 +1,5 @@
 <?php
-namespace GjoSe\GjoTiger\Domain\Model;
+namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
  *  created: 04.09.17 - 15:45
@@ -24,23 +24,23 @@ use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class ProductSetVariantGroup
- * @package GjoSe\GjoTiger\Domain\Model
+ * @package GjoSe\GjoProducts\Domain\Model
  */
 class ProductSetVariantGroup extends AbstractModel
 {
     /**
-     * @var \GjoSe\GjoTiger\Domain\Model\ProductSet
+     * @var \GjoSe\GjoProducts\Domain\Model\ProductSet
      */
     protected $productSet = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoTiger\Domain\Model\ProductSetVariant>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\ProductSetVariant>
      * @lazy
      */
     protected $productSetVariants = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoTiger\Domain\Model\Product>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\Product>
      * @lazy
      */
     protected $products = null;
@@ -75,7 +75,7 @@ class ProductSetVariantGroup extends AbstractModel
     }
 
     /**
-     * @return \GjoSe\GjoTiger\Domain\Model\ProductSet
+     * @return \GjoSe\GjoProducts\Domain\Model\ProductSet
      */
     public function getProductSet()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace GjoSe\GjoTiger\Controller;
+namespace GjoSe\GjoProducts\Controller;
 
 /***************************************************************
  *  created: 05.09.17 - 14:46
@@ -26,7 +26,7 @@ use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Class ProductController
- * @package GjoSe\GjoTiger\Controller
+ * @package GjoSe\GjoProducts\Controller
  */
 class ProductController extends AbstractController
 {
@@ -222,7 +222,7 @@ class ProductController extends AbstractController
     protected function translate($key)
     {
         // TODO: abstract machen
-        return $this->languageService->sL('LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:' . $key);
+        return $this->languageService->sL('LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:' . $key);
     }
 
     public function ajaxGetProductSetVariantAction()

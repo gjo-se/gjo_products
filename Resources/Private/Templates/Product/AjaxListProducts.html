@@ -65,7 +65,7 @@
                                     {productFinderListWings}:
                                 </f:then>
                                 <f:else>
-                                    {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productFinder.list.wings')}:
+                                    {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.wings')}:
                                 </f:else>
                             </f:if>
                             {productSet.filterWingcount}
@@ -76,7 +76,7 @@
                                     {productFinderListDoorWidth}:
                                 </f:then>
                                 <f:else>
-                                    {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productFinder.list.doorWidth')}:
+                                    {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.doorWidth')}:
                                 </f:else>
                             </f:if>
                             {productSet.minimumDoorWidth} - {productSet.maximumDoorWidth} mm
@@ -89,7 +89,7 @@
                                     {productFinderListDoorThickness}:
                                 </f:then>
                                 <f:else>
-                                    {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productFinder.list.doorThickness')}:
+                                    {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.doorThickness')}:
                                 </f:else>
                             </f:if>
                             {productSet.minimumDoorThickness} - {productSet.maximumDoorThickness} mm
@@ -100,7 +100,7 @@
                                     {productFinderListDoorWeight}:
                                 </f:then>
                                 <f:else>
-                                    {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productFinder.list.doorWeight')}:
+                                    {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.doorWeight')}:
                                 </f:else>
                             </f:if>
                             max. {productSet.maximumDoorWeight} kg
@@ -114,7 +114,7 @@
                                         {productSetVariantGroupPrice}:
                                     </f:then>
                                     <f:else>
-                                        {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productSetVariantGroup.price')}
+                                        {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSetVariantGroup.price')}
                                     </f:else>
                                 </f:if>
                                 <f:if condition="{productSetVariantGroupVatText}">
@@ -122,7 +122,7 @@
                                         {productSetVariantGroupVatText}
                                     </f:then>
                                     <f:else>
-                                        {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productSetVariantGroup.{gjoSe:feUser.vatText()}')}
+                                        {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSetVariantGroup.{gjoSe:feUser.vatText()}')}
                                     </f:else>
                                 </f:if>
                                 <f:if condition="{gjoSe:feUser.discount()}">
@@ -132,7 +132,7 @@
                                             {productSetVariantGroupDiscount}:
                                         </f:then>
                                         <f:else>
-                                            {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productSetVariantGroup.discount')}:
+                                            {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSetVariantGroup.discount')}:
                                         </f:else>
                                     </f:if>
                                     {gjoSe:feUser.discount() -> f:format.currency(decimalSeparator:',',
@@ -154,7 +154,7 @@
                                                 {productFinderListPriceFrom}
                                             </f:then>
                                             <f:else>
-                                                {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productFinder.list.price.from')}
+                                                {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.price.from')}
                                             </f:else>
                                         </f:if>
                                         <f:if condition="{gjoSe:feUser.discount()}">
@@ -185,7 +185,7 @@
                                                 {productFinderListPriceAvailableOnRequest}
                                             </f:then>
                                             <f:else>
-                                                {f:translate(key:'LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:productFinder.list.price.availableOnRequest')}
+                                                {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.price.availableOnRequest')}
                                             </f:else>
                                         </f:if>
                                     </f:else>
@@ -198,13 +198,13 @@
                                 <f:then>
                                     <f:link.page pageUid="{productSet.pages.uid}" additionalParams="{L: '{sysLanguageUid}', is_shop: 1}">
                                         <button type="button"
-                                                class="btn btn-tiger-primary float-right m-0 waves-effect waves-light">
+                                                class="btn btn-products-primary float-right m-0 waves-effect waves-light">
                                             <f:if condition="{productsSeeProduct}">
                                                 <f:then>
                                                     {productsSeeProduct}
                                                 </f:then>
                                                 <f:else>
-                                                    <f:translate key="LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:products.seeProduct"/>
+                                                    <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:products.seeProduct"/>
                                                 </f:else>
                                             </f:if>
                                         </button>
@@ -213,13 +213,13 @@
                                 <f:else>
                                     <f:link.page pageUid="{productSet.pages.uid}" additionalParams="{L: '{sysLanguageUid}'}">
                                         <button type="button"
-                                                class="btn btn-tiger-primary float-right m-0 waves-effect waves-light">
+                                                class="btn btn-products-primary float-right m-0 waves-effect waves-light">
                                             <f:if condition="{productsSeeProduct}">
                                                 <f:then>
                                                     {productsSeeProduct}
                                                 </f:then>
                                                 <f:else>
-                                                    <f:translate key="LLL:EXT:gjo_tiger/Resources/Private/Language/locallang.xlf:products.seeProduct"/>
+                                                    <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:products.seeProduct"/>
                                                 </f:else>
                                             </f:if>
                                         </button>

@@ -1,5 +1,5 @@
 <?php
-namespace GjoSe\GjoTiger\Domain\Model;
+namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
  *  created: 04.09.17 - 13:47
@@ -24,7 +24,7 @@ use GjoSe\GjoBoilerplate\Domain\Model\AbstractModel as GjoBoilerplateAbstractMod
 
 /**
  * Class AbstractModel
- * @package GjoSe\GjoTiger\Domain\Model
+ * @package GjoSe\GjoProducts\Domain\Model
  */
 abstract class AbstractModel extends GjoBoilerplateAbstractModel
 {

@@ -1,5 +1,5 @@
 <?php
-namespace GjoSe\GjoTiger\Domain\Repository;
+namespace GjoSe\GjoProducts\Domain\Repository;
 
  use TYPO3\CMS\Core\Utility\GeneralUtility;
  use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -27,7 +27,7 @@ use GjoSe\GjoBoilerplate\Domain\Repository\AbstractRepository as GjoBoilerplateA
 
 /**
  * Class ProductSetTypeRepository
- * @package GjoSe\GjoTiger\Domain\Repository
+ * @package GjoSe\GjoProducts\Domain\Repository
  */
 class ProductSetTypeRepository extends AbstractRepository
 {
@@ -37,10 +37,10 @@ class ProductSetTypeRepository extends AbstractRepository
     public function findProductSetTypeUidByProductSetUid($productSetUid, $maxCount = '')
     {
 
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_gjotiger_productset_productsettype_mm');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_gjoproducts_productset_productsettype_mm');
         $queryBuilder
             ->select('uid_foreign')
-            ->from('tx_gjotiger_productset_productsettype_mm')
+            ->from('tx_gjoproducts_productset_productsettype_mm')
             ->where(
                 $queryBuilder->expr()->eq('uid_local', $queryBuilder->createNamedParameter($productSetUid, \PDO::PARAM_INT))
             );

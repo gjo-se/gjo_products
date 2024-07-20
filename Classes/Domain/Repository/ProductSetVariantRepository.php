@@ -1,5 +1,5 @@
 <?php
-namespace GjoSe\GjoTiger\Domain\Repository;
+namespace GjoSe\GjoProducts\Domain\Repository;
 
 /***************************************************************
  *  created: 04.09.17 - 15:44
@@ -24,7 +24,7 @@ use GjoSe\GjoBoilerplate\Domain\Repository\AbstractRepository as GjoBoilerplateA
 
 /**
  * Class ProductSetVariantRepository
- * @package GjoSe\GjoTiger\Domain\Repository
+ * @package GjoSe\GjoProducts\Domain\Repository
  */
 class ProductSetVariantRepository extends AbstractRepository
 {

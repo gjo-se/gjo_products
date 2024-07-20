@@ -1,6 +1,6 @@
 <?php
 
-namespace GjoSe\GjoTiger\Domain\Repository;
+namespace GjoSe\GjoProducts\Domain\Repository;
 
  use TYPO3\CMS\Core\Utility\GeneralUtility;
  use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
  * Class ProductSetRepository
- * @package GjoSe\GjoTiger\Domain\Repository
+ * @package GjoSe\GjoProducts\Domain\Repository
  */
 class ProductSetRepository extends AbstractRepository
 {
@@ -142,7 +142,7 @@ class ProductSetRepository extends AbstractRepository
     public function findByFilter($sysLanguageUid, $productFinderFilter = '', $offset = 0, $limit = 0)
     {
 
-        $pluginSignature = 'tx_gjotiger_product[';
+        $pluginSignature = 'tx_gjoproducts_product[';
         $query           = $this->createQuery();
 
         //        https://docs.typo3.org/typo3cms/ExtbaseFluidBook/6-Persistence/3-implement-individual-database-queries.html

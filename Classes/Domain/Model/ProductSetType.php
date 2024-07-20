@@ -1,5 +1,5 @@
 <?php
-namespace GjoSe\GjoTiger\Domain\Model;
+namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
  *  created: 04.09.17 - 15:37
@@ -24,18 +24,18 @@ use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class ProductSetType
- * @package GjoSe\GjoTiger\Domain\Model
+ * @package GjoSe\GjoProducts\Domain\Model
  */
 class ProductSetType extends AbstractModel
 {
 
     /**
-     * @var \GjoSe\GjoTiger\Domain\Model\ProductGroup
+     * @var \GjoSe\GjoProducts\Domain\Model\ProductGroup
      */
     protected $productGroup = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoTiger\Domain\Model\ProductSet>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\ProductSet>
      * @lazy
      */
     protected $productSets = null;
@@ -64,7 +64,7 @@ class ProductSetType extends AbstractModel
     }
 
     /**
-     * @return \GjoSe\GjoTiger\Domain\Model\ProductGroup
+     * @return \GjoSe\GjoProducts\Domain\Model\ProductGroup
      */
     public function getProductGroup()
     {

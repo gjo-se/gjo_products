@@ -1,5 +1,5 @@
 <?php
-namespace GjoSe\GjoTiger\Domain\Repository;
+namespace GjoSe\GjoProducts\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 
 /**
  * Class AccessorykitGroupRepository
- * @package GjoSe\GjoTiger\Domain\Repository
+ * @package GjoSe\GjoProducts\Domain\Repository
  */
 class AccessorykitGroupRepository extends AbstractRepository
 {
@@ -35,10 +35,10 @@ class AccessorykitGroupRepository extends AbstractRepository
      */
     public function findAccessorykitUidsByAccessorykitGroupUid($accessorykitGroupUid)
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_gjotiger_productset_accessorykit_mm');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_gjoproducts_productset_accessorykit_mm');
         $queryBuilder
             ->select('uid_local')
-            ->from('tx_gjotiger_productset_accessorykit_mm')
+            ->from('tx_gjoproducts_productset_accessorykit_mm')
             ->where(
                 $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($accessorykitGroupUid, \PDO::PARAM_INT))
             );

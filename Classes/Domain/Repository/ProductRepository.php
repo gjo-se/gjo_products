@@ -1,5 +1,5 @@
 <?php
-namespace GjoSe\GjoTiger\Domain\Repository;
+namespace GjoSe\GjoProducts\Domain\Repository;
 
 /***************************************************************
  *  created: 04.09.17 - 11:26
@@ -22,7 +22,7 @@ namespace GjoSe\GjoTiger\Domain\Repository;
 
 /**
  * Class ProductRepository
- * @package GjoSe\GjoTiger\Domain\Repository
+ * @package GjoSe\GjoProducts\Domain\Repository
  */
 class ProductRepository extends AbstractRepository
 {

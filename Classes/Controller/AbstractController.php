@@ -1,5 +1,5 @@
 <?php
-namespace GjoSe\GjoTiger\Controller;
+namespace GjoSe\GjoProducts\Controller;
 
 /***************************************************************
  *  created: 05.09.17 - 14:47
@@ -21,26 +21,26 @@ namespace GjoSe\GjoTiger\Controller;
  ***************************************************************/
 
 use GjoSe\GjoBoilerplate\Controller\AbstractController as GjoBoilerplateAbstractController;
-use GjoSe\GjoTiger\Domain\Repository\ProductGroupRepository;
-use GjoSe\GjoTiger\Domain\Repository\ProductSetRepository;
-use GjoSe\GjoTiger\Domain\Repository\ProductSetTypeRepository;
-use GjoSe\GjoTiger\Domain\Repository\ProductSetVariantRepository;
+use GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository;
+use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
+use GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository;
+use GjoSe\GjoProducts\Domain\Repository\ProductSetVariantRepository;
 use GjoSe\GjoExtendsFemanager\Domain\Repository\FeUserRepository;
-use GjoSe\GjoTiger\Domain\Repository\AccessorykitGroupRepository;
+use GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository;
 
 /**
  * Class AbstractController
- * @package GjoSe\GjoTiger\Controller
+ * @package GjoSe\GjoProducts\Controller
  */
 abstract class AbstractController extends GjoBoilerplateAbstractController
 {
     /**
-     * @var \GjoSe\GjoTiger\Domain\Repository\ProductGroupRepository
+     * @var \GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository
      */
     protected $productGroupRepository;
 
     /**
-     * @param \GjoSe\GjoTiger\Domain\Repository\ProductGroupRepository
+     * @param \GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository
      */
     public function injectProductGroupRepository(ProductGroupRepository $productGroupRepository)
     {
@@ -48,12 +48,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoTiger\Domain\Repository\ProductSetRepository
+     * @var \GjoSe\GjoProducts\Domain\Repository\ProductSetRepository
      */
     protected $productSetRepository;
 
     /**
-     * @param \GjoSe\GjoTiger\Domain\Repository\ProductSetRepository
+     * @param \GjoSe\GjoProducts\Domain\Repository\ProductSetRepository
      */
     public function injectProductSetRepository(ProductSetRepository $productSetRepository)
     {
@@ -61,12 +61,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoTiger\Domain\Repository\ProductSetTypeRepository
+     * @var \GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository
      */
     protected $productSetTypeRepository;
 
     /**
-     * @param \GjoSe\GjoTiger\Domain\Repository\ProductSetTypeRepository
+     * @param \GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository
      */
     public function injectProductSetTypeRepository(ProductSetTypeRepository $productSetTypeRepository)
     {
@@ -74,12 +74,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoTiger\Domain\Repository\ProductSetVariantRepository
+     * @var \GjoSe\GjoProducts\Domain\Repository\ProductSetVariantRepository
      */
     protected $productSetVariantRepository;
 
     /**
-     * @param \GjoSe\GjoTiger\Domain\Repository\ProductSetVariantRepository
+     * @param \GjoSe\GjoProducts\Domain\Repository\ProductSetVariantRepository
      */
     public function injectProductSetVariantRepository(ProductSetVariantRepository $productSetVariantRepository)
     {
@@ -100,12 +100,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoTiger\Domain\Repository\AccessorykitGroupRepository
+     * @var \GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository
      */
     protected $accessorykitGroupRepository;
 
     /**
-     * @param \GjoSe\GjoTiger\Domain\Repository\AccessorykitGroupRepository
+     * @param \GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository
      */
     public function injectAccessorykitGroupRepository(AccessorykitGroupRepository $accessorykitGroupRepository)
     {
