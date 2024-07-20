@@ -1,5 +1,14 @@
 <?php
 
-defined('TYPO3') or die;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('gjo_tiger', 'Configuration/TypoScript', 'Tiger Products');
+call_user_func(function()
+{
+    $extensionKey = 'gjo_products';
+
+    ExtensionManagementUtility::addStaticFile(
+        $extensionKey,
+        'Configuration/TypoScript',
+        'GjoSe Products'
+    );
+});

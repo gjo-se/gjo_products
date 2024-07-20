@@ -4,7 +4,7 @@ ajaxListProducts {
     10 = USER
     10 {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-        extensionName = GjoTiger
+        extensionName = GjoProducts
         pluginName = Product
         vendorName = GjoSe
         switchableControllerActions {
@@ -13,9 +13,9 @@ ajaxListProducts {
             }
         }
 
-        view =< plugin.tx_gjotiger.view
-        persistence =< plugin.tx_gjotiger.persistence
-        settings =< plugin.tx_gjotiger.settings
+        view =< plugin.tx_gjoproducts.view
+        persistence =< plugin.tx_gjoproducts.persistence
+        settings =< plugin.tx_gjoproducts.settings
     }
 
     config {
@@ -28,7 +28,7 @@ ajaxListProducts {
     }
 }
 
-plugin.tx_gjotiger {
+plugin.tx_gjoproducts {
     settings{
         ajaxListProducts {
             offset = 0

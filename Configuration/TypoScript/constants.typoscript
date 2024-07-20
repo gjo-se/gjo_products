@@ -1,0 +1,10 @@
+plugin.tx_gjoproducts {
+    view {
+        templateRootPath = EXT:gjo_products/Resources/Private/Templates/
+        partialRootPath = EXT:gjo_products/Resources/Private/Partials/
+        layoutRootPath = EXT:gjo_products/Resources/Private/Layouts/
+    }
+
+    settings {
+    }
+}

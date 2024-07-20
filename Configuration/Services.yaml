@@ -4,6 +4,6 @@ services:
     autoconfigure: true
     public: false
 
-  GjoSe\GjoTiger\:
+  GjoSe\GjoProducts\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
