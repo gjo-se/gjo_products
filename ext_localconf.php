@@ -8,7 +8,7 @@ defined('TYPO3') or die('Access denied.');
 call_user_func(
     static function (): void {
 
-        $extensionKey = 'gjo_tiger';
+        $extensionKey = 'gjo_products';
 
         ExtensionUtility::configurePlugin(
             $extensionKey,
@@ -19,10 +19,6 @@ call_user_func(
             [
                 'Product' => 'showProductGroupTeaser, showProductGroup, showProductSet, ajaxProductSet, productFinder, ajaxListProducts',
             ]
-        );
-
-        ExtensionManagementUtility::addPageTSConfig(
-            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $extensionKey . '/Configuration/PageTS/Mod/Wizards/newContentElement.t3s">'
         );
     }
 );
