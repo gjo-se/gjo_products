@@ -22,25 +22,25 @@
                                     </numIndex>
                                     <numIndex index="1">
                                         <numIndex index="0">
-                                            LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroupTeaser
+                                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroupTeaser
                                         </numIndex>
                                         <numIndex index="1">Product->showProductGroupTeaser</numIndex>
                                     </numIndex>
                                     <numIndex index="2">
                                         <numIndex index="0">
-                                            LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroup
+                                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroup
                                         </numIndex>
                                         <numIndex index="1">Product->showProductGroup</numIndex>
                                     </numIndex>
                                     <numIndex index="3">
                                         <numIndex index="0">
-                                            LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductSet
+                                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductSet
                                         </numIndex>
                                         <numIndex index="1">Product->showProductSet</numIndex>
                                     </numIndex>
                                     <numIndex index="4">
                                         <numIndex index="0">
-                                            LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.productFinder
+                                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.productFinder
                                         </numIndex>
                                         <numIndex index="1">Product->productFinder</numIndex>
                                     </numIndex>
@@ -52,7 +52,7 @@
                     <settings.productGroup>
                         <TCEforms>
                             <label>
-                                LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productGroup
+                                LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productGroup
                             </label>
                             <displayCond>
                                 <OR>
@@ -70,8 +70,8 @@
                                         <numIndex index="1"></numIndex>
                                     </numIndex>
                                 </items>
-                                <foreign_table>tx_gjotiger_domain_model_productgroup</foreign_table>
-                                <foreign_table_where>AND tx_gjotiger_domain_model_productgroup.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjotiger_domain_model_productgroup.header</foreign_table_where>
+                                <foreign_table>tx_gjoproducts_domain_model_productgroup</foreign_table>
+                                <foreign_table_where>AND tx_gjoproducts_domain_model_productgroup.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productgroup.header</foreign_table_where>
                             </config>
                         </TCEforms>
                     </settings.productGroup>
@@ -79,7 +79,7 @@
                     <settings.productSet>
                         <TCEforms>
                             <label>
-                                LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productSet
+                                LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productSet
                             </label>
                             <displayCond>FIELD:switchableControllerActions:=:Product->showProductSet</displayCond>
                             <config>
@@ -92,8 +92,8 @@
                                         <numIndex index="1"></numIndex>
                                     </numIndex>
                                 </items>
-                                <foreign_table>tx_gjotiger_domain_model_productset</foreign_table>
-                                <foreign_table_where>AND tx_gjotiger_domain_model_productset.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjotiger_domain_model_productset.name</foreign_table_where>
+                                <foreign_table>tx_gjoproducts_domain_model_productset</foreign_table>
+                                <foreign_table_where>AND tx_gjoproducts_domain_model_productset.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productset.name</foreign_table_where>
                             </config>
                         </TCEforms>
                     </settings.productSet>
@@ -101,7 +101,7 @@
                     <settings.isShop>
                         <TCEforms>
                             <label>
-                                LLL:EXT:gjo_tiger/Resources/Private/Language/locallang_be.xlf:flexforms.settings.isShop
+                                LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.isShop
                             </label>
                             <displayCond>FIELD:switchableControllerActions:=:Product->productFinder</displayCond>
                             <config>
