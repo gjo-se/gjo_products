@@ -21,8 +21,8 @@ namespace GjoSe\GjoProducts\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Lang\LanguageService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Localization\LocalizationFactory;
 
 /**
  * Class ProductController
@@ -31,9 +31,13 @@ use TYPO3\CMS\Lang\LanguageService;
 class ProductController extends AbstractController
 {
     /**
-     * @var LanguageService
+     * @var LocalizationFactory
      */
-    protected $languageService;
+    protected $localizationFactory;
+
+    public function __construct(LocalizationFactory $localizationFactory = null) {
+        $this->localizationFactory = $localizationFactory ?: GeneralUtility::makeInstance(LocalizationFactory::class);
+    }
 
     /**
      * return void
@@ -79,15 +83,6 @@ class ProductController extends AbstractController
         $searchString   = $postParams['searchString'];
         $sysLanguageUid = $postParams['sysLanguageUid'];
         $productSets    = $this->productSetRepository->findBySearchString($searchString, $limit);
-
-        $this->languageService = GeneralUtility::makeInstance(LanguageService::class);
-
-        if ($sysLanguageUid == '0') {
-            $sysLanguage = 'de';
-        } elseif ($sysLanguageUid == '1') {
-            $sysLanguage = 'en';
-        }
-        $this->languageService->init($sysLanguage);
 
         $productSetsArr = array();
 
@@ -157,18 +152,10 @@ class ProductController extends AbstractController
     public function ajaxListProductsAction()
     {
 
-        // auch das kann ins Abstract
         $postParams          = GeneralUtility::_POST();
         $productFinderFilter = $postParams['productFinderFilter'];
 
-        // TODO: wenn ich bei den TESTS bin, hier mit ajaxProductSetAction generischer gestalten
-        //  - locallang-helper-sysLanguageUid ist 2x im Quellcode
-        //  - locallang-helper-sysLanguage ist redundant und kann raus
-        //  - nachfolgenden Zeilen in AbstractController verschieben (Boilerpalte) => wird immer im Ajaxfall gebraucht
-        //  - siehe auch translate() hier im File
         $sysLanguageUid      = $postParams['sysLanguageUid'];
-        $this->languageService = GeneralUtility::makeInstance(LanguageService::class);
-        $this->languageService->init(trim($postParams['sysLanguage']));
 
         if ($postParams['offset']) {
             $offset = $postParams['offset'];
@@ -207,27 +194,30 @@ class ProductController extends AbstractController
         $this->view->assign('productSetVariantGroupDiscount', $this->translate('productSetVariantGroup.discount'));
         $this->view->assign('productSetVariantGroupVatText', $this->translate('productSetVariantGroup.' . $vatTextTranslationKey));
 
-
         $this->view->assign('productSets', $productSets);
         $this->view->assign('productSetsCount', $productSetsCount);
         $this->view->assign('isShop', (int)$postParams['isShop']);
     }
 
     /**
-     * Returns the translation of $key
+     * Returns the translation of $key from the specified language file
      *
-     * @param string $key
-     * @return string
+     * @param string $key The key from the localization file
+     * @param string $languageFile The path to the localization file
+     * @param string $language The language to use (default is 'default')
+     * @return string The translated string
      */
-    protected function translate($key)
-    {
-        // TODO: abstract machen
-        return $this->languageService->sL('LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:' . $key);
+    public function translate($key, $language = 'default') {
+        $localizationReference = 'LLL:LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf';
+        $translation = $this->localizationFactory->getParsedData($localizationReference, $language)[0][$key][0]['target'];
+        return $translation ?: $key;
     }
 
     public function ajaxGetProductSetVariantAction()
     {
         $json = array();
+        $productSetVariantListPrice = 0;
+        $feUserDiscount             = 0;
 
         $postParams                = GeneralUtility::_POST();
         $productSetVariantGroupUid = $postParams['productSetVariantGroupUid'];
@@ -256,7 +246,6 @@ class ProductController extends AbstractController
 
             $feUserData                 = $GLOBALS['TSFE']->fe_user->user;
             $feUserObj                  = $this->feUserRepository->findByUid($feUserData['uid']);
-            $feUserDiscount             = 0;
             $productSetVariantListPrice = $productSetVariant->getPrice() + ($productSetVariant->getPrice() * $productSetVariant->getTax() / 100);
 
             if ($feUserObj) {

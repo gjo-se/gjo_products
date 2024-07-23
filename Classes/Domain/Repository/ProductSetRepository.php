@@ -444,9 +444,8 @@ class ProductSetRepository extends AbstractRepository
 
         $queryResult = $query->execute();
 
+        $productSetWithVariants = [];
         if ($queryResult->count()) {
-
-            $productSetWithVariants = array();
             foreach ($queryResult as $productSet) {
 
                 $productSetVariantGroups = $productSet->getProductSetVariantGroups();

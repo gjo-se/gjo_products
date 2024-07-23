@@ -68,7 +68,7 @@ return call_user_func(function () {
                     'size' => 10,
                     'autoSizeMax' => 30,
                     'maxitems' => 14,
-                    'multiple' => 0
+                    'multiple' => 0,
                 ],
             ],
 
@@ -77,17 +77,17 @@ return call_user_func(function () {
                 'description' => $lll . $table . '.headline',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
-            ###############################################################################
+            // ###############################################################################
 
             'sys_language_uid' => [
                 'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
                 'config' => [
                     'type' => 'language',
-                ]
+                ],
             ],
 
             'l10n_parent' => [
@@ -99,7 +99,7 @@ return call_user_func(function () {
                     'items' => [
                         [
                             'label' => '',
-                            'value' => 0
+                            'value' => 0,
                         ],
                     ],
                     'foreign_table' => $table,
@@ -149,7 +149,7 @@ return call_user_func(function () {
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                             hidden,
             ',
-            ]
+            ],
         ],
     ];
 });
