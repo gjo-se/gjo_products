@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
@@ -20,29 +21,22 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class AccessorykitGroup
- * @package GjoSe\GjoProducts\Domain\Model
  */
-class AccessorykitGroup extends AbstractModel
+class AccessorykitGroup extends GjoBaseAbstractModel
 {
-    /**
-     * @var \GjoSe\GjoProducts\Domain\Model\ProductSet
-     */
-    protected $productSet = null;
+    protected ?ProductSet $productSet = null;
+    protected string $headline = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\ProductSet>
-     * @lazy
+     * @var ObjectStorage<ProductSet>
+     * @Extbase\ORM\Lazy
      */
-    protected $accessoryKits = null;
-
-    /**
-     * @var string
-     */
-    protected $headline = '';
+    protected ObjectStorage $accessoryKits;
 
     public function __construct()
     {
@@ -52,15 +46,15 @@ class AccessorykitGroup extends AbstractModel
     /**
      * @return void
      */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->accessoryKits = new ObjectStorage();
     }
 
     /**
-     * @return \GjoSe\GjoProducts\Domain\Model\ProductSet
+     * @return ProductSet|null
      */
-    public function getProductSet()
+    public function getProductSet(): ?ProductSet
     {
         return $this->productSet;
     }
@@ -68,17 +62,16 @@ class AccessorykitGroup extends AbstractModel
     /**
      * @return string
      */
-    public function getHeadline()
+    public function getHeadline(): string
     {
         return $this->headline;
     }
 
     /**
-     * @return ObjectStorage
+     * @return ObjectStorage<ProductSet>
      */
-    public function getAccessoryKits()
+    public function getAccessoryKits(): ObjectStorage
     {
         return $this->accessoryKits;
     }
-
 }
