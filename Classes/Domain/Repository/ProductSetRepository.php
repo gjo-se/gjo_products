@@ -2,6 +2,8 @@
 
 namespace GjoSe\GjoProducts\Domain\Repository;
 
+ use TYPO3\CMS\Core\Context\Context;
+ use TYPO3\CMS\Core\Context\LanguageAspect;
  use TYPO3\CMS\Core\Utility\GeneralUtility;
  use TYPO3\CMS\Core\Database\ConnectionPool;
 
@@ -82,8 +84,11 @@ class ProductSetRepository extends AbstractRepository
             $query->setLimit(intval($limit));
         }
 
-        $sysLanguageUid = $GLOBALS['TSFE']->sys_language_uid;
-        $query->getQuerySettings()->setLanguageUid($sysLanguageUid);
+        $context = GeneralUtility::makeInstance(Context::class);
+        $languageUid = $GLOBALS['TSFE']->sys_language_uid;
+        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $languageUid);
+        $context->setAspect('language', $languageAspect);
+        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
 
         return $query->execute();
     }
@@ -134,7 +139,10 @@ class ProductSetRepository extends AbstractRepository
         }
 
 
-        $query->getQuerySettings()->setLanguageUid($sysLanguageUid);
+        $context = GeneralUtility::makeInstance(Context::class);
+        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
+        $context->setAspect('language', $languageAspect);
+        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
 
         return $query->execute();
     }
@@ -202,19 +210,6 @@ class ProductSetRepository extends AbstractRepository
                     $constraints[] = $query->equals('filterDesignCustomer', 1);
                 }
             }
-
-//            3x dersekbe Code?!
-//            if (isset($productFinderFilter[$pluginSignature . 'customer'])) {
-//                if ($productFinderFilter[$pluginSignature . 'customer'] == '1') {
-//                    $constraints[] = $query->equals('filterDesignCustomer', 1);
-//                }
-//            }
-//
-//            if (isset($productFinderFilter[$pluginSignature . 'customer'])) {
-//                if ($productFinderFilter[$pluginSignature . 'customer'] == '1') {
-//                    $constraints[] = $query->equals('filterDesignCustomer', 1);
-//                }
-//            }
 
             if (isset($productFinderFilter[$pluginSignature . 'alu'])) {
                 if ($productFinderFilter[$pluginSignature . 'alu'] == '1') {
@@ -424,13 +419,15 @@ class ProductSetRepository extends AbstractRepository
             )
         );
 
-        $query->getQuerySettings()->setLanguageUid($sysLanguageUid);
+        $context = GeneralUtility::makeInstance(Context::class);
+        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
+        $context->setAspect('language', $languageAspect);
+        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
 
         return $query->execute();
     }
 
-    public
-    function findAllWithVariants()
+    public function findAllWithVariants()
     {
         $query = $this->createQuery();
         $query->getQuerySettings()

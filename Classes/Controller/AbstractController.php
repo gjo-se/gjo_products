@@ -35,12 +35,12 @@ use GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository;
 abstract class AbstractController extends GjoBoilerplateAbstractController
 {
     /**
-     * @var \GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository
+     * @var ProductGroupRepository
      */
     protected $productGroupRepository;
 
     /**
-     * @param \GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository
+     * @param ProductGroupRepository $productGroupRepository
      */
     public function injectProductGroupRepository(ProductGroupRepository $productGroupRepository)
     {
@@ -48,12 +48,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoProducts\Domain\Repository\ProductSetRepository
+     * @var ProductSetRepository
      */
     protected $productSetRepository;
 
     /**
-     * @param \GjoSe\GjoProducts\Domain\Repository\ProductSetRepository
+     * @param ProductSetRepository $productSetRepository
      */
     public function injectProductSetRepository(ProductSetRepository $productSetRepository)
     {
@@ -61,12 +61,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository
+     * @var ProductSetTypeRepository
      */
     protected $productSetTypeRepository;
 
     /**
-     * @param \GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository
+     * @param ProductSetTypeRepository $productSetTypeRepository
      */
     public function injectProductSetTypeRepository(ProductSetTypeRepository $productSetTypeRepository)
     {
@@ -74,12 +74,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoProducts\Domain\Repository\ProductSetVariantRepository
+     * @var ProductSetVariantRepository
      */
     protected $productSetVariantRepository;
 
     /**
-     * @param \GjoSe\GjoProducts\Domain\Repository\ProductSetVariantRepository
+     * @param ProductSetVariantRepository $productSetVariantRepository
      */
     public function injectProductSetVariantRepository(ProductSetVariantRepository $productSetVariantRepository)
     {
@@ -87,12 +87,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoExtendsFemanager\Domain\Repository\FeUserRepository
+     * @var FeUserRepository
      */
     protected $feUserRepository;
 
     /**
-     * @param \GjoSe\GjoExtendsFemanager\Domain\Repository\FeUserRepository
+     * @param FeUserRepository $feUserRepository
      */
     public function injectFeUserRepository(FeUserRepository $feUserRepository)
     {
@@ -100,12 +100,12 @@ abstract class AbstractController extends GjoBoilerplateAbstractController
     }
 
     /**
-     * @var \GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository
+     * @var AccessorykitGroupRepository
      */
     protected $accessorykitGroupRepository;
 
     /**
-     * @param \GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository
+     * @param AccessorykitGroupRepository $accessorykitGroupRepository
      */
     public function injectAccessorykitGroupRepository(AccessorykitGroupRepository $accessorykitGroupRepository)
     {

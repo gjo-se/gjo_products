@@ -203,7 +203,6 @@ class ProductController extends AbstractController
      * Returns the translation of $key from the specified language file
      *
      * @param string $key The key from the localization file
-     * @param string $languageFile The path to the localization file
      * @param string $language The language to use (default is 'default')
      * @return string The translated string
      */

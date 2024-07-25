@@ -101,29 +101,29 @@ class ProductSet extends AbstractModel
     protected $maximumDoorThickness = 0;
 
     /**
-     * @var integer
+     * @var int
      */
-    protected $minimumDoorWidth = '';
+    protected $minimumDoorWidth = 0;
 
     /**
-     * @var integer
+     * @var int
      */
-    protected $minimumDoorWidthSoftClose = '';
+    protected $minimumDoorWidthSoftClose = 0;
 
     /**
-     * @var integer
+     * @var int
      */
-    protected $minimumDoorWidthSoftCloseLong = '';
+    protected $minimumDoorWidthSoftCloseLong = 0;
 
     /**
-     * @var integer
+     * @var int
      */
-    protected $minimumDoorWidthSoftCloseBoth = '';
+    protected $minimumDoorWidthSoftCloseBoth = 0;
 
     /**
-     * @var integer
+     * @var int
      */
-    protected $maximumDoorWidth = '';
+    protected $maximumDoorWidth = 0;
 
     /**
      * @var string
@@ -251,13 +251,13 @@ class ProductSet extends AbstractModel
     /**
      * @var bool
      */
-
     protected $filterTfold = false;
+
     /**
      * @var bool
      */
-
     protected $filterTclose = false;
+
     /**
      * @var bool
      */
