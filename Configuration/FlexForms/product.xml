@@ -3,20 +3,20 @@
         <sDEF>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.settings</sheetTitle>
+                    <sheetTitle>LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.settings</sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>
                     <switchableControllerActions>
                         <TCEforms>
-                            <label>LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode</label>
+                            <label>LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode</label>
                             <onChange>reload</onChange>
                             <config>
                                 <type>select</type>
                                 <items>
                                     <numIndex index="0">
                                         <numIndex index="0">
-                                            LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
+                                            LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                         </numIndex>
                                         <numIndex index="1"></numIndex>
                                     </numIndex>
@@ -65,7 +65,7 @@
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">
-                                            LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
+                                            LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                         </numIndex>
                                         <numIndex index="1"></numIndex>
                                     </numIndex>
@@ -87,7 +87,7 @@
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">
-                                            LLL:EXT:gjo_boilerplate/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
+                                            LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                         </numIndex>
                                         <numIndex index="1"></numIndex>
                                     </numIndex>

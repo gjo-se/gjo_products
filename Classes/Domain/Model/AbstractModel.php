@@ -20,13 +20,13 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBoilerplate\Domain\Model\AbstractModel as GjoBoilerplateAbstractModel;
+use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
 
 /**
  * Class AbstractModel
  * @package GjoSe\GjoProducts\Domain\Model
  */
-abstract class AbstractModel extends GjoBoilerplateAbstractModel
+abstract class AbstractModel extends GjoBaseAbstractModel
 {
     
 }

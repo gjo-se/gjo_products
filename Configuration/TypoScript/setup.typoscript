@@ -4,7 +4,7 @@ plugin.tx_gjoproducts {
         layoutRootPath = {$plugin.tx_gjoproducts.view.layoutRootPath}
         partialRootPaths {
             10 = {$plugin.tx_gjoproducts.view.partialRootPath}
-            20 = {$plugin.tx_gjoboilerplate.view.partialRootPath}
+            20 = {$plugin.tx_gjobase.view.partialRootPath}
             30 = {$plugin.tx_gjointroduction.view.partialRootPath}
         }
     }

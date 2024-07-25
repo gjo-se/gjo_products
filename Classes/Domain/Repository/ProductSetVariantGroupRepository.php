@@ -20,7 +20,7 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBoilerplate\Domain\Repository\AbstractRepository as GjoBoilerplateAbstractRepository;
+use GjoSe\GjoBase\Domain\Repository\AbstractRepository as GjoBaseAbstractRepository;
 
 /**
  * Class ProductSetVariantGroupRepository

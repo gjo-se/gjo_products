@@ -20,7 +20,7 @@ namespace GjoSe\GjoProducts\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBoilerplate\Controller\AbstractController as GjoBoilerplateAbstractController;
+use GjoSe\GjoBase\Controller\AbstractController as GjoBaseAbstractController;
 use GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository;
@@ -32,7 +32,7 @@ use GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository;
  * Class AbstractController
  * @package GjoSe\GjoProducts\Controller
  */
-abstract class AbstractController extends GjoBoilerplateAbstractController
+abstract class AbstractController extends GjoBaseAbstractController
 {
     /**
      * @var ProductGroupRepository

@@ -34,7 +34,7 @@ class ProductGroup extends AbstractModel
     protected $productSetTypes = null;
 
     /**
-     * @var \GjoSe\GjoBoilerplate\Domain\Model\Pages
+     * @var \GjoSe\GjoBase\Domain\Model\Pages
      */
     protected $pages = null;
 
@@ -156,7 +156,7 @@ class ProductGroup extends AbstractModel
     }
 
     /**
-     * @return \GjoSe\GjoBoilerplate\Domain\Model\Pages
+     * @return \GjoSe\GjoBase\Domain\Model\Pages
      */
     public function getPages()
     {
