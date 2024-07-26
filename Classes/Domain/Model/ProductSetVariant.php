@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
@@ -20,160 +21,79 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class ProductSetVariant
- * @package GjoSe\GjoProducts\Domain\Model
  */
-class ProductSetVariant extends AbstractModel
+class ProductSetVariant extends GjoBaseAbstractModel
 {
+    protected string $name = '';
+
+    protected string $articleNumber = '';
+    protected float $price = 0.0;
+    protected string $material = '';
+    protected int $length = 0;
+    protected string $version = '';
+    protected int $tax = 0;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\ProductSetVariantGroup>
-     * @lazy
+     * @var ObjectStorage<ProductSetVariantGroup>
+     * @Extbase\ORM\Lazy
      */
-    protected $productSetVariantGroup = null;
-
-    /**
-     * @var string
-     */
-    protected $name = '';
-
-    /**
-     * @var string
-     */
-    protected $articleNumber = '';
-
-    /**
-     * @var double
-     */
-    protected $price = 0;
-
-    /**
-     * @var string
-     */
-    protected $material = '';
-
-    /**
-     * @var int
-     */
-    protected $length = 0;
-
-    /**
-     * @var string
-     */
-    protected $version = '';
-
-    /**
-     * @var int
-     */
-    protected $tax = 0;
+    protected ObjectStorage $productSetVariantGroup;
 
     public function __construct()
     {
         $this->initStorageObjects();
     }
 
-    /**
-     * @return void
-     */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->productSetVariantGroup = new ObjectStorage();
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getProductSetVariantGroup()
-    {
-        return $this->productSetVariantGroup;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getArticleNumber()
+    public function getArticleNumber(): string
     {
         return $this->articleNumber;
     }
 
-    /**
-     * @return float
-     */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * @return int
-     */
-    public function getTax()
+    public function getTax(): int
     {
         return $this->tax;
     }
 
-    /**
-     * @return string
-     */
     public function getMaterial(): string
     {
         return $this->material;
     }
 
-    /**
-     * @param string $material
-     *
-     * @return void
-     */
-    public function setMaterial($material)
-    {
-        $this->material = $material;
-    }
-
-    /**
-     * @return int
-     */
     public function getLength(): int
     {
         return $this->length;
     }
 
-    /**
-     * @param int $length
-     *
-     * @return void
-     */
-    public function setLength($length)
-    {
-        $this->length = $length;
-    }
-
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->version;
     }
 
     /**
-     * @param string $version
-     *
-     * @return void
+     * @return ObjectStorage<ProductSetVariantGroup>
      */
-    public function setVersion($version)
+    public function getProductSetVariantGroup(): ObjectStorage
     {
-        $this->version = $version;
+        return $this->productSetVariantGroup;
     }
 }

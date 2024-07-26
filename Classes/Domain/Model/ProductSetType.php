@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
@@ -20,77 +21,56 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class ProductSetType
- * @package GjoSe\GjoProducts\Domain\Model
  */
-class ProductSetType extends AbstractModel
+class ProductSetType extends GjoBaseAbstractModel
 {
+    protected string $name = '';
+    protected string $description = '';
+    protected ?ProductGroup $productGroup;
 
     /**
-     * @var \GjoSe\GjoProducts\Domain\Model\ProductGroup
+     * @var ObjectStorage<ProductSet>
+     * @Extbase\ORM\Lazy
      */
-    protected $productGroup = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\ProductSet>
-     * @lazy
-     */
-    protected $productSets = null;
-
-    /**
-     * @var string
-     */
-    protected $name = '';
-
-    /**
-     * @var string
-     */
-    protected $description = '';
+    protected ObjectStorage $productSets;
 
     public function __construct()
     {
         $this->initStorageObjects();
     }
 
-    /**
-     * @return void
-     */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->productSets = new ObjectStorage();
     }
 
-    /**
-     * @return \GjoSe\GjoProducts\Domain\Model\ProductGroup
-     */
-    public function getProductGroup()
-    {
-        return $this->productGroup;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * @return ObjectStorage
+     * @return ProductGroup|null
      */
-    public function getProductSets()
+    public function getProductGroup(): ?ProductGroup
+    {
+        return $this->productGroup;
+    }
+
+    /**
+     * @return ObjectStorage<ProductSet>
+     */
+    public function getProductSets(): ObjectStorage
     {
         return $this->productSets;
     }

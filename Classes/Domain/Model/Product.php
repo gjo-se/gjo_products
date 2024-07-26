@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
@@ -20,74 +21,35 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
  * Class Product
- * @package GjoSe\GjoProducts\Domain\Model
  */
-class Product extends AbstractModel
+class Product extends GjoBaseAbstractModel
 {
+    protected string $name = '';
+    protected string $articleNumber = '';
+    protected string $additionalInformation = '';
+    protected ?FileReference $image = null;
 
-    /**
-     * @var string
-     */
-    protected $name = '';
-
-    /**
-     * @var string
-     */
-    protected $articleNumber = '';
-
-    /**
-     * @var string
-     */
-    protected $additionalInformation = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     */
-    protected $image = null;
-
-    public function __construct() {
-        $this->initStorageObjects();
-    }
-
-    /**
-     * @return void
-     */
-    protected function initStorageObjects() {
-        $this->image = new ObjectStorage();
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getArticleNumber()
+    public function getArticleNumber(): string
     {
         return $this->articleNumber;
     }
 
-    /**
-     * @return string
-     */
-    public function getAdditionalInformation()
+    public function getAdditionalInformation(): string
     {
         return $this->additionalInformation;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getImage()
+    public function getImage(): ?FileReference
     {
         return $this->image;
     }

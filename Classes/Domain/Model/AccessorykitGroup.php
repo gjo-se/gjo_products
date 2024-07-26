@@ -29,8 +29,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class AccessorykitGroup extends GjoBaseAbstractModel
 {
-    protected ?ProductSet $productSet = null;
     protected string $headline = '';
+    protected ?ProductSet $productSet = null;
 
     /**
      * @var ObjectStorage<ProductSet>
@@ -43,28 +43,19 @@ class AccessorykitGroup extends GjoBaseAbstractModel
         $this->initStorageObjects();
     }
 
-    /**
-     * @return void
-     */
     protected function initStorageObjects(): void
     {
         $this->accessoryKits = new ObjectStorage();
     }
 
-    /**
-     * @return ProductSet|null
-     */
-    public function getProductSet(): ?ProductSet
-    {
-        return $this->productSet;
-    }
-
-    /**
-     * @return string
-     */
     public function getHeadline(): string
     {
         return $this->headline;
+    }
+
+    public function getProductSet(): ?ProductSet
+    {
+        return $this->productSet;
     }
 
     /**

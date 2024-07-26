@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
@@ -20,145 +21,92 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
+use GjoSe\GjoBase\Domain\Model\Pages;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class ProductGroup
- * @package GjoSe\GjoProducts\Domain\Model
  */
-class ProductGroup extends AbstractModel
+class ProductGroup extends GjoBaseAbstractModel
 {
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\ProductSetType>
-     */
-    protected $productSetTypes = null;
+    protected string $header = '';
+    protected string $subHeader = '';
+    protected string $description = '';
+    protected ?FileReference $image = null;
+    protected string $teaserHeader = '';
+    protected string $teaserDescription = '';
+    protected ?FileReference $teaserImage = null;
 
     /**
-     * @var \GjoSe\GjoBase\Domain\Model\Pages
+     * @var ObjectStorage<ProductSetType>
      */
-    protected $pages = null;
+    protected ObjectStorage $productSetTypes;
 
     /**
-     * @var string
+     * @var ObjectStorage<Pages>
      */
-    protected $header = '';
-
-    /**
-     * @var string
-     */
-    protected $subHeader = '';
-
-    /**
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
-     */
-    protected $image = null;
-
-    /**
-     * @var string
-     */
-    protected $teaserHeader = '';
-
-    /**
-     * @var string
-     */
-    protected $teaserDescription = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
-     */
-    protected $teaserImage = null;
+    protected ObjectStorage $pages;
 
     public function __construct()
     {
         $this->initStorageObjects();
     }
 
-    /**
-     * @return void
-     */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->productSetTypes = new ObjectStorage();
-        $this->image           = new ObjectStorage();
-        $this->teaserImage = new ObjectStorage();
         $this->pages = new ObjectStorage();
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getProductSetTypes()
-    {
-        return $this->productSetTypes;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeader()
+    public function getHeader(): string
     {
         return $this->header;
     }
 
-    /**
-     * @return string
-     */
-    public function getSubHeader()
+    public function getSubHeader(): string
     {
         return $this->subHeader;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getImage()
+    public function getImage(): ?FileReference
     {
         return $this->image;
     }
 
-    /**
-     * @return string
-     */
-    public function getTeaserHeader()
+    public function getTeaserHeader(): string
     {
         return $this->teaserHeader;
     }
 
-    /**
-     * @return string
-     */
-    public function getTeaserDescription()
+    public function getTeaserDescription(): string
     {
         return $this->teaserDescription;
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getTeaserImage()
+    public function getTeaserImage(): ?FileReference
     {
         return $this->teaserImage;
     }
 
     /**
-     * @return \GjoSe\GjoBase\Domain\Model\Pages
+     * @return ObjectStorage<ProductSetType>
      */
-    public function getPages()
+    public function getProductSetTypes(): ObjectStorage
+    {
+        return $this->productSetTypes;
+    }
+
+    /**
+     * @return ObjectStorage<Pages>
+     */
+    public function getPages(): ObjectStorage
     {
         return $this->pages;
     }

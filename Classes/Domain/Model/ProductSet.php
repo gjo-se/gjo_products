@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
@@ -20,753 +21,359 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use GjoSe\GjoBase\Domain\Model\Pages;
 
 /**
  * Class ProductSet
- * @package GjoSe\GjoProducts\Domain\Model
  */
-class ProductSet extends AbstractModel
+class ProductSet extends GjoBaseAbstractModel
 {
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\ProductSetVariantGroup>
-     */
-    protected $productSetVariantGroups = null;
+    protected string $name = '';
+    protected string $anchor = '';
+    protected string $description = '';
+    protected ?FileReference $image = null;
+    protected ?FileReference $icon = null;
+    protected bool $showTechnicalnots = false;
+    protected string $maximumDoorWeight = '';
+    protected string $minimumDoorWeight = '';
+    protected string $height = '';
+    protected int $minimumDoorThickness = 0;
+    protected int $maximumDoorThickness = 0;
+    protected int $minimumDoorWidth = 0;
+    protected int $minimumDoorWidthSoftClose = 0;
+    protected int $minimumDoorWidthSoftCloseLong = 0;
+    protected int $minimumDoorWidthSoftCloseBoth = 0;
+    protected int $maximumDoorWidth = 0;
+    protected string $voltage = '';
+    protected bool $showDin = false;
+    protected string $useCategorie = '';
+    protected string $durability = '';
+    protected string $doorWeight = '';
+    protected string $fireResistance = '';
+    protected string $safety = '';
+    protected string $corrosionResistance = '';
+    protected string $security = '';
+    protected string $doorType = '';
+    protected string $initialFriction = '';
+    protected string $invitationToTender = '';
+    protected bool $isFeatured = false;
+    protected bool $filterMaterialWood = false;
+    protected bool $filterMaterialGlas = false;
+    protected string $filterWingcount = '';
+    protected ?FileReference $download = null;
+    protected ?FileReference $downloadEngineeringDrawing = null;
+    protected ?FileReference $imageEngineeringDrawing = null;
+    protected bool $filterDesignCustomer = false;
+    protected bool $filterDesignAlu = false;
+    protected bool $filterDesignDesign = false;
+    protected bool $filterSoftClose = false;
+    protected bool $filterEt3 = false;
+    protected bool $filterTfold = false;
+    protected bool $filterTclose = false;
+    protected bool $filterTmaster = false;
+    protected bool $filterSynchron = false;
+    protected bool $filterTelescop2 = false;
+    protected bool $filterTelescop3 = false;
+    protected bool $filterMontageIn = false;
+    protected bool $filterMontageWall = false;
+    protected bool $filterMontageCeiling = false;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\AccessorykitGroup>
+     * @var ObjectStorage<ProductSetVariantGroup>
      */
-    protected $accessorykitGroups = null;
-	
-	/**
-     * @var \GjoSe\GjoBase\Domain\Model\Pages
-     */
-    protected $pages = null;
+    protected ObjectStorage $productSetVariantGroups;
 
     /**
-     * @var string
+     * @var ObjectStorage<AccessorykitGroup>
      */
-    protected $name = '';
+    protected ObjectStorage $accessorykitGroups;
 
     /**
-     * @var string
+     * @var ObjectStorage<Pages>
      */
-    protected $anchor = '';
-
-    /**
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
-     */
-    protected $image = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
-     */
-    protected $icon = null;
-
-    /**
-     * @var bool
-     */
-    protected $showTechnicalnots = false;
-
-    /**
-     * @var string
-     */
-    protected $maximumDoorWeight = '';
-
-    /**
-     * @var string
-     */
-    protected $minimumDoorWeight = '';
-
-    /**
-     * @var string
-     */
-    protected $height = '';
-
-    /**
-     * @var int
-     */
-    protected $minimumDoorThickness = 0;
-
-    /**
-     * @var int
-     */
-    protected $maximumDoorThickness = 0;
-
-    /**
-     * @var int
-     */
-    protected $minimumDoorWidth = 0;
-
-    /**
-     * @var int
-     */
-    protected $minimumDoorWidthSoftClose = 0;
-
-    /**
-     * @var int
-     */
-    protected $minimumDoorWidthSoftCloseLong = 0;
-
-    /**
-     * @var int
-     */
-    protected $minimumDoorWidthSoftCloseBoth = 0;
-
-    /**
-     * @var int
-     */
-    protected $maximumDoorWidth = 0;
-
-    /**
-     * @var string
-     */
-    protected $voltage = '';
-
-    /**
-     * @var bool
-     */
-    protected $showDin = false;
-
-    /**
-     * @var string
-     */
-    protected $useCategorie = '';
-
-    /**
-     * @var string
-     */
-    protected $durability = '';
-
-    /**
-     * @var string
-     */
-    protected $doorWeight = '';
-
-    /**
-     * @var string
-     */
-    protected $fireResistance = '';
-
-    /**
-     * @var string
-     */
-    protected $safety = '';
-
-    /**
-     * @var string
-     */
-    protected $corrosionResistance = '';
-
-    /**
-     * @var string
-     */
-    protected $security = '';
-
-    /**
-     * @var string
-     */
-    protected $doorType = '';
-
-    /**
-     * @var string
-     */
-    protected $initialFriction = '';
-
-    /**
-     * @var string
-     */
-    protected $invitationToTender = '';
-
-    /**
-     * @var bool
-     */
-    protected $isFeatured = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterMaterialWood = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterMaterialGlas = false;
-
-    /**
-     * @var string
-     */
-    protected $filterWingcount = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
-     */
-    protected $download = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
-     */
-    protected $downloadEngineeringDrawing = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
-     */
-    protected $imageEngineeringDrawing = null;
-
-    /**
-     * @var bool
-     */
-    protected $filterDesignCustomer = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterDesignAlu = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterDesignDesign = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterSoftClose = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterEt3 = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterTfold = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterTclose = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterTmaster = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterSynchron = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterTelescop2 = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterTelescop3 = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterMontageIn = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterMontageWall = false;
-
-    /**
-     * @var bool
-     */
-    protected $filterMontageCeiling = false;
+    protected ObjectStorage $pages;
 
     public function __construct()
     {
         $this->initStorageObjects();
     }
 
-    /**
-     * @return void
-     */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->productSetVariantGroups = new ObjectStorage();
         $this->accessorykitGroups = new ObjectStorage();
         $this->pages = new ObjectStorage();
-
-        $this->image = new ObjectStorage();
-        $this->icon = new ObjectStorage();
-        $this->download = new ObjectStorage();
-        $this->downloadEngineeringDrawing = new ObjectStorage();
-        $this->imageEngineeringDrawing = new ObjectStorage();
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getProductSetVariantGroups()
-    {
-        return $this->productSetVariantGroups;
-    }
-
-    /**
-     * @return ObjectStorage
-     */
-    public function getAccessorykitGroups()
-    {
-        return $this->accessorykitGroups;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getAnchor(): string
     {
         return $this->anchor;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getImage()
+    public function getImage(): ?FileReference
     {
         return $this->image;
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getIcon()
+    public function getIcon(): ?FileReference
     {
         return $this->icon;
     }
 
-    /**
-     * @return bool
-     */
-    public function isShowTechnicalnots()
+    public function isShowTechnicalnots(): bool
     {
         return $this->showTechnicalnots;
     }
 
-    /**
-     * @return string
-     */
-    public function getMaximumDoorWeight()
+    public function getMaximumDoorWeight(): string
     {
         return $this->maximumDoorWeight;
     }
 
-    /**
-     * @return string
-     */
-    public function getMinimumDoorWeight()
+    public function getMinimumDoorWeight(): string
     {
         return $this->minimumDoorWeight;
     }
 
-    /**
-     * @return string
-     */
-    public function getHeight()
+    public function getHeight(): string
     {
         return $this->height;
     }
 
-    /**
-     * @return int
-     */
-    public function getMinimumDoorThickness()
+    public function getMinimumDoorThickness(): int
     {
         return $this->minimumDoorThickness;
     }
 
-    /**
-     * @return int
-     */
-    public function getMaximumDoorThickness()
+    public function getMaximumDoorThickness(): int
     {
         return $this->maximumDoorThickness;
     }
 
-    /**
-     * @return integer
-     */
-    public function getMinimumDoorWidth()
+    public function getMinimumDoorWidth(): int
     {
         return $this->minimumDoorWidth;
     }
 
-    /**
-     * @return integer
-     */
-    public function getMinimumDoorWidthSoftClose()
+    public function getMinimumDoorWidthSoftClose(): int
     {
         return $this->minimumDoorWidthSoftClose;
     }
 
-    /**
-     * @return integer
-     */
-    public function getMinimumDoorWidthSoftCloseLong()
+    public function getMinimumDoorWidthSoftCloseLong(): int
     {
         return $this->minimumDoorWidthSoftCloseLong;
     }
 
-    /**
-     * @return integer
-     */
-    public function getMinimumDoorWidthSoftCloseBoth()
+    public function getMinimumDoorWidthSoftCloseBoth(): int
     {
         return $this->minimumDoorWidthSoftCloseBoth;
     }
 
-    /**
-     * @return integer
-     */
-    public function getMaximumDoorWidth()
+    public function getMaximumDoorWidth(): int
     {
         return $this->maximumDoorWidth;
     }
 
-    /**
-     * @return string
-     */
-    public function getVoltage()
+    public function getVoltage(): string
     {
         return $this->voltage;
     }
 
-    /**
-     * @return bool
-     */
-    public function isShowDin()
+    public function isShowDin(): bool
     {
         return $this->showDin;
     }
 
-    /**
-     * @return string
-     */
-    public function getUseCategorie()
+    public function getUseCategorie(): string
     {
         return $this->useCategorie;
     }
 
-    /**
-     * @return string
-     */
-    public function getDurability()
+    public function getDurability(): string
     {
         return $this->durability;
     }
 
-    /**
-     * @return string
-     */
-    public function getDoorWeight()
+    public function getDoorWeight(): string
     {
         return $this->doorWeight;
     }
 
-    /**
-     * @return string
-     */
-    public function getFireResistance()
+    public function getFireResistance(): string
     {
         return $this->fireResistance;
     }
 
-    /**
-     * @return string
-     */
-    public function getSafety()
+    public function getSafety(): string
     {
         return $this->safety;
     }
 
-    /**
-     * @return string
-     */
-    public function getCorrosionResistance()
+    public function getCorrosionResistance(): string
     {
         return $this->corrosionResistance;
     }
 
-    /**
-     * @return string
-     */
-    public function getSecurity()
+    public function getSecurity(): string
     {
         return $this->security;
     }
 
-    /**
-     * @return string
-     */
-    public function getDoorType()
+    public function getDoorType(): string
     {
         return $this->doorType;
     }
 
-    /**
-     * @return string
-     */
-    public function getInitialFriction()
+    public function getInitialFriction(): string
     {
         return $this->initialFriction;
     }
 
-    /**
-     * @return string
-     */
-    public function getInvitationToTender()
+    public function getInvitationToTender(): string
     {
         return $this->invitationToTender;
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getDownload()
+    public function getDownload(): ?FileReference
     {
         return $this->download;
     }
 
-    /**
-     * @return ObjectStorage
-     */
-    public function getDownloadEngineeringDrawing()
+    public function getDownloadEngineeringDrawing(): ?FileReference
     {
         return $this->downloadEngineeringDrawing;
     }
 
-    /**
-     * @return \GjoSe\GjoBase\Domain\Model\Pages
-     */
-    public function getPages()
-    {
-        return $this->pages;
-    }
-
-    /**
-     * @return ObjectStorage
-     */
-    public function getImageEngineeringDrawing()
+    public function getImageEngineeringDrawing(): ?FileReference
     {
         return $this->imageEngineeringDrawing;
     }
 
-    /**
-     * @return bool
-     */
-    public function isIsFeatured()
+    public function isIsFeatured(): bool
     {
         return $this->isFeatured;
     }
 
-    /**
-     * @param bool $isFeatured
-     *
-     * @return void
-     */
-    public function setIsFeatured($isFeatured)
-    {
-        $this->isFeatured = $isFeatured;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isFilterMaterialWood()
+    public function isFilterMaterialWood(): bool
     {
         return $this->filterMaterialWood;
     }
 
-    /**
-     * @param bool $filterMaterialWood
-     *
-     * @return void
-     */
-    public function setFilterMaterialWood($filterMaterialWood)
-    {
-        $this->filterMaterialWood = $filterMaterialWood;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isFilterMaterialGlas()
+    public function isFilterMaterialGlas(): bool
     {
         return $this->filterMaterialGlas;
     }
 
-    /**
-     * @param bool $filterMaterialGlas
-     *
-     * @return void
-     */
-    public function setFilterMaterialGlas($filterMaterialGlas)
-    {
-        $this->filterMaterialGlas = $filterMaterialGlas;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFilterWingcount()
+    public function getFilterWingcount(): string
     {
         return $this->filterWingcount;
     }
 
-    /**
-     * @param string $filterWingcount
-     *
-     * @return void
-     */
-    public function setFilterWingcount($filterWingcount)
-    {
-        $this->filterWingcount = $filterWingcount;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isFilterMontageIn()
+    public function isFilterMontageIn(): bool
     {
         return $this->filterMontageIn;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterMontageWall()
+    public function isFilterMontageWall(): bool
     {
         return $this->filterMontageWall;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterMontageCeiling()
+    public function isFilterMontageCeiling(): bool
     {
         return $this->filterMontageCeiling;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterDesignCustomer()
+    public function isFilterDesignCustomer(): bool
     {
         return $this->filterDesignCustomer;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterDesignAlu()
+    public function isFilterDesignAlu(): bool
     {
         return $this->filterDesignAlu;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterDesignDesign()
+    public function isFilterDesignDesign(): bool
     {
         return $this->filterDesignDesign;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterSoftClose()
+    public function isFilterSoftClose(): bool
     {
         return $this->filterSoftClose;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterEt3()
+    public function isFilterEt3(): bool
     {
         return $this->filterEt3;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterTfold()
+    public function isFilterTfold(): bool
     {
         return $this->filterTfold;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterTclose()
+    public function isFilterTclose(): bool
     {
         return $this->filterTclose;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterTmaster()
+    public function isFilterTmaster(): bool
     {
         return $this->filterTmaster;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterSynchron()
+    public function isFilterSynchron(): bool
     {
         return $this->filterSynchron;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterTelescop2()
+    public function isFilterTelescop2(): bool
     {
         return $this->filterTelescop2;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterTelescop3()
+    public function isFilterTelescop3(): bool
     {
         return $this->filterTelescop3;
+    }
+
+    /**
+     * @return ObjectStorage<ProductSetVariantGroup>
+     */
+    public function getProductSetVariantGroups(): ObjectStorage
+    {
+        return $this->productSetVariantGroups;
+    }
+
+    /**
+     * @return ObjectStorage<AccessorykitGroup>
+     */
+    public function getAccessorykitGroups(): ObjectStorage
+    {
+        return $this->accessorykitGroups;
+    }
+
+    /**
+     * @return ObjectStorage<Pages>
+     */
+    public function getPages(): ObjectStorage
+    {
+        return $this->pages;
     }
 }

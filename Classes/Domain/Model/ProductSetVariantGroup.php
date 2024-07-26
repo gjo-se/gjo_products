@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoProducts\Domain\Model;
 
 /***************************************************************
@@ -20,104 +21,77 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class ProductSetVariantGroup
- * @package GjoSe\GjoProducts\Domain\Model
  */
-class ProductSetVariantGroup extends AbstractModel
+class ProductSetVariantGroup extends GjoBaseAbstractModel
 {
-    /**
-     * @var \GjoSe\GjoProducts\Domain\Model\ProductSet
-     */
-    protected $productSet = null;
+    protected string $headline = '';
+    protected string $description = '';
+    protected string $tableHeadline = '';
+    protected ?ProductSet $productSet = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\ProductSetVariant>
-     * @lazy
+     * @var ObjectStorage<ProductSetVariant>
+     * @Extbase\ORM\Lazy
      */
-    protected $productSetVariants = null;
+    protected ObjectStorage $productSetVariants;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\GjoSe\GjoProducts\Domain\Model\Product>
-     * @lazy
+     * @var ObjectStorage<Product>
+     * @Extbase\ORM\Lazy
      */
-    protected $products = null;
-
-    /**
-     * @var string
-     */
-    protected $headline = '';
-
-    /**
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * @var string
-     */
-    protected $tableHeadline = '';
+    protected ObjectStorage $products;
 
     public function __construct()
     {
         $this->initStorageObjects();
     }
 
-    /**
-     * @return void
-     */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->productSetVariants = new ObjectStorage();
         $this->products = new ObjectStorage();
     }
 
-    /**
-     * @return \GjoSe\GjoProducts\Domain\Model\ProductSet
-     */
-    public function getProductSet()
-    {
-        return $this->productSet;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeadline()
+    public function getHeadline(): string
     {
         return $this->headline;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
-    public function getTableHeadline()
+    public function getTableHeadline(): string
     {
         return $this->tableHeadline;
     }
 
     /**
-     * @return ObjectStorage
+     * @return ProductSet|null
      */
-    public function getProductSetVariants()
+    public function getProductSet(): ?ProductSet
+    {
+        return $this->productSet;
+    }
+
+    /**
+     * @return ObjectStorage<ProductSetVariant>
+     */
+    public function getProductSetVariants(): ObjectStorage
     {
         return $this->productSetVariants;
     }
 
     /**
-     * @return ObjectStorage
+     * @return ObjectStorage<Product>
      */
-    public function getProducts()
+    public function getProducts(): ObjectStorage
     {
         return $this->products;
     }
