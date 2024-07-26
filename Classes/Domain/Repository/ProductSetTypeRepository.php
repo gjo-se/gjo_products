@@ -1,8 +1,6 @@
 <?php
-namespace GjoSe\GjoProducts\Domain\Repository;
 
- use TYPO3\CMS\Core\Utility\GeneralUtility;
- use TYPO3\CMS\Core\Database\ConnectionPool;
+namespace GjoSe\GjoProducts\Domain\Repository;
 
 /***************************************************************
  *  created: 04.09.17 - 15:40
@@ -23,40 +21,39 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBase\Domain\Repository\AbstractRepository as GjoBaseAbstractRepository;
+use Doctrine\DBAL\Exception;
+use GjoSe\GjoBase\Domain\Repository\AbstractRepository;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class ProductSetTypeRepository
- * @package GjoSe\GjoProducts\Domain\Repository
- */
 class ProductSetTypeRepository extends AbstractRepository
 {
     /**
-     * @return array
+     * @param int $productSetUid
+     * @param int $maxCount
+     *
+     * @return int|null
+     * @throws Exception
      */
-    public function findProductSetTypeUidByProductSetUid($productSetUid, $maxCount = '')
+    public function findProductSetTypeUidByProductSetUid(int $productSetUid, int $maxCount = 0): ?int
     {
-
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_gjoproducts_productset_productsettype_mm');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_gjoproducts_productset_productsettype_mm');
         $queryBuilder
             ->select('uid_foreign')
             ->from('tx_gjoproducts_productset_productsettype_mm')
             ->where(
-                $queryBuilder->expr()->eq('uid_local', $queryBuilder->createNamedParameter($productSetUid, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('uid_local', $queryBuilder->createNamedParameter($productSetUid, Connection::PARAM_INT))
             );
 
-        if ($maxCount !== '') {
+        if ($maxCount !== 0) {
             $queryBuilder->setMaxResults($maxCount);
         }
 
-        $rows = $queryBuilder->execute()->fetchAll();
+        /** @var array<array<string, int>> $rows */
+        $rows = $queryBuilder->executeQuery()->fetchAllAssociative();
 
-        $productSetTypeUid = null;
-
-        if(count($rows)){
-            $productSetTypeUid = $rows[0]['uid_foreign'];
-        }
-
-        return $productSetTypeUid;
+        return $rows ? (int)$rows[0]['uid_foreign'] : null;
     }
 }

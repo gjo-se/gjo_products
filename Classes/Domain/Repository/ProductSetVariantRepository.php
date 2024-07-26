@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoProducts\Domain\Repository;
 
 /***************************************************************
@@ -20,22 +21,27 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBase\Domain\Repository\AbstractRepository as GjoBaseAbstractRepository;
+use GjoSe\GjoBase\Domain\Repository\AbstractRepository;
+use GjoSe\GjoProducts\Domain\Model\ProductSetVariant;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 
-/**
- * Class ProductSetVariantRepository
- * @package GjoSe\GjoProducts\Domain\Repository
- */
 class ProductSetVariantRepository extends AbstractRepository
 {
-    public function findByProductSetVariantGroupAndFilter($productSetVariantGroupUid, $productSetVariantFilter)
+    /**
+     * @param int $productSetVariantGroupUid
+     * @param array<string> $productSetVariantFilter
+     *
+     * @return ProductSetVariant|null
+     * @throws InvalidQueryException
+     */
+    public function findByProductSetVariantGroupAndFilter(int $productSetVariantGroupUid, array $productSetVariantFilter): ?ProductSetVariant
     {
         $query = $this->createQuery();
         $query->getQuerySettings()
               ->setRespectStoragePage(false);
 
-        $constraints   = array();
-        $constraints[] = $query->equals('product_set_variant_group', $productSetVariantGroupUid );
+        $constraints   = [];
+        $constraints[] = $query->equals('product_set_variant_group', $productSetVariantGroupUid);
 
         if (isset($productSetVariantFilter['noFilterTyp'])) {
             $constraints[] = $query->like('name', '%%');
@@ -50,7 +56,7 @@ class ProductSetVariantRepository extends AbstractRepository
             $constraints[] = $query->equals('version', $productSetVariantFilter['version']);
         }
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
 
         return $query->execute()->getFirst();
     }

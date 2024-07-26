@@ -2,11 +2,6 @@
 
 namespace GjoSe\GjoProducts\Domain\Repository;
 
- use TYPO3\CMS\Core\Context\Context;
- use TYPO3\CMS\Core\Context\LanguageAspect;
- use TYPO3\CMS\Core\Utility\GeneralUtility;
- use TYPO3\CMS\Core\Database\ConnectionPool;
-
 /***************************************************************
  *  created: 04.09.17 - 15:37
  *  Copyright notice
@@ -26,26 +21,34 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBase\Domain\Repository\AbstractRepository as GjoBaseAbstractRepository;
+use GjoSe\GjoBase\Domain\Repository\AbstractRepository;
+use GjoSe\GjoBase\Utility\SettingsUtility;
+use GjoSe\GjoProducts\Domain\Model\ProductSet;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
-/**
- * Class ProductSetRepository
- * @package GjoSe\GjoProducts\Domain\Repository
- */
 class ProductSetRepository extends AbstractRepository
 {
-    const SYS_LANGUAGE_UID_DE = 0;
+    private const int SYS_LANGUAGE_UID_DE = 0;
 
-    public function findBySearchString($searchString = '', $limit = 0)
+    /**
+     * @param string $searchString
+     * @param int $limit
+     *
+     * @return QueryResultInterface<ProductSet>|null
+     *
+     * @throws InvalidQueryException
+     */
+    public function findBySearchString(string $searchString = '', int $limit = 0): ?QueryResultInterface
     {
-
         $query = $this->createQuery();
         $query->getQuerySettings()
-              ->setRespectStoragePage(false);
+            ->setRespectStoragePage(false);
 
-        $productSetName = array();
-        $accessorykitName = array();
+        $productSetName = [];
+        $accessorykitName = [];
         $searchStringArr = explode(' ', $searchString);
         foreach ($searchStringArr as $searchStringArrVal) {
             $productSetName[] = $query->like('name', '%' . $searchStringArrVal . '%');
@@ -56,13 +59,13 @@ class ProductSetRepository extends AbstractRepository
             $query->logicalAnd(
                 $query->logicalOr(
                     // productSet
-                    $query->logicalAnd($productSetName),
+                    $query->logicalAnd(...$productSetName),
                     $query->like('productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
                     $query->like('productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
                     $query->like('productSetVariantGroups.products.name', '%' . $searchString . '%'),
                     $query->like('productSetVariantGroups.products.articleNumber', '%' . $searchString . '%'),
                     // accessoryKit
-                    $query->logicalAnd($accessorykitName),
+                    $query->logicalAnd(...$accessorykitName),
                     $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
                     $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
                     $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.products.name', '%' . $searchString . '%'),
@@ -70,45 +73,55 @@ class ProductSetRepository extends AbstractRepository
                 ),
                 $query->equals('is_accessory_kit', 0)
             )
-
         );
 
         $query->setOrderings(
-            array(
+            [
                 'is_featured' => QueryInterface::ORDER_DESCENDING,
-                'name'        => QueryInterface::ORDER_ASCENDING
-            )
+                'name' => QueryInterface::ORDER_ASCENDING,
+            ]
         );
 
         if ($limit) {
-            $query->setLimit(intval($limit));
+            $query->setLimit($limit);
         }
 
-        $context = GeneralUtility::makeInstance(Context::class);
-        $languageUid = $GLOBALS['TSFE']->sys_language_uid;
-        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $languageUid);
-        $context->setAspect('language', $languageAspect);
-        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
+        // TODO - Notwenigkeit prüfen
+        //        /** @var Context $context */
+        //        $context = GeneralUtility::makeInstance(Context::class);
+        //        $languageUid = $GLOBALS['TSFE']->sys_language_uid;
+        //        /** @var LanguageAspect $languageAspect */
+        //        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $languageUid);
+        //        $context->setAspect('language', $languageAspect);
+        //        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
 
         return $query->execute();
     }
 
-
-    public function findAccessoryKitByProductSetAndSearchString($accessoryKitUidList, $searchString, $limit)
+    /**
+     * @param array<int> $accessoryKitUidList
+     * @param string $searchString
+     * @param int $limit
+     *
+     * @return QueryResultInterface<ProductSet>|null
+     *
+     * @throws InvalidQueryException
+     */
+    public function findAccessoryKitByProductSetAndSearchString(array $accessoryKitUidList, string $searchString, int $limit): ?QueryResultInterface
     {
         $sysLanguageUid = $GLOBALS['TSFE']->sys_language_uid;
 
         $query = $this->createQuery();
         $query->getQuerySettings()
-              ->setRespectStoragePage(false);
+            ->setRespectStoragePage(false);
 
-        if($sysLanguageUid != self::SYS_LANGUAGE_UID_DE){
+        if ($sysLanguageUid != self::SYS_LANGUAGE_UID_DE) {
             $accessoryKitList = $query->in('l10n_parent', $accessoryKitUidList);
-        }else{
+        } else {
             $accessoryKitList = $query->in('uid', $accessoryKitUidList);
         }
 
-        $accessoryKitName = array();
+        $accessoryKitName = [];
         $searchStringArr = explode(' ', $searchString);
         foreach ($searchStringArr as $searchStringArrVal) {
             $accessoryKitName[] = $query->like('name', '%' . $searchStringArrVal . '%');
@@ -119,7 +132,7 @@ class ProductSetRepository extends AbstractRepository
                 $query->equals('is_accessory_kit', 1),
                 $accessoryKitList,
                 $query->logicalOr(
-                    $query->logicalAnd($accessoryKitName),
+                    $query->logicalAnd(...$accessoryKitName),
                     $query->like('productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
                     $query->like('productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
                     $query->like('productSetVariantGroups.products.name', '%' . $searchString . '%'),
@@ -129,36 +142,42 @@ class ProductSetRepository extends AbstractRepository
         );
 
         $query->setOrderings(
-            array(
-                'productSetVariantGroups.products.name'        => QueryInterface::ORDER_ASCENDING
-            )
+            [
+                'productSetVariantGroups.products.name' => QueryInterface::ORDER_ASCENDING,
+            ]
         );
 
         if ($limit) {
-            $query->setLimit(intval($limit));
+            $query->setLimit($limit);
         }
 
-
-        $context = GeneralUtility::makeInstance(Context::class);
-        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
-        $context->setAspect('language', $languageAspect);
-        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
+        //        $context = GeneralUtility::makeInstance(Context::class);
+        //        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
+        //        $context->setAspect('language', $languageAspect);
+        //        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
 
         return $query->execute();
     }
 
-    public function findByFilter($sysLanguageUid, $productFinderFilter = '', $offset = 0, $limit = 0)
+    /**
+     * @param int $sysLanguageUid
+     * @param array<string> $productFinderFilter
+     * @param int $offset
+     * @param int $limit
+     *
+     * @return QueryResultInterface<ProductSet>|null
+     *
+     * @throws InvalidQueryException
+     */
+    public function findByFilter(int $sysLanguageUid, array $productFinderFilter = [], int $offset = 0, int $limit = 0): ?QueryResultInterface
     {
 
+        $settings = GeneralUtility::makeInstance(SettingsUtility::class)->getSettings();
         $pluginSignature = 'tx_gjoproducts_product[';
-        $query           = $this->createQuery();
+        $query = $this->createQuery();
 
-        //        https://docs.typo3.org/typo3cms/ExtbaseFluidBook/6-Persistence/3-implement-individual-database-queries.html
-        $constraints   = array();
+        $constraints = [];
         $constraints[] = $query->equals('is_accessory_kit', 0);
-
-        //TODO: Benutzung klären!
-        $constraintsNotFoundHelper = $query->equals('name', 'IsNotFound');
 
         if ($productFinderFilter) {
 
@@ -182,25 +201,33 @@ class ProductSetRepository extends AbstractRepository
 
             if (isset($productFinderFilter[$pluginSignature . 'doorWidth'])) {
                 if ($productFinderFilter[$pluginSignature . 'doorWidth']) {
-                    $constraints[] = $query->lessThanOrEqual('minimumDoorWidth',
-                        intval($productFinderFilter[$pluginSignature . 'doorWidth']));
+                    $constraints[] = $query->lessThanOrEqual(
+                        'minimumDoorWidth',
+                        (int)($productFinderFilter[$pluginSignature . 'doorWidth'])
+                    );
                     $constraints[] = $query->greaterThanOrEqual('maximumDoorWidth', $productFinderFilter[$pluginSignature . 'doorWidth']);
                 }
             }
 
             if (isset($productFinderFilter[$pluginSignature . 'doorThickness'])) {
                 if ($productFinderFilter[$pluginSignature . 'doorThickness']) {
-                    $constraints[] = $query->lessThanOrEqual('minimumDoorThickness',
-                        intval($productFinderFilter[$pluginSignature . 'doorThickness']));
-                    $constraints[] = $query->greaterThanOrEqual('maximumDoorThickness',
-                        $productFinderFilter[$pluginSignature . 'doorThickness']);
+                    $constraints[] = $query->lessThanOrEqual(
+                        'minimumDoorThickness',
+                        (int)($productFinderFilter[$pluginSignature . 'doorThickness'])
+                    );
+                    $constraints[] = $query->greaterThanOrEqual(
+                        'maximumDoorThickness',
+                        $productFinderFilter[$pluginSignature . 'doorThickness']
+                    );
                 }
             }
 
             if (isset($productFinderFilter[$pluginSignature . 'doorWeight'])) {
                 if ($productFinderFilter[$pluginSignature . 'doorWeight']) {
-                    $constraints[] = $query->lessThanOrEqual('minimumDoorWeight',
-                        intval($productFinderFilter[$pluginSignature . 'doorWeight']));
+                    $constraints[] = $query->lessThanOrEqual(
+                        'minimumDoorWeight',
+                        (int)($productFinderFilter[$pluginSignature . 'doorWeight'])
+                    );
                     $constraints[] = $query->greaterThanOrEqual('maximumDoorWeight', $productFinderFilter[$pluginSignature . 'doorWeight']);
                 }
             }
@@ -229,18 +256,18 @@ class ProductSetRepository extends AbstractRepository
                     $constraintsFilterSoftClose = $query->equals('filterSoftClose', 1);
 
                     if ($productFinderFilter[$pluginSignature . 'doorWidth']) {
-                        $constraintsMinimumDoorWidth = $query->lessThanOrEqual('minimumDoorWidthSoftClose', intval($productFinderFilter[$pluginSignature . 'doorWidth']));
-                    }else{
+                        $constraintsMinimumDoorWidth = $query->lessThanOrEqual('minimumDoorWidthSoftClose', (int)($productFinderFilter[$pluginSignature . 'doorWidth']));
+                    } else {
                         $constraintsMinimumDoorWidth = $query->lessThanOrEqual('minimumDoorWidthSoftClose', 9999);
                     }
 
                     $constraintsAlu80SoftClose = $query->equals('filterSoftClose', 1);
-                    if ($productFinderFilter[$pluginSignature . 'telescop2'] == $this->settings['productset']['alu-80']['softClose']['telescop2']) {
+                    if ($productFinderFilter[$pluginSignature . 'telescop2'] == $settings['productset']['alu-80']['softClose']['telescop2']) {
                         $constraintsAlu80SoftClose = $query->logicalNot(
                             $query->equals('name', 'ALU 80 NEO')
                         );
                     }
-                    if ($productFinderFilter[$pluginSignature . 'telescop3'] == $this->settings['productset']['alu-80']['softClose']['telescop3']) {
+                    if ($productFinderFilter[$pluginSignature . 'telescop3'] == $settings['productset']['alu-80']['softClose']['telescop3']) {
                         $constraintsAlu80SoftClose = $query->logicalNot(
                             $query->equals('name', 'ALU 80 NEO')
                         );
@@ -270,29 +297,29 @@ class ProductSetRepository extends AbstractRepository
                 if ($productFinderFilter[$pluginSignature . 'synchron'] == '1') {
 
                     $constraintsAlu80Syncron = $query->equals('filterSynchron', 1);
-                    if ($productFinderFilter[$pluginSignature . 'doorWidth'] > $this->settings['productset']['alu-80']['synchron']['maximumDoorWidth']) {
+                    if ($productFinderFilter[$pluginSignature . 'doorWidth'] > $settings['productset']['alu-80']['synchron']['maximumDoorWidth']) {
                         $constraintsAlu80Syncron = $query->logicalNot(
                             $query->equals('name', 'ALU 80 NEO')
                         );
                     }
-                    if ($productFinderFilter[$pluginSignature . 'soft-close'] == $this->settings['productset']['alu-80']['synchron']['softClose']) {
+                    if ($productFinderFilter[$pluginSignature . 'soft-close'] == $settings['productset']['alu-80']['synchron']['softClose']) {
                         $constraintsAlu80Syncron = $query->logicalNot(
                             $query->equals('name', 'ALU 80 NEO')
                         );
                     }
-                    if ($productFinderFilter[$pluginSignature . 'telescop2'] == $this->settings['productset']['alu-80']['synchron']['telescop2']) {
+                    if ($productFinderFilter[$pluginSignature . 'telescop2'] == $settings['productset']['alu-80']['synchron']['telescop2']) {
                         $constraintsAlu80Syncron = $query->logicalNot(
                             $query->equals('name', 'ALU 80 NEO')
                         );
                     }
-                    if ($productFinderFilter[$pluginSignature . 'telescop3'] == $this->settings['productset']['alu-80']['synchron']['telescop3']) {
+                    if ($productFinderFilter[$pluginSignature . 'telescop3'] == $settings['productset']['alu-80']['synchron']['telescop3']) {
                         $constraintsAlu80Syncron = $query->logicalNot(
                             $query->equals('name', 'ALU 80 NEO')
                         );
                     }
 
                     $constraintsAlu250Syncron = $query->equals('filterSynchron', 1);
-                    if ($productFinderFilter[$pluginSignature . 'doorWeight'] > $this->settings['productset']['alu-250']['synchron']['maximumDoorWeight']) {
+                    if ($productFinderFilter[$pluginSignature . 'doorWeight'] > $settings['productset']['alu-250']['synchron']['maximumDoorWeight']) {
                         $constraintsAlu250Syncron = $query->logicalNot(
                             $query->like('name', '%Alu 250%')
                         );
@@ -311,17 +338,17 @@ class ProductSetRepository extends AbstractRepository
 
                     $constraintsAlu80Telescop2 = $query->equals('filterTelescop2', 1);
 
-                    $doorWidth        = $productFinderFilter[$pluginSignature . 'doorWidth'];
-                    $minimumDoorWidth = $this->settings['productset']['alu-80']['telescop2']['minimumDoorWidth'];
-                    $maximumDoorWidth = $this->settings['productset']['alu-80']['telescop2']['maximumDoorWidth'];
+                    $doorWidth = $productFinderFilter[$pluginSignature . 'doorWidth'];
+                    $minimumDoorWidth = $settings['productset']['alu-80']['telescop2']['minimumDoorWidth'];
+                    $maximumDoorWidth = $settings['productset']['alu-80']['telescop2']['maximumDoorWidth'];
 
-                    $doorThickness        = $productFinderFilter[$pluginSignature . 'doorThickness'];
-                    $minimumDoorThickness = $this->settings['productset']['alu-80']['telescop2']['minimumDoorThickness'];
-                    $maximumDoorThickness = $this->settings['productset']['alu-80']['telescop2']['maximumDoorThickness'];
+                    $doorThickness = $productFinderFilter[$pluginSignature . 'doorThickness'];
+                    $minimumDoorThickness = $settings['productset']['alu-80']['telescop2']['minimumDoorThickness'];
+                    $maximumDoorThickness = $settings['productset']['alu-80']['telescop2']['maximumDoorThickness'];
 
-                    if (($doorWidth > 0 && $doorWidth < $minimumDoorWidth) OR
-                        ($doorWidth > 0 && $doorWidth > $maximumDoorWidth) OR
-                        ($doorThickness > 0 && $doorThickness < $minimumDoorThickness) OR
+                    if (($doorWidth > 0 && $doorWidth < $minimumDoorWidth) or
+                        ($doorWidth > 0 && $doorWidth > $maximumDoorWidth) or
+                        ($doorThickness > 0 && $doorThickness < $minimumDoorThickness) or
                         ($doorThickness > 0 && $doorThickness > $maximumDoorThickness)
                     ) {
 
@@ -342,21 +369,21 @@ class ProductSetRepository extends AbstractRepository
 
                     $constraintsAlu80Telescop3 = $query->equals('filterTelescop3', 1);
 
-                    $doorWidth        = $productFinderFilter[$pluginSignature . 'doorWidth'];
-                    $minimumDoorWidth = $this->settings['productset']['alu-80']['telescop3']['minimumDoorWidth'];
-                    $maximumDoorWidth = $this->settings['productset']['alu-80']['telescop3']['maximumDoorWidth'];
+                    $doorWidth = $productFinderFilter[$pluginSignature . 'doorWidth'];
+                    $minimumDoorWidth = $settings['productset']['alu-80']['telescop3']['minimumDoorWidth'];
+                    $maximumDoorWidth = $settings['productset']['alu-80']['telescop3']['maximumDoorWidth'];
 
-                    $doorThickness        = $productFinderFilter[$pluginSignature . 'doorThickness'];
-                    $minimumDoorThickness = $this->settings['productset']['alu-80']['telescop3']['minimumDoorThickness'];
-                    $maximumDoorThickness = $this->settings['productset']['alu-80']['telescop3']['maximumDoorThickness'];
+                    $doorThickness = $productFinderFilter[$pluginSignature . 'doorThickness'];
+                    $minimumDoorThickness = $settings['productset']['alu-80']['telescop3']['minimumDoorThickness'];
+                    $maximumDoorThickness = $settings['productset']['alu-80']['telescop3']['maximumDoorThickness'];
 
-                    $doorWeight        = $productFinderFilter[$pluginSignature . 'doorWeight'];
-                    $maximumDoorWeight = $this->settings['productset']['alu-80']['telescop3']['maximumDoorWeight'];
+                    $doorWeight = $productFinderFilter[$pluginSignature . 'doorWeight'];
+                    $maximumDoorWeight = $settings['productset']['alu-80']['telescop3']['maximumDoorWeight'];
 
-                    if (($doorWidth > 0 && $doorWidth < $minimumDoorWidth) OR
-                        ($doorWidth > 0 && $doorWidth > $maximumDoorWidth) OR
-                        ($doorThickness > 0 && $doorThickness < $minimumDoorThickness) OR
-                        ($doorThickness > 0 && $doorThickness > $maximumDoorThickness) OR
+                    if (($doorWidth > 0 && $doorWidth < $minimumDoorWidth) or
+                        ($doorWidth > 0 && $doorWidth > $maximumDoorWidth) or
+                        ($doorThickness > 0 && $doorThickness < $minimumDoorThickness) or
+                        ($doorThickness > 0 && $doorThickness > $maximumDoorThickness) or
                         ($doorWeight > 0 && $doorWeight > $maximumDoorWeight)
                     ) {
                         $constraintsAlu80Telescop3 = $query->logicalNot(
@@ -403,54 +430,58 @@ class ProductSetRepository extends AbstractRepository
 
         }
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
 
         if ($offset) {
-            $query->setOffset(intval($offset));
+            $query->setOffset($offset);
         }
         if ($limit) {
-            $query->setLimit(intval($limit));
+            $query->setLimit($limit);
         }
 
         $query->setOrderings(
-            array(
+            [
                 'is_featured' => QueryInterface::ORDER_DESCENDING,
-                'name'        => QueryInterface::ORDER_ASCENDING
-            )
+                'name' => QueryInterface::ORDER_ASCENDING,
+            ]
         );
 
-        $context = GeneralUtility::makeInstance(Context::class);
-        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
-        $context->setAspect('language', $languageAspect);
-        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
+        //        $context = GeneralUtility::makeInstance(Context::class);
+        //        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
+        //        $context->setAspect('language', $languageAspect);
+        //        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
 
         return $query->execute();
     }
 
-    public function findAllWithVariants()
+    /**
+     * @return array<string>
+     */
+    public function findAllWithVariants(): array
     {
         $query = $this->createQuery();
         $query->getQuerySettings()
-              ->setRespectStoragePage(false);
+            ->setRespectStoragePage(false);
 
         $query->setOrderings(
-            array(
-                'name' => QueryInterface::ORDER_ASCENDING
-            )
+            [
+                'name' => QueryInterface::ORDER_ASCENDING,
+            ]
         );
 
         $queryResult = $query->execute();
 
         $productSetWithVariants = [];
         if ($queryResult->count()) {
+            /** @var ProductSet $productSet */
             foreach ($queryResult as $productSet) {
 
                 $productSetVariantGroups = $productSet->getProductSetVariantGroups();
-                if ($productSetVariantGroups) {
+                if ($productSetVariantGroups !== null) {
                     foreach ($productSetVariantGroups as $productSetVariantGroup) {
                         $productSetVariants = $productSetVariantGroup->getProductSetVariants();
 
-                        if ($productSetVariants) {
+                        if ($productSetVariants !== null) {
                             foreach ($productSetVariants as $productSetVariant) {
                                 $productSetWithVariants [$productSetVariant->getArticleNumber()] = $productSet->getName() . ' - ' . $productSetVariantGroup->getTableHeadline() . ' - ' . $productSetVariant->getName();
                             }

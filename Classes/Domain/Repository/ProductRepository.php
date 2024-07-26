@@ -20,6 +20,8 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use GjoSe\GjoBase\Domain\Repository\AbstractRepository;
+
 /**
  * Class ProductRepository
  * @package GjoSe\GjoProducts\Domain\Repository
