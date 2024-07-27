@@ -31,7 +31,7 @@ class ProductSetType extends GjoBaseAbstractModel
 {
     protected string $name = '';
     protected string $description = '';
-    protected ?ProductGroup $productGroup;
+    protected ?ProductGroup $productGroup = null;
 
     /**
      * @var ObjectStorage<ProductSet>
