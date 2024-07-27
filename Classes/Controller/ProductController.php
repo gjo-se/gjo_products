@@ -29,7 +29,7 @@ class ProductController extends AbstractController
     /**
      * @var LocalizationFactory
      */
-    protected $localizationFactory;
+    protected LocalizationFactory $localizationFactory;
 
     public function __construct(?LocalizationFactory $localizationFactory = null)
     {
