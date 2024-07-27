@@ -21,13 +21,9 @@ namespace GjoSe\GjoProducts\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class ProductController
- * @package GjoSe\GjoProducts\Controller
- */
 class ProductController extends AbstractController
 {
     /**
@@ -35,7 +31,8 @@ class ProductController extends AbstractController
      */
     protected $localizationFactory;
 
-    public function __construct(LocalizationFactory $localizationFactory = null) {
+    public function __construct(?LocalizationFactory $localizationFactory = null)
+    {
         $this->localizationFactory = $localizationFactory ?: GeneralUtility::makeInstance(LocalizationFactory::class);
     }
 
@@ -45,14 +42,14 @@ class ProductController extends AbstractController
     public function showProductGroupTeaserAction()
     {
         $this->view->assignMultiple([
-            'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup'])
+            'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
     }
 
     public function showProductGroupAction()
     {
         $this->view->assignMultiple([
-            'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup'])
+            'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
     }
 
@@ -60,7 +57,7 @@ class ProductController extends AbstractController
     {
         $productSet = $this->productSetRepository->findByUid($this->settings['productSet']);
 
-        $productSetTypeUid = $this->productSetTypeRepository->findProductSetTypeUidByProductSetUid($this->settings['productSet'], 1);
+        $productSetTypeUid = $this->productSetTypeRepository->findProductSetTypeUidByProductSetUid((int)$this->settings['productSet'], 1);
         $productSetType    = $this->productSetTypeRepository->findByUid($productSetTypeUid);
 
         $productGroup = null;
@@ -72,7 +69,7 @@ class ProductController extends AbstractController
             'productSet'   => $productSet,
             'productGroup' => $productGroup,
             'is_shop'      => GeneralUtility::_GET()['is_shop'],
-            'pageUid'      => $GLOBALS['TSFE']->id
+            'pageUid'      => $GLOBALS['TSFE']->id,
         ]);
     }
 
@@ -84,31 +81,31 @@ class ProductController extends AbstractController
         $sysLanguageUid = $postParams['sysLanguageUid'];
         $productSets    = $this->productSetRepository->findBySearchString($searchString, $limit);
 
-        $productSetsArr = array();
+        $productSetsArr = [];
 
         foreach ($productSets as $productSet) {
 
-            $accessoryKitUids = array();
+            $accessoryKitUids = [];
             $pageUid          = 0;
             if ($productSet->getPages()) {
                 $pageUid = $productSet->getPages()->getUid();
 
-                if($pageUid){
-                    $productSetsArr[$productSet->getUid()] = array(
+                if ($pageUid) {
+                    $productSetsArr[$productSet->getUid()] = [
                         'name'    => $productSet->getName(),
-                        'pageUid' => $pageUid
-                    );
+                        'pageUid' => $pageUid,
+                    ];
                 }
 
                 $accessorykitGroups    = $productSet->getAccessorykitGroups();
-                $accessorykitGroupUids = array();
+                $accessorykitGroupUids = [];
                 if ($accessorykitGroups) {
                     foreach ($accessorykitGroups as $accessorykitGroup) {
                         $accessorykitGroupUids[] = $accessorykitGroup->getUid();
                     }
                 }
 
-                $accessorykitUids = array();
+                $accessorykitUids = [];
                 if ($accessorykitGroupUids) {
                     foreach ($accessorykitGroupUids as $key => $accessorykitGroupUid) {
                         $accessorykitUidsTemp = $this->accessorykitGroupRepository->findAccessorykitUidsByAccessorykitGroupUid($accessorykitGroupUid);
@@ -119,15 +116,18 @@ class ProductController extends AbstractController
                 }
 
                 if ($accessorykitUids) {
-                    $productSetAccessoryKits = $this->productSetRepository->findAccessoryKitByProductSetAndSearchString($accessorykitUids,
-                        $searchString, $limit);
+                    $productSetAccessoryKits = $this->productSetRepository->findAccessoryKitByProductSetAndSearchString(
+                        $accessorykitUids,
+                        $searchString,
+                        $limit
+                    );
 
                     if ($productSetAccessoryKits) {
                         foreach ($productSetAccessoryKits as $productSetAccessoryKit) {
-                            $productSetsArr[$productSet->getUid()]['accessoryKits'][$productSetAccessoryKit->getUid()] = array(
+                            $productSetsArr[$productSet->getUid()]['accessoryKits'][$productSetAccessoryKit->getUid()] = [
                                 'name'   => $productSetAccessoryKit->getName(),
-                                'anchor' => $productSetAccessoryKit->getAnchor()
-                            );
+                                'anchor' => $productSetAccessoryKit->getAnchor(),
+                            ];
                         }
                     }
                 }
@@ -163,8 +163,12 @@ class ProductController extends AbstractController
             $offset = $this->settings['ajaxListProducts']['offset'];
         }
 
-        $productSets      = $this->productSetRepository->findByFilter($sysLanguageUid, $productFinderFilter, $offset,
-            $this->settings['ajaxListProducts']['limit']);
+        $productSets      = $this->productSetRepository->findByFilter(
+            $sysLanguageUid,
+            $productFinderFilter,
+            $offset,
+            $this->settings['ajaxListProducts']['limit']
+        );
         $productSetsCount = $this->productSetRepository->findByFilter($sysLanguageUid, $productFinderFilter)->count();
 
         $vatTextTranslationKey = 'priceInclVat';
@@ -172,11 +176,11 @@ class ProductController extends AbstractController
         $feUserData = $GLOBALS['TSFE']->fe_user->user;
         $feUserObj = $this->feUserRepository->findByUid($feUserData['uid']);
 
-        if($feUserObj){
+        if ($feUserObj) {
             $feUserGroupsObj = $feUserObj->getUserGroup();
 
             foreach ($feUserGroupsObj as $feUserGroup) {
-                if(!$feUserGroup->isTxGjoExtendsFemanagerVatIncl()){
+                if (!$feUserGroup->isTxGjoExtendsFemanagerVatIncl()) {
                     $vatTextTranslationKey = 'priceExclVat';
                 }
             }
@@ -206,7 +210,8 @@ class ProductController extends AbstractController
      * @param string $language The language to use (default is 'default')
      * @return string The translated string
      */
-    public function translate($key, $language = 'default') {
+    public function translate($key, $language = 'default')
+    {
         $localizationReference = 'LLL:LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf';
         $translation = $this->localizationFactory->getParsedData($localizationReference, $language)[0][$key][0]['target'];
         return $translation ?: $key;
@@ -214,13 +219,13 @@ class ProductController extends AbstractController
 
     public function ajaxGetProductSetVariantAction()
     {
-        $json = array();
+        $json = [];
         $productSetVariantListPrice = 0;
         $feUserDiscount             = 0;
 
         $postParams                = GeneralUtility::_POST();
         $productSetVariantGroupUid = $postParams['productSetVariantGroupUid'];
-        $productSetVariantFilter   = array();
+        $productSetVariantFilter   = [];
 
         if ($postParams['productSetVariantFilterTypValueNoFilterTyp']) {
             $productSetVariantFilter['noFilterTyp'] = $postParams['productSetVariantFilterTypValueNoFilterTyp'];
@@ -238,10 +243,12 @@ class ProductController extends AbstractController
             $productSetVariantFilter['version'] = $postParams['productSetVariantFilterTypValueVersion'];
         }
 
-        $productSetVariant = $this->productSetVariantRepository->findByProductSetVariantGroupAndFilter($productSetVariantGroupUid,
-            $productSetVariantFilter);
+        $productSetVariant = $this->productSetVariantRepository->findByProductSetVariantGroupAndFilter(
+            $productSetVariantGroupUid,
+            $productSetVariantFilter
+        );
 
-        if ($productSetVariant) {
+        if ($productSetVariant instanceof ProductSetVariant) {
 
             $feUserData                 = $GLOBALS['TSFE']->fe_user->user;
             $feUserObj                  = $this->feUserRepository->findByUid($feUserData['uid']);
@@ -250,7 +257,7 @@ class ProductController extends AbstractController
             if ($feUserObj) {
                 $feUserGroupsObj = $feUserObj->getUserGroup();
 
-                $discounts = array();
+                $discounts = [];
                 foreach ($feUserGroupsObj as $feUserGroup) {
 
                     if ($feUserGroup) {
