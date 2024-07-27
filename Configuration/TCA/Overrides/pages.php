@@ -2,7 +2,7 @@
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-call_user_func(function()
+call_user_func(function(): void
 {
     $extensionKey = 'gjo_products';
 
