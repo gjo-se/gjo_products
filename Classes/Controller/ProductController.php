@@ -39,21 +39,21 @@ class ProductController extends AbstractController
     /**
      * return void
      */
-    public function showProductGroupTeaserAction()
+    public function showProductGroupTeaserAction(): void
     {
         $this->view->assignMultiple([
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
     }
 
-    public function showProductGroupAction()
+    public function showProductGroupAction(): void
     {
         $this->view->assignMultiple([
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
     }
 
-    public function showProductSetAction()
+    public function showProductSetAction(): void
     {
         $productSet = $this->productSetRepository->findByUid($this->settings['productSet']);
 
@@ -73,7 +73,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    public function ajaxProductSetAction()
+    public function ajaxProductSetAction(): void
     {
         $limit          = 0;
         $postParams     = GeneralUtility::_POST();
@@ -143,13 +143,13 @@ class ProductController extends AbstractController
 
     }
 
-    public function productFinderAction()
+    public function productFinderAction(): void
     {
         $this->view->assign('sysLanguageUid', $GLOBALS['TSFE']->sys_language_uid);
         $this->view->assign('sysLanguage', $GLOBALS['TSFE']->lang);
     }
 
-    public function ajaxListProductsAction()
+    public function ajaxListProductsAction(): void
     {
 
         $postParams          = GeneralUtility::_POST();

@@ -42,7 +42,7 @@ abstract class AbstractController extends GjoBaseAbstractController
     /**
      * @param ProductGroupRepository $productGroupRepository
      */
-    public function injectProductGroupRepository(ProductGroupRepository $productGroupRepository)
+    public function injectProductGroupRepository(ProductGroupRepository $productGroupRepository): void
     {
         $this->productGroupRepository = $productGroupRepository;
     }
@@ -55,7 +55,7 @@ abstract class AbstractController extends GjoBaseAbstractController
     /**
      * @param ProductSetRepository $productSetRepository
      */
-    public function injectProductSetRepository(ProductSetRepository $productSetRepository)
+    public function injectProductSetRepository(ProductSetRepository $productSetRepository): void
     {
         $this->productSetRepository = $productSetRepository;
     }
@@ -68,7 +68,7 @@ abstract class AbstractController extends GjoBaseAbstractController
     /**
      * @param ProductSetTypeRepository $productSetTypeRepository
      */
-    public function injectProductSetTypeRepository(ProductSetTypeRepository $productSetTypeRepository)
+    public function injectProductSetTypeRepository(ProductSetTypeRepository $productSetTypeRepository): void
     {
         $this->productSetTypeRepository = $productSetTypeRepository;
     }
@@ -81,7 +81,7 @@ abstract class AbstractController extends GjoBaseAbstractController
     /**
      * @param ProductSetVariantRepository $productSetVariantRepository
      */
-    public function injectProductSetVariantRepository(ProductSetVariantRepository $productSetVariantRepository)
+    public function injectProductSetVariantRepository(ProductSetVariantRepository $productSetVariantRepository): void
     {
         $this->productSetVariantRepository = $productSetVariantRepository;
     }
@@ -94,7 +94,7 @@ abstract class AbstractController extends GjoBaseAbstractController
     /**
      * @param FeUserRepository $feUserRepository
      */
-    public function injectFeUserRepository(FeUserRepository $feUserRepository)
+    public function injectFeUserRepository(FeUserRepository $feUserRepository): void
     {
         $this->feUserRepository = $feUserRepository;
     }
@@ -107,7 +107,7 @@ abstract class AbstractController extends GjoBaseAbstractController
     /**
      * @param AccessorykitGroupRepository $accessorykitGroupRepository
      */
-    public function injectAccessorykitGroupRepository(AccessorykitGroupRepository $accessorykitGroupRepository)
+    public function injectAccessorykitGroupRepository(AccessorykitGroupRepository $accessorykitGroupRepository): void
     {
         $this->accessorykitGroupRepository = $accessorykitGroupRepository;
     }
