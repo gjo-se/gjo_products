@@ -20,7 +20,7 @@
 
 use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 
-return call_user_func(function () {
+return call_user_func(function (): array {
 
     $ext = 'gjo_products';
     $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';

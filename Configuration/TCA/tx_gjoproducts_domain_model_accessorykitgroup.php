@@ -18,7 +18,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-return call_user_func(function () {
+return call_user_func(function (): array {
 
     $ext = 'gjo_products';
     $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
