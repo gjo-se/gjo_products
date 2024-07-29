@@ -37,63 +37,7 @@ use GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository;
  */
 abstract class AbstractController extends GjoBaseAbstractController
 {
-    /**
-     * @var ProductGroupRepository
-     */
-    protected $productGroupRepository;
-
-    public function injectProductGroupRepository(ProductGroupRepository $productGroupRepository): void
+    public function __construct(protected ProductGroupRepository $productGroupRepository, protected ProductSetRepository $productSetRepository, protected ProductSetTypeRepository $productSetTypeRepository, protected ProductSetVariantRepository $productSetVariantRepository, protected FeUserRepository $feUserRepository, protected AccessorykitGroupRepository $accessorykitGroupRepository)
     {
-        $this->productGroupRepository = $productGroupRepository;
-    }
-
-    /**
-     * @var ProductSetRepository
-     */
-    protected $productSetRepository;
-
-    public function injectProductSetRepository(ProductSetRepository $productSetRepository): void
-    {
-        $this->productSetRepository = $productSetRepository;
-    }
-
-    /**
-     * @var ProductSetTypeRepository
-     */
-    protected $productSetTypeRepository;
-
-    public function injectProductSetTypeRepository(ProductSetTypeRepository $productSetTypeRepository): void
-    {
-        $this->productSetTypeRepository = $productSetTypeRepository;
-    }
-
-    /**
-     * @var ProductSetVariantRepository
-     */
-    protected $productSetVariantRepository;
-
-    public function injectProductSetVariantRepository(ProductSetVariantRepository $productSetVariantRepository): void
-    {
-        $this->productSetVariantRepository = $productSetVariantRepository;
-    }
-
-    /**
-     * @var FeUserRepository
-     */
-    protected $feUserRepository;
-
-    public function injectFeUserRepository(FeUserRepository $feUserRepository): void
-    {
-        $this->feUserRepository = $feUserRepository;
-    }
-
-    /**
-     * @var AccessorykitGroupRepository
-     */
-    protected $accessorykitGroupRepository;
-
-    public function injectAccessorykitGroupRepository(AccessorykitGroupRepository $accessorykitGroupRepository): void
-    {
-        $this->accessorykitGroupRepository = $accessorykitGroupRepository;
     }
 }
