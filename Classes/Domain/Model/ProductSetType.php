@@ -39,8 +39,8 @@ class ProductSetType extends GjoBaseAbstractModel
 
     /**
      * @var ObjectStorage<ProductSet>
-     * @Extbase\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $productSets;
 
     public function __construct()

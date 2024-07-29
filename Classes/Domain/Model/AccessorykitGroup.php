@@ -37,8 +37,8 @@ class AccessorykitGroup extends GjoBaseAbstractModel
 
     /**
      * @var ObjectStorage<ProductSet>
-     * @Extbase\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $accessoryKits;
 
     public function __construct()

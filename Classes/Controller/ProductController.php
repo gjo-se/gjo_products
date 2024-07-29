@@ -70,7 +70,7 @@ final class ProductController extends AbstractController
         $this->view->assignMultiple([
             'productSet'   => $productSet,
             'productGroup' => $productGroup,
-            'is_shop'      => GeneralUtility::_GET()['is_shop'],
+            'is_shop'      => $this->request->getQueryParams()['is_shop'],
             'pageUid'      => $GLOBALS['TSFE']->id,
         ]);
         return $this->htmlResponse();
@@ -79,7 +79,7 @@ final class ProductController extends AbstractController
     public function ajaxProductSetAction(): ResponseInterface
     {
         $limit          = 0;
-        $postParams     = GeneralUtility::_POST();
+        $postParams     = $this->request->getParsedBody();
         $searchString   = $postParams['searchString'];
         $productSets    = $this->productSetRepository->findBySearchString($searchString, $limit);
 
@@ -154,7 +154,7 @@ final class ProductController extends AbstractController
     public function ajaxListProductsAction(): ResponseInterface
     {
 
-        $postParams          = GeneralUtility::_POST();
+        $postParams          = $this->request->getParsedBody();
         $productFinderFilter = $postParams['productFinderFilter'];
 
         $sysLanguageUid      = $postParams['sysLanguageUid'];
@@ -222,7 +222,7 @@ final class ProductController extends AbstractController
         $productSetVariantListPrice = 0;
         $feUserDiscount             = 0;
 
-        $postParams                = GeneralUtility::_POST();
+        $postParams                = $this->request->getParsedBody();
         $productSetVariantGroupUid = $postParams['productSetVariantGroupUid'];
         $productSetVariantFilter   = [];
 

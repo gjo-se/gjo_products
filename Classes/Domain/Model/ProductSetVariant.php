@@ -47,8 +47,8 @@ class ProductSetVariant extends GjoBaseAbstractModel
 
     /**
      * @var ObjectStorage<ProductSetVariantGroup>
-     * @Extbase\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $productSetVariantGroup;
 
     public function __construct()
