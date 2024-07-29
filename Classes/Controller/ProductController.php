@@ -107,7 +107,7 @@ class ProductController extends AbstractController
                 foreach ($accessorykitGroupUids as $accessorykitGroupUid) {
                     $accessorykitUidsTemp = $this->accessorykitGroupRepository->findAccessorykitUidsByAccessorykitGroupUid($accessorykitGroupUid);
                     foreach ($accessorykitUidsTemp as $accessorykitUidTemp) {
-                        array_push($accessorykitUids, $accessorykitUidTemp);
+                        $accessorykitUids[] = $accessorykitUidTemp;
                     }
                 }
 
@@ -253,7 +253,7 @@ class ProductController extends AbstractController
                 foreach ($feUserGroupsObj as $feUserGroup) {
 
                     if ($feUserGroup) {
-                        array_push($discounts, $feUserGroup->getTxGjoExtendsFemanagerDiscount());
+                        $discounts[] = $feUserGroup->getTxGjoExtendsFemanagerDiscount();
                     }
 
                     if (!$feUserGroup->isTxGjoExtendsFemanagerVatIncl()) {
