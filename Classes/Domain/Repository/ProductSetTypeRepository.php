@@ -32,9 +32,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class ProductSetTypeRepository extends AbstractRepository
 {
     /**
-     * @param int $productSetUid
-     * @param int $maxCount
-     *
      * @return int|null
      * @throws Exception
      */

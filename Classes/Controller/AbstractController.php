@@ -42,9 +42,6 @@ abstract class AbstractController extends GjoBaseAbstractController
      */
     protected $productGroupRepository;
 
-    /**
-     * @param ProductGroupRepository $productGroupRepository
-     */
     public function injectProductGroupRepository(ProductGroupRepository $productGroupRepository): void
     {
         $this->productGroupRepository = $productGroupRepository;
@@ -55,9 +52,6 @@ abstract class AbstractController extends GjoBaseAbstractController
      */
     protected $productSetRepository;
 
-    /**
-     * @param ProductSetRepository $productSetRepository
-     */
     public function injectProductSetRepository(ProductSetRepository $productSetRepository): void
     {
         $this->productSetRepository = $productSetRepository;
@@ -68,9 +62,6 @@ abstract class AbstractController extends GjoBaseAbstractController
      */
     protected $productSetTypeRepository;
 
-    /**
-     * @param ProductSetTypeRepository $productSetTypeRepository
-     */
     public function injectProductSetTypeRepository(ProductSetTypeRepository $productSetTypeRepository): void
     {
         $this->productSetTypeRepository = $productSetTypeRepository;
@@ -81,9 +72,6 @@ abstract class AbstractController extends GjoBaseAbstractController
      */
     protected $productSetVariantRepository;
 
-    /**
-     * @param ProductSetVariantRepository $productSetVariantRepository
-     */
     public function injectProductSetVariantRepository(ProductSetVariantRepository $productSetVariantRepository): void
     {
         $this->productSetVariantRepository = $productSetVariantRepository;
@@ -94,9 +82,6 @@ abstract class AbstractController extends GjoBaseAbstractController
      */
     protected $feUserRepository;
 
-    /**
-     * @param FeUserRepository $feUserRepository
-     */
     public function injectFeUserRepository(FeUserRepository $feUserRepository): void
     {
         $this->feUserRepository = $feUserRepository;
@@ -107,9 +92,6 @@ abstract class AbstractController extends GjoBaseAbstractController
      */
     protected $accessorykitGroupRepository;
 
-    /**
-     * @param AccessorykitGroupRepository $accessorykitGroupRepository
-     */
     public function injectAccessorykitGroupRepository(AccessorykitGroupRepository $accessorykitGroupRepository): void
     {
         $this->accessorykitGroupRepository = $accessorykitGroupRepository;

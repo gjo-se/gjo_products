@@ -36,8 +36,6 @@ class ProductSetRepository extends AbstractRepository
     private const int SYS_LANGUAGE_UID_DE = 0;
 
     /**
-     * @param string $searchString
-     * @param int $limit
      *
      * @return QueryResultInterface<ProductSet>|null
      *
@@ -102,8 +100,6 @@ class ProductSetRepository extends AbstractRepository
 
     /**
      * @param array<int> $accessoryKitUidList
-     * @param string $searchString
-     * @param int $limit
      *
      * @return QueryResultInterface<ProductSet>|null
      *
@@ -162,10 +158,7 @@ class ProductSetRepository extends AbstractRepository
     }
 
     /**
-     * @param int $sysLanguageUid
      * @param array<string> $productFinderFilter
-     * @param int $offset
-     * @param int $limit
      *
      * @return QueryResultInterface<ProductSet>|null
      *

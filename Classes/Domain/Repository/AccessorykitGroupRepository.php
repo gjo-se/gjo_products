@@ -32,9 +32,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class AccessorykitGroupRepository extends AbstractRepository
 {
     /**
-     * @param int $accessorykitGroupUid
      * @return array<int>
-     *
      * @throws Exception
      */
     public function findAccessorykitUidsByAccessorykitGroupUid(int $accessorykitGroupUid): array
