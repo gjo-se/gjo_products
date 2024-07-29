@@ -303,10 +303,7 @@ class ProductSetRepository extends AbstractRepository
                 $doorThickness = $productFinderFilter[$pluginSignature . 'doorThickness'];
                 $minimumDoorThickness = $settings['productset']['alu-80']['telescop2']['minimumDoorThickness'];
                 $maximumDoorThickness = $settings['productset']['alu-80']['telescop2']['maximumDoorThickness'];
-                if (($doorWidth > 0 && $doorWidth < $minimumDoorWidth) or
-                    ($doorWidth > 0 && $doorWidth > $maximumDoorWidth) or
-                    ($doorThickness > 0 && $doorThickness < $minimumDoorThickness) or
-                    ($doorThickness > 0 && $doorThickness > $maximumDoorThickness)
+                if ($doorWidth > 0 && $doorWidth < $minimumDoorWidth || $doorWidth > 0 && $doorWidth > $maximumDoorWidth || $doorThickness > 0 && $doorThickness < $minimumDoorThickness || $doorThickness > 0 && $doorThickness > $maximumDoorThickness
                 ) {
 
                     $constraintsAlu80Telescop2 = $query->logicalNot(
@@ -329,11 +326,7 @@ class ProductSetRepository extends AbstractRepository
                 $maximumDoorThickness = $settings['productset']['alu-80']['telescop3']['maximumDoorThickness'];
                 $doorWeight = $productFinderFilter[$pluginSignature . 'doorWeight'];
                 $maximumDoorWeight = $settings['productset']['alu-80']['telescop3']['maximumDoorWeight'];
-                if (($doorWidth > 0 && $doorWidth < $minimumDoorWidth) or
-                    ($doorWidth > 0 && $doorWidth > $maximumDoorWidth) or
-                    ($doorThickness > 0 && $doorThickness < $minimumDoorThickness) or
-                    ($doorThickness > 0 && $doorThickness > $maximumDoorThickness) or
-                    ($doorWeight > 0 && $doorWeight > $maximumDoorWeight)
+                if ($doorWidth > 0 && $doorWidth < $minimumDoorWidth || $doorWidth > 0 && $doorWidth > $maximumDoorWidth || $doorThickness > 0 && $doorThickness < $minimumDoorThickness || $doorThickness > 0 && $doorThickness > $maximumDoorThickness || $doorWeight > 0 && $doorWeight > $maximumDoorWeight
                 ) {
                     $constraintsAlu80Telescop3 = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
