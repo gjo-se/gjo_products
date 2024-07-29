@@ -26,9 +26,9 @@ namespace GjoSe\GjoProducts\Controller;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class ProductController extends AbstractController
+final class ProductController extends AbstractController
 {
-    protected LocalizationFactory $localizationFactory;
+    private readonly LocalizationFactory $localizationFactory;
 
     public function __construct(?LocalizationFactory $localizationFactory = null)
     {
