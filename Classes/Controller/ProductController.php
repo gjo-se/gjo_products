@@ -77,7 +77,6 @@ class ProductController extends AbstractController
         $limit          = 0;
         $postParams     = GeneralUtility::_POST();
         $searchString   = $postParams['searchString'];
-        $sysLanguageUid = $postParams['sysLanguageUid'];
         $productSets    = $this->productSetRepository->findBySearchString($searchString, $limit);
 
         $productSetsArr = [];
