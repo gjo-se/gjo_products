@@ -176,11 +176,11 @@ class ProductSetRepository extends AbstractRepository
 
         if ($productFinderFilter !== []) {
 
-            if (isset($productFinderFilter[$pluginSignature . 'wood']) && $productFinderFilter[$pluginSignature . 'wood'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'wood']) && $productFinderFilter[$pluginSignature . 'wood'] === '1') {
                 $constraints[] = $query->equals('filterMaterialWood', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'glass']) && $productFinderFilter[$pluginSignature . 'glass'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'glass']) && $productFinderFilter[$pluginSignature . 'glass'] === '1') {
                 $constraints[] = $query->equals('filterMaterialGlas', 1);
             }
 
@@ -215,19 +215,19 @@ class ProductSetRepository extends AbstractRepository
                 $constraints[] = $query->greaterThanOrEqual('maximumDoorWeight', $productFinderFilter[$pluginSignature . 'doorWeight']);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'customer']) && $productFinderFilter[$pluginSignature . 'customer'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'customer']) && $productFinderFilter[$pluginSignature . 'customer'] === '1') {
                 $constraints[] = $query->equals('filterDesignCustomer', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'alu']) && $productFinderFilter[$pluginSignature . 'alu'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'alu']) && $productFinderFilter[$pluginSignature . 'alu'] === '1') {
                 $constraints[] = $query->equals('filterDesignAlu', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'design']) && $productFinderFilter[$pluginSignature . 'design'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'design']) && $productFinderFilter[$pluginSignature . 'design'] === '1') {
                 $constraints[] = $query->equals('filterDesignDesign', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'soft-close']) && $productFinderFilter[$pluginSignature . 'soft-close'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'soft-close']) && $productFinderFilter[$pluginSignature . 'soft-close'] === '1') {
                 $constraintsFilterSoftClose = $query->equals('filterSoftClose', 1);
                 if ($productFinderFilter[$pluginSignature . 'doorWidth'] !== '' && $productFinderFilter[$pluginSignature . 'doorWidth'] !== '0') {
                     $constraintsMinimumDoorWidth = $query->lessThanOrEqual('minimumDoorWidthSoftClose', (int)($productFinderFilter[$pluginSignature . 'doorWidth']));
@@ -252,15 +252,15 @@ class ProductSetRepository extends AbstractRepository
                 );
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'et3']) && $productFinderFilter[$pluginSignature . 'et3'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'et3']) && $productFinderFilter[$pluginSignature . 'et3'] === '1') {
                 $constraints[] = $query->equals('filterEt3', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 't-fold']) && $productFinderFilter[$pluginSignature . 't-fold'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 't-fold']) && $productFinderFilter[$pluginSignature . 't-fold'] === '1') {
                 $constraints[] = $query->equals('filterTfold', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'synchron']) && $productFinderFilter[$pluginSignature . 'synchron'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'synchron']) && $productFinderFilter[$pluginSignature . 'synchron'] === '1') {
                 $constraintsAlu80Syncron = $query->equals('filterSynchron', 1);
                 if ($productFinderFilter[$pluginSignature . 'doorWidth'] > $settings['productset']['alu-80']['synchron']['maximumDoorWidth']) {
                     $constraintsAlu80Syncron = $query->logicalNot(
@@ -345,23 +345,23 @@ class ProductSetRepository extends AbstractRepository
                 );
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 't-close']) && $productFinderFilter[$pluginSignature . 't-close'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 't-close']) && $productFinderFilter[$pluginSignature . 't-close'] === '1') {
                 $constraints[] = $query->equals('filterTclose', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 't-master']) && $productFinderFilter[$pluginSignature . 't-master'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 't-master']) && $productFinderFilter[$pluginSignature . 't-master'] === '1') {
                 $constraints[] = $query->equals('filterTmaster', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'montage-wall']) && $productFinderFilter[$pluginSignature . 'montage-wall'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'montage-wall']) && $productFinderFilter[$pluginSignature . 'montage-wall'] === '1') {
                 $constraints[] = $query->equals('filterMontageWall', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'montage-ceiling']) && $productFinderFilter[$pluginSignature . 'montage-ceiling'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'montage-ceiling']) && $productFinderFilter[$pluginSignature . 'montage-ceiling'] === '1') {
                 $constraints[] = $query->equals('filterMontageCeiling', 1);
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'montage-in-wall']) && $productFinderFilter[$pluginSignature . 'montage-in-wall'] == '1') {
+            if (isset($productFinderFilter[$pluginSignature . 'montage-in-wall']) && $productFinderFilter[$pluginSignature . 'montage-in-wall'] === '1') {
                 $constraints[] = $query->equals('filterMontageIn', 1);
             }
 
