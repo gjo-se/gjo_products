@@ -153,11 +153,7 @@ class ProductController extends AbstractController
 
         $sysLanguageUid      = $postParams['sysLanguageUid'];
 
-        if ($postParams['offset']) {
-            $offset = $postParams['offset'];
-        } else {
-            $offset = $this->settings['ajaxListProducts']['offset'];
-        }
+        $offset = $postParams['offset'] ?: $this->settings['ajaxListProducts']['offset'];
 
         $productSets      = $this->productSetRepository->findByFilter(
             $sysLanguageUid,
