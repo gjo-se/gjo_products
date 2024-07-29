@@ -28,9 +28,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ProductController extends AbstractController
 {
-    /**
-     * @var LocalizationFactory
-     */
     protected LocalizationFactory $localizationFactory;
 
     public function __construct(?LocalizationFactory $localizationFactory = null)
