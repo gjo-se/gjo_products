@@ -34,53 +34,101 @@ use GjoSe\GjoBase\Domain\Model\Pages;
 class ProductSet extends GjoBaseAbstractModel
 {
     protected string $name = '';
+
     protected string $anchor = '';
+
     protected string $description = '';
+
     protected ?FileReference $image = null;
+
     protected ?FileReference $icon = null;
+
     protected bool $showTechnicalnots = false;
+
     protected string $maximumDoorWeight = '';
+
     protected string $minimumDoorWeight = '';
+
     protected string $height = '';
+
     protected int $minimumDoorThickness = 0;
+
     protected int $maximumDoorThickness = 0;
+
     protected int $minimumDoorWidth = 0;
+
     protected int $minimumDoorWidthSoftClose = 0;
+
     protected int $minimumDoorWidthSoftCloseLong = 0;
+
     protected int $minimumDoorWidthSoftCloseBoth = 0;
+
     protected int $maximumDoorWidth = 0;
+
     protected string $voltage = '';
+
     protected bool $showDin = false;
+
     protected string $useCategorie = '';
+
     protected string $durability = '';
+
     protected string $doorWeight = '';
+
     protected string $fireResistance = '';
+
     protected string $safety = '';
+
     protected string $corrosionResistance = '';
+
     protected string $security = '';
+
     protected string $doorType = '';
+
     protected string $initialFriction = '';
+
     protected string $invitationToTender = '';
+
     protected bool $isFeatured = false;
+
     protected bool $filterMaterialWood = false;
+
     protected bool $filterMaterialGlas = false;
+
     protected string $filterWingcount = '';
+
     protected ?FileReference $download = null;
+
     protected ?FileReference $downloadEngineeringDrawing = null;
+
     protected ?FileReference $imageEngineeringDrawing = null;
+
     protected bool $filterDesignCustomer = false;
+
     protected bool $filterDesignAlu = false;
+
     protected bool $filterDesignDesign = false;
+
     protected bool $filterSoftClose = false;
+
     protected bool $filterEt3 = false;
+
     protected bool $filterTfold = false;
+
     protected bool $filterTclose = false;
+
     protected bool $filterTmaster = false;
+
     protected bool $filterSynchron = false;
+
     protected bool $filterTelescop2 = false;
+
     protected bool $filterTelescop3 = false;
+
     protected bool $filterMontageIn = false;
+
     protected bool $filterMontageWall = false;
+
     protected bool $filterMontageCeiling = false;
 
     /**

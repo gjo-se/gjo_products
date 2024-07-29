@@ -34,10 +34,15 @@ class ProductSetVariant extends GjoBaseAbstractModel
     protected string $name = '';
 
     protected string $articleNumber = '';
+
     protected float $price = 0.0;
+
     protected string $material = '';
+
     protected int $length = 0;
+
     protected string $version = '';
+
     protected int $tax = 0;
 
     /**

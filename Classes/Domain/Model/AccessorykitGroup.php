@@ -32,6 +32,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class AccessorykitGroup extends GjoBaseAbstractModel
 {
     protected string $headline = '';
+
     protected ?ProductSet $productSet = null;
 
     /**

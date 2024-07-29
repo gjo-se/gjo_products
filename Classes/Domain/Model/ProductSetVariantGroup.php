@@ -32,8 +32,11 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class ProductSetVariantGroup extends GjoBaseAbstractModel
 {
     protected string $headline = '';
+
     protected string $description = '';
+
     protected string $tableHeadline = '';
+
     protected ?ProductSet $productSet = null;
 
     /**

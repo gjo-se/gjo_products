@@ -32,8 +32,11 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 class Product extends GjoBaseAbstractModel
 {
     protected string $name = '';
+
     protected string $articleNumber = '';
+
     protected string $additionalInformation = '';
+
     protected ?FileReference $image = null;
 
     public function getName(): string

@@ -234,17 +234,20 @@ class ProductSetRepository extends AbstractRepository
                 } else {
                     $constraintsMinimumDoorWidth = $query->lessThanOrEqual('minimumDoorWidthSoftClose', 9999);
                 }
+
                 $constraintsAlu80SoftClose = $query->equals('filterSoftClose', 1);
                 if ($productFinderFilter[$pluginSignature . 'telescop2'] == $settings['productset']['alu-80']['softClose']['telescop2']) {
                     $constraintsAlu80SoftClose = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
+
                 if ($productFinderFilter[$pluginSignature . 'telescop3'] == $settings['productset']['alu-80']['softClose']['telescop3']) {
                     $constraintsAlu80SoftClose = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
+
                 $constraints[] = $query->logicalAnd(
                     $constraintsFilterSoftClose,
                     $constraintsAlu80SoftClose,
@@ -267,27 +270,32 @@ class ProductSetRepository extends AbstractRepository
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
+
                 if ($productFinderFilter[$pluginSignature . 'soft-close'] == $settings['productset']['alu-80']['synchron']['softClose']) {
                     $constraintsAlu80Syncron = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
+
                 if ($productFinderFilter[$pluginSignature . 'telescop2'] == $settings['productset']['alu-80']['synchron']['telescop2']) {
                     $constraintsAlu80Syncron = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
+
                 if ($productFinderFilter[$pluginSignature . 'telescop3'] == $settings['productset']['alu-80']['synchron']['telescop3']) {
                     $constraintsAlu80Syncron = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
+
                 $constraintsAlu250Syncron = $query->equals('filterSynchron', 1);
                 if ($productFinderFilter[$pluginSignature . 'doorWeight'] > $settings['productset']['alu-250']['synchron']['maximumDoorWeight']) {
                     $constraintsAlu250Syncron = $query->logicalNot(
                         $query->like('name', '%Alu 250%')
                     );
                 }
+
                 $constraints[] = $query->logicalAnd(
                     $query->equals('filterSynchron', 1),
                     $constraintsAlu80Syncron,
@@ -310,6 +318,7 @@ class ProductSetRepository extends AbstractRepository
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
+
                 $constraints[] = $query->logicalAnd(
                     $query->equals('filterTelescop2', 1),
                     $constraintsAlu80Telescop2
@@ -332,6 +341,7 @@ class ProductSetRepository extends AbstractRepository
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
+
                 $constraints[] = $query->logicalAnd(
                     $query->equals('filterTelescop3', 1),
                     $constraintsAlu80Telescop3
@@ -365,6 +375,7 @@ class ProductSetRepository extends AbstractRepository
         if ($offset !== 0) {
             $query->setOffset($offset);
         }
+
         if ($limit !== 0) {
             $query->setLimit($limit);
         }

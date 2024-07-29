@@ -34,11 +34,17 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class ProductGroup extends GjoBaseAbstractModel
 {
     protected string $header = '';
+
     protected string $subHeader = '';
+
     protected string $description = '';
+
     protected ?FileReference $image = null;
+
     protected string $teaserHeader = '';
+
     protected string $teaserDescription = '';
+
     protected ?FileReference $teaserImage = null;
 
     /**

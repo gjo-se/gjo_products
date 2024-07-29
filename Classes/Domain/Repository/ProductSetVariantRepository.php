@@ -46,12 +46,15 @@ class ProductSetVariantRepository extends AbstractRepository
         if (isset($productSetVariantFilter['noFilterTyp'])) {
             $constraints[] = $query->like('name', '%%');
         }
+
         if (isset($productSetVariantFilter['length'])) {
             $constraints[] = $query->equals('length', $productSetVariantFilter['length']);
         }
+
         if (isset($productSetVariantFilter['material'])) {
             $constraints[] = $query->equals('material', $productSetVariantFilter['material']);
         }
+
         if (isset($productSetVariantFilter['version'])) {
             $constraints[] = $query->equals('version', $productSetVariantFilter['version']);
         }
