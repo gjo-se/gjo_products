@@ -32,7 +32,7 @@ final class ProductController extends AbstractController
 
     public function __construct(?LocalizationFactory $localizationFactory = null)
     {
-        $this->localizationFactory = $localizationFactory ?: GeneralUtility::makeInstance(LocalizationFactory::class);
+        $this->localizationFactory = $localizationFactory instanceof LocalizationFactory ? $localizationFactory : GeneralUtility::makeInstance(LocalizationFactory::class);
     }
 
     /**

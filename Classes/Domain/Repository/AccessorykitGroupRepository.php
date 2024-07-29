@@ -49,7 +49,7 @@ class AccessorykitGroupRepository extends AbstractRepository
         $rows = $queryBuilder->executeQuery()->fetchAllAssociative();
 
         $accessorykitUids = [];
-        if (count($rows)) {
+        if (count($rows) !== 0) {
             foreach ($rows as $row) {
                 $accessorykitUids[] = $row['uid_local'];
             }
