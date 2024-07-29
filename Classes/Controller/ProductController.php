@@ -22,7 +22,7 @@ namespace GjoSe\GjoProducts\Controller;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -118,7 +118,7 @@ final class ProductController extends AbstractController
                         $limit
                     );
 
-                    if ($productSetAccessoryKits) {
+                    if ($productSetAccessoryKits instanceof QueryResultInterface) {
                         foreach ($productSetAccessoryKits as $productSetAccessoryKit) {
                             $productSetsArr[$productSet->getUid()]['accessoryKits'][$productSetAccessoryKit->getUid()] = [
                                 'name'   => $productSetAccessoryKit->getName(),
