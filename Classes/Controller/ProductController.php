@@ -108,12 +108,10 @@ class ProductController extends AbstractController
                 }
 
                 $accessorykitUids = [];
-                if ($accessorykitGroupUids) {
-                    foreach ($accessorykitGroupUids as $accessorykitGroupUid) {
-                        $accessorykitUidsTemp = $this->accessorykitGroupRepository->findAccessorykitUidsByAccessorykitGroupUid($accessorykitGroupUid);
-                        foreach ($accessorykitUidsTemp as $accessorykitUidTemp) {
-                            array_push($accessorykitUids, $accessorykitUidTemp);
-                        }
+                foreach ($accessorykitGroupUids as $accessorykitGroupUid) {
+                    $accessorykitUidsTemp = $this->accessorykitGroupRepository->findAccessorykitUidsByAccessorykitGroupUid($accessorykitGroupUid);
+                    foreach ($accessorykitUidsTemp as $accessorykitUidTemp) {
+                        array_push($accessorykitUids, $accessorykitUidTemp);
                     }
                 }
 
