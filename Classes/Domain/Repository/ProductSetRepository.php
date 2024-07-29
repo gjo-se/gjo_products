@@ -88,7 +88,7 @@ class ProductSetRepository extends AbstractRepository
             $query->setLimit($limit);
         }
 
-        // TODO - Notwenigkeit prüfen
+        // TODO-a: - Notwenigkeit prüfen
         //        /** @var Context $context */
         //        $context = GeneralUtility::makeInstance(Context::class);
         //        $languageUid = $GLOBALS['TSFE']->sys_language_uid;
@@ -173,7 +173,7 @@ class ProductSetRepository extends AbstractRepository
      */
     public function findByFilter(int $sysLanguageUid, array $productFinderFilter = [], int $offset = 0, int $limit = 0): ?QueryResultInterface
     {
-
+        // todo-b: Settings aus typoscript in yaml
         $settings = GeneralUtility::makeInstance(SettingsUtility::class)->getSettings();
         $pluginSignature = 'tx_gjoproducts_product[';
         $query = $this->createQuery();
