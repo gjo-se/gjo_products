@@ -22,6 +22,7 @@ namespace GjoSe\GjoProducts\Controller;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -38,21 +39,23 @@ final class ProductController extends AbstractController
     /**
      * return void
      */
-    public function showProductGroupTeaserAction(): void
+    public function showProductGroupTeaserAction(): ResponseInterface
     {
         $this->view->assignMultiple([
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
+        return $this->htmlResponse();
     }
 
-    public function showProductGroupAction(): void
+    public function showProductGroupAction(): ResponseInterface
     {
         $this->view->assignMultiple([
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
+        return $this->htmlResponse();
     }
 
-    public function showProductSetAction(): void
+    public function showProductSetAction(): ResponseInterface
     {
         $productSet = $this->productSetRepository->findByUid($this->settings['productSet']);
 
@@ -70,9 +73,10 @@ final class ProductController extends AbstractController
             'is_shop'      => GeneralUtility::_GET()['is_shop'],
             'pageUid'      => $GLOBALS['TSFE']->id,
         ]);
+        return $this->htmlResponse();
     }
 
-    public function ajaxProductSetAction(): void
+    public function ajaxProductSetAction(): ResponseInterface
     {
         $limit          = 0;
         $postParams     = GeneralUtility::_POST();
@@ -136,16 +140,18 @@ final class ProductController extends AbstractController
         $this->view->assign('searchString', $searchString);
         $this->view->assign('searchNoProductSetsFound1', $this->translate('search.noProductSetsFound.1'));
         $this->view->assign('searchNoProductSetsFound2', $this->translate('search.noProductSetsFound.2'));
+        return $this->htmlResponse();
 
     }
 
-    public function productFinderAction(): void
+    public function productFinderAction(): ResponseInterface
     {
         $this->view->assign('sysLanguageUid', $GLOBALS['TSFE']->sys_language_uid);
         $this->view->assign('sysLanguage', $GLOBALS['TSFE']->lang);
+        return $this->htmlResponse();
     }
 
-    public function ajaxListProductsAction(): void
+    public function ajaxListProductsAction(): ResponseInterface
     {
 
         $postParams          = GeneralUtility::_POST();
@@ -193,6 +199,7 @@ final class ProductController extends AbstractController
         $this->view->assign('productSets', $productSets);
         $this->view->assign('productSetsCount', $productSetsCount);
         $this->view->assign('isShop', (int)$postParams['isShop']);
+        return $this->htmlResponse();
     }
 
     /**
@@ -209,7 +216,7 @@ final class ProductController extends AbstractController
         return $translation ?: $key;
     }
 
-    public function ajaxGetProductSetVariantAction()
+    public function ajaxGetProductSetVariantAction(): ResponseInterface
     {
         $json = [];
         $productSetVariantListPrice = 0;
@@ -276,6 +283,6 @@ final class ProductController extends AbstractController
         $json['productSetVariantGroupUid']  = $productSetVariantGroupUid;
         $json['productSetVariantListPrice'] = number_format($productSetVariantListPrice, 2, ',', '.');
 
-        return json_encode($json);
+        return $this->jsonResponse(json_encode($json));
     }
 }
