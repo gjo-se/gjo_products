@@ -25,6 +25,7 @@ namespace GjoSe\GjoProducts\Domain\Model;
 
 use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 
 /**
  * Class ProductSetVariantGroup
@@ -42,13 +43,13 @@ class ProductSetVariantGroup extends GjoBaseAbstractModel
     /**
      * @var ObjectStorage<ProductSetVariant>
      */
-    #[Extbase\ORM\Lazy]
+    #[Lazy]
     protected ObjectStorage $productSetVariants;
 
     /**
      * @var ObjectStorage<Product>
      */
-    #[Extbase\ORM\Lazy]
+    #[Lazy]
     protected ObjectStorage $products;
 
     public function __construct()
