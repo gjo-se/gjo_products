@@ -111,7 +111,7 @@ class ProductController extends AbstractController
                     }
                 }
 
-                if ($accessorykitUids) {
+                if ($accessorykitUids !== []) {
                     $productSetAccessoryKits = $this->productSetRepository->findAccessoryKitByProductSetAndSearchString(
                         $accessorykitUids,
                         $searchString,
