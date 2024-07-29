@@ -32,7 +32,6 @@ class ProductSetVariantRepository extends AbstractRepository
     /**
      * @param array<string> $productSetVariantFilter
      *
-     * @return ProductSetVariant|null
      * @throws InvalidQueryException
      */
     public function findByProductSetVariantGroupAndFilter(int $productSetVariantGroupUid, array $productSetVariantFilter): ?ProductSetVariant

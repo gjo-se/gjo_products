@@ -32,7 +32,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class ProductSetTypeRepository extends AbstractRepository
 {
     /**
-     * @return int|null
      * @throws Exception
      */
     public function findProductSetTypeUidByProductSetUid(int $productSetUid, int $maxCount = 0): ?int

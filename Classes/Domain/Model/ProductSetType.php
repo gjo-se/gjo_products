@@ -61,9 +61,6 @@ class ProductSetType extends GjoBaseAbstractModel
         return $this->description;
     }
 
-    /**
-     * @return ProductGroup|null
-     */
     public function getProductGroup(): ?ProductGroup
     {
         return $this->productGroup;

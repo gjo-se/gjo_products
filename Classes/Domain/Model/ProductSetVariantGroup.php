@@ -74,9 +74,6 @@ class ProductSetVariantGroup extends GjoBaseAbstractModel
         return $this->tableHeadline;
     }
 
-    /**
-     * @return ProductSet|null
-     */
     public function getProductSet(): ?ProductSet
     {
         return $this->productSet;
