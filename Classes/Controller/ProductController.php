@@ -166,13 +166,13 @@ class ProductController extends AbstractController
         $vatTextTranslationKey = 'priceInclVat';
 
         $feUserData = $GLOBALS['TSFE']->fe_user->user;
-        $feUserObj = $this->feUserRepository->findByUid($feUserData['uid']);
+        $user = $this->feUserRepository->findByUid($feUserData['uid']);
 
-        if ($feUserObj) {
-            $feUserGroupsObj = $feUserObj->getUserGroup();
+        if ($user) {
+            $feUserGroupsObj = $user->getUserGroup();
 
-            foreach ($feUserGroupsObj as $feUserGroup) {
-                if (!$feUserGroup->isTxGjoExtendsFemanagerVatIncl()) {
+            foreach ($feUserGroupsObj as $feUserGroupObj) {
+                if (!$feUserGroupObj->isTxGjoExtendsFemanagerVatIncl()) {
                     $vatTextTranslationKey = 'priceExclVat';
                 }
             }
@@ -250,13 +250,13 @@ class ProductController extends AbstractController
                 $feUserGroupsObj = $feUserObj->getUserGroup();
 
                 $discounts = [];
-                foreach ($feUserGroupsObj as $feUserGroup) {
+                foreach ($feUserGroupsObj as $feUserGroupObj) {
 
-                    if ($feUserGroup) {
-                        $discounts[] = $feUserGroup->getTxGjoExtendsFemanagerDiscount();
+                    if ($feUserGroupObj) {
+                        $discounts[] = $feUserGroupObj->getTxGjoExtendsFemanagerDiscount();
                     }
 
-                    if (!$feUserGroup->isTxGjoExtendsFemanagerVatIncl()) {
+                    if (!$feUserGroupObj->isTxGjoExtendsFemanagerVatIncl()) {
                         $productSetVariantListPrice = $productSetVariant->getPrice();
                     }
                 }
