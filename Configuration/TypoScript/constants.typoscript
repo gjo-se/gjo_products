@@ -4,7 +4,6 @@ plugin.tx_gjoproducts {
         partialRootPath = EXT:gjo_products/Resources/Private/Partials/
         layoutRootPath = EXT:gjo_products/Resources/Private/Layouts/
     }
-
     settings {
     }
 }

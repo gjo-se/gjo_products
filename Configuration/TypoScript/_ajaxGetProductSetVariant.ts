@@ -12,12 +12,10 @@ ajaxGetProductSetVariant {
                 1 = ajaxGetProductSetVariant
             }
         }
-
         view =< plugin.tx_gjoproducts.view
         persistence =< plugin.tx_gjoproducts.persistence
         settings =< plugin.tx_gjoproducts.settings
     }
-
     config {
         disableAllHeaderCode = 1
         additionalHeaders = Content-type:application/html

@@ -1,13 +1,13 @@
 mod.wizards.newContentElement.wizardItems.plugins {
-	elements {
-		product {
-			iconIdentifier = products-icon
-			title = LLL:EXT:gjo_products/Resources/Private/Language/Plugin.xlf:wizardItems.plugins.product.title
-			description = LLL:EXT:gjo_products/Resources/Private/Language/Plugin.xlf:wizardItems.plugins.product.description
-			tt_content_defValues {
-				CType = list
-				list_type = gjoproducts_product
-			}
-		}
-	}
+    elements {
+        product {
+            iconIdentifier = products-icon
+            title = LLL:EXT:gjo_products/Resources/Private/Language/Plugin.xlf:wizardItems.plugins.product.title
+            description = LLL:EXT:gjo_products/Resources/Private/Language/Plugin.xlf:wizardItems.plugins.product.description
+            tt_content_defValues {
+                CType = list
+                list_type = gjoproducts_product
+            }
+        }
+    }
 }

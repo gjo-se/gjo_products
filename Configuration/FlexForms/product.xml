@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <T3DataStructure>
     <sheets>
         <sDEF>
@@ -18,37 +19,36 @@
                                         <numIndex index="0">
                                             LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                         </numIndex>
-                                        <numIndex index="1"></numIndex>
+                                        <numIndex index="1"/>
                                     </numIndex>
                                     <numIndex index="1">
                                         <numIndex index="0">
                                             LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroupTeaser
                                         </numIndex>
-                                        <numIndex index="1">Product->showProductGroupTeaser</numIndex>
+                                        <numIndex index="1">Product-&gt;showProductGroupTeaser</numIndex>
                                     </numIndex>
                                     <numIndex index="2">
                                         <numIndex index="0">
                                             LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroup
                                         </numIndex>
-                                        <numIndex index="1">Product->showProductGroup</numIndex>
+                                        <numIndex index="1">Product-&gt;showProductGroup</numIndex>
                                     </numIndex>
                                     <numIndex index="3">
                                         <numIndex index="0">
                                             LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductSet
                                         </numIndex>
-                                        <numIndex index="1">Product->showProductSet</numIndex>
+                                        <numIndex index="1">Product-&gt;showProductSet</numIndex>
                                     </numIndex>
                                     <numIndex index="4">
                                         <numIndex index="0">
                                             LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.productFinder
                                         </numIndex>
-                                        <numIndex index="1">Product->productFinder</numIndex>
+                                        <numIndex index="1">Product-&gt;productFinder</numIndex>
                                     </numIndex>
                                 </items>
                             </config>
                         </TCEforms>
                     </switchableControllerActions>
-
                     <settings.productGroup>
                         <TCEforms>
                             <label>
@@ -56,8 +56,8 @@
                             </label>
                             <displayCond>
                                 <OR>
-                                    <numIndex index="0">FIELD:switchableControllerActions:=:Product->showProductGroupTeaser</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:=:Product->showProductGroup</numIndex>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Product-&gt;showProductGroupTeaser</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Product-&gt;showProductGroup</numIndex>
                                 </OR>
                             </displayCond>
                             <config>
@@ -67,7 +67,7 @@
                                         <numIndex index="0">
                                             LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                         </numIndex>
-                                        <numIndex index="1"></numIndex>
+                                        <numIndex index="1"/>
                                     </numIndex>
                                 </items>
                                 <foreign_table>tx_gjoproducts_domain_model_productgroup</foreign_table>
@@ -75,13 +75,12 @@
                             </config>
                         </TCEforms>
                     </settings.productGroup>
-
                     <settings.productSet>
                         <TCEforms>
                             <label>
                                 LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productSet
                             </label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product->showProductSet</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:=:Product-&gt;showProductSet</displayCond>
                             <config>
                                 <type>select</type>
                                 <items type="array">
@@ -89,7 +88,7 @@
                                         <numIndex index="0">
                                             LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                         </numIndex>
-                                        <numIndex index="1"></numIndex>
+                                        <numIndex index="1"/>
                                     </numIndex>
                                 </items>
                                 <foreign_table>tx_gjoproducts_domain_model_productset</foreign_table>
@@ -97,20 +96,17 @@
                             </config>
                         </TCEforms>
                     </settings.productSet>
-
                     <settings.isShop>
                         <TCEforms>
                             <label>
                                 LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.isShop
                             </label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product->productFinder</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:=:Product-&gt;productFinder</displayCond>
                             <config>
                                 <type>check</type>
                             </config>
                         </TCEforms>
                     </settings.isShop>
-
-
                 </el>
             </ROOT>
         </sDEF>

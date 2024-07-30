@@ -8,10 +8,9 @@ plugin.tx_gjoproducts {
             30 = {$plugin.tx_gjointroduction.view.partialRootPath}
         }
     }
-
     settings {
 
-        placeholder{
+        placeholder {
             imageActive75 = https://via.placeholder.com/75/000
             imageDefault75 = https://via.placeholder.com/75/f8f9fa
             imageDisabled75 = https://via.placeholder.com/75/dee2e6/?text=disabled
@@ -26,9 +25,8 @@ plugin.tx_gjoproducts {
             imageDisabled150 = https://via.placeholder.com/150/dee2e6/?text=disabled
         }
 
-
         // Konfigurator-Filter-Button Bedingungen
-        productset{
+        productset {
             alu-80 {
                 softClose {
                     minimumDoorWidthWood = 640
@@ -60,7 +58,6 @@ plugin.tx_gjoproducts {
                     maximumDoorWeight = 200
                 }
             }
-
         }
         site {
             pid {
@@ -73,9 +70,8 @@ plugin.tx_gjoproducts {
 
 
     }
-
     persistence {
- 
+
 
 
     }

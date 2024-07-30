@@ -12,12 +12,10 @@ ajaxListProducts {
                 1 = ajaxListProducts
             }
         }
-
         view =< plugin.tx_gjoproducts.view
         persistence =< plugin.tx_gjoproducts.persistence
         settings =< plugin.tx_gjoproducts.settings
     }
-
     config {
         disableAllHeaderCode = 1
         additionalHeaders = Content-type:application/html
@@ -29,7 +27,7 @@ ajaxListProducts {
 }
 
 plugin.tx_gjoproducts {
-    settings{
+    settings {
         ajaxListProducts {
             offset = 0
             limit = 6

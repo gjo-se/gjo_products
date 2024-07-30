@@ -76,8 +76,8 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.name',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'article_number' => [
@@ -85,8 +85,8 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.article_number',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'additional_information' => [
@@ -94,8 +94,8 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.additional_information',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'image' => [
@@ -123,13 +123,13 @@ return call_user_func(function (): array {
                 ],
             ],
 
-            ###############################################################################
+            //##############################################################################
 
             'sys_language_uid' => [
                 'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
                 'config' => [
                     'type' => 'language',
-                ]
+                ],
             ],
 
             'l10n_parent' => [
@@ -141,7 +141,7 @@ return call_user_func(function (): array {
                     'items' => [
                         [
                             'label' => '',
-                            'value' => 0
+                            'value' => 0,
                         ],
                     ],
                     'foreign_table' => $table,
@@ -193,7 +193,7 @@ return call_user_func(function (): array {
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                             hidden,
             ',
-            ]
+            ],
         ],
     ];
 });
