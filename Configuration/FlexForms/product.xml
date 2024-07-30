@@ -11,36 +11,37 @@
                         <onChange>reload</onChange>
                         <config>
                             <type>select</type>
+                            <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0">
-                                    <numIndex index="0">
+                                    <label>
                                         LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
-                                    </numIndex>
-                                    <numIndex index="1"/>
+                                    </label>
+                                    <value>0</value>
                                 </numIndex>
-                                <numIndex index="1">
-                                    <numIndex index="0">
+                                <numIndex>
+                                    <label index="0">
                                         LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroupTeaser
-                                    </numIndex>
-                                    <numIndex index="1">Product-&gt;showProductGroupTeaser</numIndex>
+                                    </label>
+                                    <value>Product-&gt;showProductGroupTeaser</value>
                                 </numIndex>
                                 <numIndex index="2">
-                                    <numIndex index="0">
+                                    <label>
                                         LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroup
-                                    </numIndex>
-                                    <numIndex index="1">Product-&gt;showProductGroup</numIndex>
+                                    </label>
+                                    <value>Product-&gt;showProductGroup</value>
                                 </numIndex>
                                 <numIndex index="3">
-                                    <numIndex index="0">
+                                    <label>
                                         LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductSet
-                                    </numIndex>
-                                    <numIndex index="1">Product-&gt;showProductSet</numIndex>
+                                    </label>
+                                    <value>Product-&gt;showProductSet</value>
                                 </numIndex>
                                 <numIndex index="4">
-                                    <numIndex index="0">
+                                    <label>
                                         LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.productFinder
-                                    </numIndex>
-                                    <numIndex index="1">Product-&gt;productFinder</numIndex>
+                                    </label>
+                                    <value>Product-&gt;productFinder</value>
                                 </numIndex>
                             </items>
                         </config>
@@ -57,12 +58,13 @@
                         </displayCond>
                         <config>
                             <type>select</type>
-                            <items type="array">
+                            <renderType>selectSingle</renderType>
+                            <items>
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0">
+                                    <label>
                                         LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
-                                    </numIndex>
-                                    <numIndex index="1"/>
+                                    </label>
+                                    <value>0</value>
                                 </numIndex>
                             </items>
                             <foreign_table>tx_gjoproducts_domain_model_productgroup</foreign_table>
@@ -76,12 +78,13 @@
                         <displayCond>FIELD:switchableControllerActions:=:Product-&gt;showProductSet</displayCond>
                         <config>
                             <type>select</type>
-                            <items type="array">
+                            <renderType>selectSingle</renderType>
+                            <items>
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0">
+                                    <label>
                                         LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
-                                    </numIndex>
-                                    <numIndex index="1"/>
+                                    </label>
+                                    <value>0</value>
                                 </numIndex>
                             </items>
                             <foreign_table>tx_gjoproducts_domain_model_productset</foreign_table>
