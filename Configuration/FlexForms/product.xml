@@ -3,109 +3,99 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.settings</sheetTitle>
-                </TCEforms>
+                <sheetTitle>LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.settings</sheetTitle>
                 <type>array</type>
                 <el>
                     <switchableControllerActions>
-                        <TCEforms>
-                            <label>LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>select</type>
-                                <items>
+                        <label>LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>select</type>
+                            <items>
+                                <numIndex index="0">
                                     <numIndex index="0">
-                                        <numIndex index="0">
-                                            LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
-                                        </numIndex>
-                                        <numIndex index="1"/>
+                                        LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                     </numIndex>
-                                    <numIndex index="1">
-                                        <numIndex index="0">
-                                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroupTeaser
-                                        </numIndex>
-                                        <numIndex index="1">Product-&gt;showProductGroupTeaser</numIndex>
+                                    <numIndex index="1"/>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">
+                                        LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroupTeaser
                                     </numIndex>
-                                    <numIndex index="2">
-                                        <numIndex index="0">
-                                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroup
-                                        </numIndex>
-                                        <numIndex index="1">Product-&gt;showProductGroup</numIndex>
+                                    <numIndex index="1">Product-&gt;showProductGroupTeaser</numIndex>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <numIndex index="0">
+                                        LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductGroup
                                     </numIndex>
-                                    <numIndex index="3">
-                                        <numIndex index="0">
-                                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductSet
-                                        </numIndex>
-                                        <numIndex index="1">Product-&gt;showProductSet</numIndex>
+                                    <numIndex index="1">Product-&gt;showProductGroup</numIndex>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <numIndex index="0">
+                                        LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.showProductSet
                                     </numIndex>
-                                    <numIndex index="4">
-                                        <numIndex index="0">
-                                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.productFinder
-                                        </numIndex>
-                                        <numIndex index="1">Product-&gt;productFinder</numIndex>
+                                    <numIndex index="1">Product-&gt;showProductSet</numIndex>
+                                </numIndex>
+                                <numIndex index="4">
+                                    <numIndex index="0">
+                                        LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.sca.Product.productFinder
                                     </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                                    <numIndex index="1">Product-&gt;productFinder</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </switchableControllerActions>
                     <settings.productGroup>
-                        <TCEforms>
-                            <label>
-                                LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productGroup
-                            </label>
-                            <displayCond>
-                                <OR>
-                                    <numIndex index="0">FIELD:switchableControllerActions:=:Product-&gt;showProductGroupTeaser</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:=:Product-&gt;showProductGroup</numIndex>
-                                </OR>
-                            </displayCond>
-                            <config>
-                                <type>select</type>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">
-                                            LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
-                                        </numIndex>
-                                        <numIndex index="1"/>
+                        <label>
+                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productGroup
+                        </label>
+                        <displayCond>
+                            <OR>
+                                <numIndex index="0">FIELD:switchableControllerActions:=:Product-&gt;showProductGroupTeaser</numIndex>
+                                <numIndex index="1">FIELD:switchableControllerActions:=:Product-&gt;showProductGroup</numIndex>
+                            </OR>
+                        </displayCond>
+                        <config>
+                            <type>select</type>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">
+                                        LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                     </numIndex>
-                                </items>
-                                <foreign_table>tx_gjoproducts_domain_model_productgroup</foreign_table>
-                                <foreign_table_where>AND tx_gjoproducts_domain_model_productgroup.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productgroup.header</foreign_table_where>
-                            </config>
-                        </TCEforms>
+                                    <numIndex index="1"/>
+                                </numIndex>
+                            </items>
+                            <foreign_table>tx_gjoproducts_domain_model_productgroup</foreign_table>
+                            <foreign_table_where>AND tx_gjoproducts_domain_model_productgroup.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productgroup.header</foreign_table_where>
+                        </config>
                     </settings.productGroup>
                     <settings.productSet>
-                        <TCEforms>
-                            <label>
-                                LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productSet
-                            </label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product-&gt;showProductSet</displayCond>
-                            <config>
-                                <type>select</type>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">
-                                            LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
-                                        </numIndex>
-                                        <numIndex index="1"/>
+                        <label>
+                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productSet
+                        </label>
+                        <displayCond>FIELD:switchableControllerActions:=:Product-&gt;showProductSet</displayCond>
+                        <config>
+                            <type>select</type>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">
+                                        LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
                                     </numIndex>
-                                </items>
-                                <foreign_table>tx_gjoproducts_domain_model_productset</foreign_table>
-                                <foreign_table_where>AND tx_gjoproducts_domain_model_productset.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productset.name</foreign_table_where>
-                            </config>
-                        </TCEforms>
+                                    <numIndex index="1"/>
+                                </numIndex>
+                            </items>
+                            <foreign_table>tx_gjoproducts_domain_model_productset</foreign_table>
+                            <foreign_table_where>AND tx_gjoproducts_domain_model_productset.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productset.name</foreign_table_where>
+                        </config>
                     </settings.productSet>
                     <settings.isShop>
-                        <TCEforms>
-                            <label>
-                                LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.isShop
-                            </label>
-                            <displayCond>FIELD:switchableControllerActions:=:Product-&gt;productFinder</displayCond>
-                            <config>
-                                <type>check</type>
-                            </config>
-                        </TCEforms>
+                        <label>
+                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.isShop
+                        </label>
+                        <displayCond>FIELD:switchableControllerActions:=:Product-&gt;productFinder</displayCond>
+                        <config>
+                            <type>check</type>
+                        </config>
                     </settings.isShop>
                 </el>
             </ROOT>
