@@ -24,7 +24,6 @@ plugin.tx_gjoproducts {
             imageDefault150 = https://via.placeholder.com/150/f8f9fa
             imageDisabled150 = https://via.placeholder.com/150/dee2e6/?text=disabled
         }
-
         // Konfigurator-Filter-Button Bedingungen
         productset {
             alu-80 {
