@@ -146,6 +146,7 @@ final class ProductController extends AbstractController
 
     public function productFinderAction(): ResponseInterface
     {
+        // todo-a: Lösung: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/9.4/Deprecation-85543-Language-relatedPropertiesInTypoScriptFrontendControllerAndPageRepository.html
         $this->view->assign('sysLanguageUid', $GLOBALS['TSFE']->sys_language_uid);
         $this->view->assign('sysLanguage', $GLOBALS['TSFE']->lang);
         return $this->htmlResponse();

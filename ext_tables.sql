@@ -3,7 +3,7 @@ CREATE TABLE tx_gjoproducts_domain_model_product
     name                   varchar(150)     DEFAULT ''  NOT NULL,
     article_number         varchar(150)     DEFAULT ''  NOT NULL,
     additional_information varchar(150)     DEFAULT ''  NOT NULL,
-    image                  int(11) unsigned DEFAULT '0' NOT NULL,
+    image                  int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 CREATE TABLE tx_gjoproducts_domain_model_productset
