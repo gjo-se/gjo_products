@@ -12,7 +12,9 @@ function configureGjoProductsPlugin(): void
     ExtensionUtility::configurePlugin(
         'GjoProducts',
         'ProductGroupTeaser',
-        [ProductController::class => 'showProductGroupTeaser']
+        [ProductController::class => 'showProductGroupTeaser'],
+        [],
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 }
 
