@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.settings</sheetTitle>
+                <type>array</type>
+                <el>
+                    <settings.productGroup>
+                        <label>
+                            LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:flexforms.settings.productGroup
+                        </label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0" type="array">
+                                    <label>
+                                        LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.mode
+                                    </label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <foreign_table>tx_gjoproducts_domain_model_productgroup</foreign_table>
+                            <foreign_table_where>AND tx_gjoproducts_domain_model_productgroup.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productgroup.header</foreign_table_where>
+                        </config>
+                    </settings.productGroup>
+              </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

@@ -1,0 +1,15 @@
+mod.wizards.newContentElement.wizardItems.ext-gjoproducts {
+    header = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:wizard.group.products
+    after = plugins
+    elements {
+        gjoproducts_productgroupteaser {
+            iconIdentifier = plugin-products
+            title = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productgroupteaser.title
+            description = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productgroupteaser.description
+            tt_content_defValues {
+                CType = gjoproducts_productgroupteaser
+            }
+        }
+    }
+    show = *
+}

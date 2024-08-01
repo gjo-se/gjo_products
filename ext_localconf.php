@@ -1,24 +1,19 @@
 <?php
 
 declare(strict_types=1);
+
+use GjoSe\GjoProducts\Controller\ProductController;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') || die('Access denied.');
 
-call_user_func(
-    static function (): void {
+function configureGjoProductsPlugin(): void
+{
+    ExtensionUtility::configurePlugin(
+        'GjoProducts',
+        'ProductGroupTeaser',
+        [ProductController::class => 'showProductGroupTeaser']
+    );
+}
 
-        $extensionKey = 'gjo_products';
-
-        ExtensionUtility::configurePlugin(
-            $extensionKey,
-            'Product',
-            [
-                'Product' => 'showProductGroupTeaser, showProductGroup, showProductSet, ajaxProductSet, productFinder, ajaxListProducts',
-            ],
-            [
-                'Product' => 'showProductGroupTeaser, showProductGroup, showProductSet, ajaxProductSet, productFinder, ajaxListProducts',
-            ]
-        );
-    }
-);
+configureGjoProductsPlugin();

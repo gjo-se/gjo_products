@@ -5,6 +5,20 @@
 		<body>
 
             ***************************
+            **** Plugins           ****
+            ***************************
+
+            <trans-unit id="wizard.group.products">
+                <source>GjoSe - Products</source>
+            </trans-unit>
+            <trans-unit id="plugin.gjoproducts_productgroupteaser.title">
+                <source>GjoSe - Product Group Teaser</source>
+            </trans-unit>
+            <trans-unit id="plugin.gjoproducts_productgroupteaser.description">
+                <source>GjoSe - Product Group Teaser</source>
+            </trans-unit>
+
+            ***************************
             **** SCA               ****
             ***************************
 
