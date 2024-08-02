@@ -7,7 +7,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') || die('Access denied.');
 
-function configureGjoProductsPlugin(): void
+function configurePlugins(): void
 {
     ExtensionUtility::configurePlugin(
         'GjoProducts',
@@ -16,6 +16,15 @@ function configureGjoProductsPlugin(): void
         [],
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
+
+    ExtensionUtility::configurePlugin(
+        'GjoProducts',
+        'ProductGroup',
+        [ProductController::class => 'showProductGroup'],
+        [],
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    );
+
 }
 
-configureGjoProductsPlugin();
+configurePlugins();

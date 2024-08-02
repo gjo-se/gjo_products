@@ -3,29 +3,25 @@
       xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-    <f:layout name="Default"/>
+    <f:layout name="CeDefaultLayout"/>
 
-    <f:section name="main">
+    <f:section name="CeMainSection">
+
+        <f:debug>{_all}</f:debug>
 
         <div class="product-set-group">
 
             <div class="card px-16 pt-16">
                 <div class="view">
-                    <f:for each="{productGroup.image}" as="image" iteration="iteration">
-                        <f:if condition="{iteration.cycle} == '1' ">
-                            <gjoSe:media.media file="{image}"
-                                               class="img-fluid"
-                                               alt="{productGroup.header}"
-                                               width="1100"
-                                               breakpoints="{
-                                                0: {cropVariant: 'wideScreen', media: '(min-width: 1200px)', srcset: {0: 1100}},
-                                                1: {cropVariant: 'desktop', media: '(min-width: 992px)', srcset: {0: 950}},
-                                                2: {cropVariant: 'laptop', media: '(min-width: 768px)', srcset: {0: 720}},
-                                                3: {cropVariant: 'tablet', media: '(min-width: 576px)', srcset: {0: 540}},
-                                                4: {cropVariant: 'mobile', media: '(min-width: 300px)', srcset: {0: 350}}
-                                            }"/>
-                        </f:if>
-                    </f:for>
+                    <picture>
+                        {f:variable(name: 'file', value: '{productGroup.image}')}
+                        <f:for each="{breakpoints}" as="breakpoint" iteration="iteration">
+                            <source srcset="{f:uri.image(image: file, cropVariant: breakpoint.cropVariant)}"
+                                    media="{breakpoint.media}"/>
+                        </f:for>
+                        <img class="img-fluid " src="{f:uri.image(image: file)}" alt="{file.alternative}"
+                             title="{file.alternative}"/>
+                    </picture>
                 </div>
 
                 <div class="card-body pb-0">
@@ -61,7 +57,7 @@
                                     <ul class="font-size-16">
                                         <f:for each="{productSetType.productSets}" as="productSet" iteration="iteration">
                                             <li>
-                                                <f:link.page pageUid="{productSet.pages.uid}">{productSet.name} &#8599;</f:link.page>
+                                                <f:link.typolink parameter="{productSet.page.uid}">{productSet.name} &#8599;</f:link.typolink>
                                             </li>
                                         </f:for>
                                     </ul>
@@ -79,23 +75,15 @@
 
             <div class="card product-set-group-image-teaser pb-32">
                 <div class="view pb-24">
-                    <f:for each="{productGroup.teaserImage}" as="image" iteration="iteration">
-                        <f:if condition="{iteration.cycle} == '1' ">
-                            <f:for each="{productGroup.teaserImage}" as="image">
-                                <gjoSe:media.media file="{image}"
-                                                   class="img-fluid"
-                                                   alt="{productGroup.header}"
-                                                   width="1100"
-                                                   breakpoints="{
-                                                        0: {cropVariant: 'wideScreen', media: '(min-width: 1200px)', srcset: {0: 1100}},
-                                                        1: {cropVariant: 'desktop', media: '(min-width: 992px)', srcset: {0: 950}},
-                                                        2: {cropVariant: 'laptop', media: '(min-width: 768px)', srcset: {0: 720}},
-                                                        3: {cropVariant: 'tablet', media: '(min-width: 576px)', srcset: {0: 540}},
-                                                        4: {cropVariant: 'mobile', media: '(min-width: 300px)', srcset: {0: 350}}
-                                         		}"/>
-                            </f:for>
-                        </f:if>
-                    </f:for>
+                    <picture>
+                        {f:variable(name: 'file', value: '{productGroup.teaserImage}')}
+                        <f:for each="{breakpoints}" as="breakpoint" iteration="iteration">
+                            <source srcset="{f:uri.image(image: file, cropVariant: breakpoint.cropVariant)}"
+                                    media="{breakpoint.media}"/>
+                        </f:for>
+                        <img class="img-fluid " src="{f:uri.image(image: file)}" alt="{file.alternative}"
+                             title="{file.alternative}"/>
+                    </picture>
                 </div>
 
                 <div class="card-body p-0 px-16">

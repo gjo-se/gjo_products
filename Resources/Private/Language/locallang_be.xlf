@@ -17,6 +17,12 @@
             <trans-unit id="plugin.gjoproducts_productgroupteaser.description">
                 <source>GjoSe - Product Group Teaser</source>
             </trans-unit>
+            <trans-unit id="plugin.gjoproducts_productgroup.title">
+                <source>GjoSe - Product Group</source>
+            </trans-unit>
+            <trans-unit id="plugin.gjoproducts_productgroup.description">
+                <source>GjoSe - Product Group</source>
+            </trans-unit>
 
             ***************************
             **** SCA               ****

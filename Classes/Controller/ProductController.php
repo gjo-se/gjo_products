@@ -24,30 +24,28 @@ namespace GjoSe\GjoProducts\Controller;
  ***************************************************************/
 
 use GjoSe\GjoBase\Controller\AbstractController;
-use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
-use TYPO3\CMS\Core\Localization\LocalizationFactory;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetVariantRepository;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
+use TYPO3\CMS\Core\Localization\LocalizationFactory;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 final class ProductController extends AbstractController
 {
     public function __construct(
         private readonly AccessorykitGroupRepository $accessorykitGroupRepository,
-        private readonly ProductGroupRepository      $productGroupRepository,
-        private readonly ProductSetRepository        $productSetRepository,
-        private readonly ProductSetTypeRepository    $productSetTypeRepository,
+        private readonly ProductGroupRepository $productGroupRepository,
+        private readonly ProductSetRepository $productSetRepository,
+        private readonly ProductSetTypeRepository $productSetTypeRepository,
         private readonly ProductSetVariantRepository $productSetVariantRepository,
-        private readonly Context                     $context,
-        LocalizationFactory                          $localizationFactory
-    )
-    {
-    }
+        private readonly Context $context,
+        LocalizationFactory $localizationFactory
+    ) {}
 
     public function showProductGroupTeaserAction(): ResponseInterface
     {
@@ -65,7 +63,6 @@ final class ProductController extends AbstractController
          * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
          */
         $currentContentObject = $this->request->getAttribute('currentContentObject');
-        $uid = $currentContentObject->data['uid'];
 
         $this->view->assignMultiple([
             'data' => $currentContentObject->data,
@@ -78,9 +75,27 @@ final class ProductController extends AbstractController
 
     public function showProductGroupAction(): ResponseInterface
     {
+        // todo-a: move to MediaUtility
+        $breakpoints = [
+            0 => ['cropVariant' => 'wideScreen', 'media' => '(min-width: 1200px)', 'srcset' => [0 => 1100]],
+            1 => ['cropVariant' => 'desktop', 'media' => '(min-width: 992px)', 'srcset' => [0 => 950]],
+            2 => ['cropVariant' => 'laptop', 'media' => '(min-width: 768px)', 'srcset' => [0 => 720]],
+            3 => ['cropVariant' => 'tablet', 'media' => '(min-width: 576px)', 'srcset' => [0 => 540]],
+            4 => ['cropVariant' => 'mobile', 'media' => '(min-width: 300px)', 'srcset' => [0 => 350]],
+        ];
+
+        // todo-a: move to __constuct()
+        /**
+         * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
+         */
+        $currentContentObject = $this->request->getAttribute('currentContentObject');
+
         $this->view->assignMultiple([
+            'data' => $currentContentObject->data,
+            'breakpoints' => $breakpoints,
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
+
         return $this->htmlResponse();
     }
 
