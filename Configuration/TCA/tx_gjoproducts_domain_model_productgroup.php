@@ -97,7 +97,7 @@ return call_user_func(function (): array {
 
             ],
 
-            'pages' => [
+            'page' => [
                 'label' => $lll . $table . '.pages',
                 'description' => $lll . $table . '.pages',
                 'config' => [
@@ -277,7 +277,7 @@ return call_user_func(function (): array {
                             sub_header,
                             description,
                             image,
-                            pages,
+                            page,
                         --div--;' . $lll . $table . '.teaser,
                             teaser_header,
                             teaser_description,

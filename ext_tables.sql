@@ -88,7 +88,7 @@ CREATE TABLE tx_gjoproducts_domain_model_productgroup
     teaser_image       int(11) unsigned NOT NULL DEFAULT '0',
 
     product_set_types  int(11) unsigned NOT NULL DEFAULT '0',
-    pages              int(11) unsigned NOT NULL DEFAULT '0'
+    page               int(11) unsigned NOT NULL DEFAULT '0'
 );
 
 CREATE TABLE tx_gjoproducts_domain_model_productsettype

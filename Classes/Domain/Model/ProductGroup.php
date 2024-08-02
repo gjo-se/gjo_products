@@ -52,10 +52,7 @@ class ProductGroup extends GjoBaseAbstractModel
      */
     protected ObjectStorage $productSetTypes;
 
-    /**
-     * @var ObjectStorage<Pages>
-     */
-    protected ObjectStorage $pages;
+    protected Pages $page;
 
     public function __construct()
     {
@@ -65,7 +62,6 @@ class ProductGroup extends GjoBaseAbstractModel
     protected function initStorageObjects(): void
     {
         $this->productSetTypes = new ObjectStorage();
-        $this->pages = new ObjectStorage();
     }
 
     public function getHeader(): string
@@ -111,11 +107,8 @@ class ProductGroup extends GjoBaseAbstractModel
         return $this->productSetTypes;
     }
 
-    /**
-     * @return ObjectStorage<Pages>
-     */
-    public function getPages(): ObjectStorage
+    public function getPages(): Pages
     {
-        return $this->pages;
+        return $this->page;
     }
 }
