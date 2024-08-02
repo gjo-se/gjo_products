@@ -1,13 +1,16 @@
 plugin.tx_gjoproducts {
     view {
         templateRootPath = {$plugin.tx_gjoproducts.view.templateRootPath}
-        layoutRootPath = {$plugin.tx_gjoproducts.view.layoutRootPath}
+        layoutRootPaths {
+            10 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.layoutRootPath}
+        }
         partialRootPaths {
             10 = {$plugin.tx_gjoproducts.view.partialRootPath}
-            20 = {$plugin.tx_gjobase.view.partialRootPath}
-            30 = {$plugin.tx_gjointroduction.view.partialRootPath}
+            20 = {$plugin.tx_gjositepackage.view.partialRootPath}
+            30 = {$plugin.tx_gjobase.view.partialRootPath}
         }
     }
+
     settings {
 
         placeholder {
@@ -24,6 +27,7 @@ plugin.tx_gjoproducts {
             imageDefault150 = https://via.placeholder.com/150/f8f9fa
             imageDisabled150 = https://via.placeholder.com/150/dee2e6/?text=disabled
         }
+
         // Konfigurator-Filter-Button Bedingungen
         productset {
             alu-80 {
@@ -32,18 +36,21 @@ plugin.tx_gjoproducts {
                     telescop2 = 1
                     telescop3 = 1
                 }
+
                 synchron {
                     maximumDoorWidth = 1000
                     softClose = 1
                     telescop2 = 1
                     telescop3 = 1
                 }
+
                 telescop2 {
                     minimumDoorWidth = 600
                     maximumDoorWidth = 1200
                     minimumDoorThickness = 35
                     maximumDoorThickness = 50
                 }
+
                 telescop3 {
                     minimumDoorWidth = 600
                     maximumDoorWidth = 1200
@@ -52,25 +59,28 @@ plugin.tx_gjoproducts {
                     maximumDoorWeight = 55
                 }
             }
+
             alu-250 {
                 synchron {
                     maximumDoorWeight = 200
                 }
             }
         }
+
         site {
             pid {
                 shop = {$plugin.tx_gjointroduction.settings.site.pid.shop}
                 shippingCosts = {$plugin.tx_gjointroduction.settings.site.pid.shippingCosts}
             }
         }
+
         #            wird nicht genutzt?!
         #            pages.productDetail = 80
 
 
     }
-    persistence {
 
+    persistence {
 
 
     }

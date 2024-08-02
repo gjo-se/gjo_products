@@ -22,28 +22,57 @@ namespace GjoSe\GjoProducts\Controller;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use GjoSe\GjoBase\Controller\AbstractController;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository;
+use GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository;
+use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
+use GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository;
+use GjoSe\GjoProducts\Domain\Repository\ProductSetVariantRepository;
 
 final class ProductController extends AbstractController
 {
-    private readonly LocalizationFactory $localizationFactory;
-
-    public function __construct(?LocalizationFactory $localizationFactory = null)
+    public function __construct(
+        private readonly AccessorykitGroupRepository $accessorykitGroupRepository,
+        private readonly ProductGroupRepository      $productGroupRepository,
+        private readonly ProductSetRepository        $productSetRepository,
+        private readonly ProductSetTypeRepository    $productSetTypeRepository,
+        private readonly ProductSetVariantRepository $productSetVariantRepository,
+        private readonly Context                     $context,
+        LocalizationFactory                          $localizationFactory
+    )
     {
-        $this->localizationFactory = $localizationFactory instanceof LocalizationFactory ? $localizationFactory : GeneralUtility::makeInstance(LocalizationFactory::class);
     }
 
-    /**
-     * return void
-     */
     public function showProductGroupTeaserAction(): ResponseInterface
     {
+        // todo-a: move to MediaUtility
+        $breakpoints = [
+            0 => ['cropVariant' => 'wideScreen', 'media' => '(min-width: 1200px)', 'srcset' => [0 => 1100]],
+            1 => ['cropVariant' => 'desktop', 'media' => '(min-width: 992px)', 'srcset' => [0 => 950]],
+            2 => ['cropVariant' => 'laptop', 'media' => '(min-width: 768px)', 'srcset' => [0 => 720]],
+            3 => ['cropVariant' => 'tablet', 'media' => '(min-width: 576px)', 'srcset' => [0 => 540]],
+            4 => ['cropVariant' => 'mobile', 'media' => '(min-width: 300px)', 'srcset' => [0 => 350]],
+        ];
+
+        // todo-a: move to __constuct()
+        /**
+         * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
+         */
+        $currentContentObject = $this->request->getAttribute('currentContentObject');
+        $uid = $currentContentObject->data['uid'];
+
         $this->view->assignMultiple([
+            'data' => $currentContentObject->data,
+            'breakpoints' => $breakpoints,
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
+
         return $this->htmlResponse();
     }
 
@@ -60,7 +89,7 @@ final class ProductController extends AbstractController
         $productSet = $this->productSetRepository->findByUid($this->settings['productSet']);
 
         $productSetTypeUid = $this->productSetTypeRepository->findProductSetTypeUidByProductSetUid((int)$this->settings['productSet'], 1);
-        $productSetType    = $this->productSetTypeRepository->findByUid($productSetTypeUid);
+        $productSetType = $this->productSetTypeRepository->findByUid($productSetTypeUid);
 
         $productGroup = null;
         if ($productSetType) {
@@ -68,38 +97,38 @@ final class ProductController extends AbstractController
         }
 
         $this->view->assignMultiple([
-            'productSet'   => $productSet,
+            'productSet' => $productSet,
             'productGroup' => $productGroup,
-            'is_shop'      => $this->request->getQueryParams()['is_shop'],
-            'pageUid'      => $GLOBALS['TSFE']->id,
+            'is_shop' => $this->request->getQueryParams()['is_shop'],
+            'pageUid' => $this->request->getAttribute('routing')->getPageId(),
         ]);
         return $this->htmlResponse();
     }
 
     public function ajaxProductSetAction(): ResponseInterface
     {
-        $limit          = 0;
-        $postParams     = $this->request->getParsedBody();
-        $searchString   = $postParams['searchString'];
-        $productSets    = $this->productSetRepository->findBySearchString($searchString, $limit);
+        $limit = 0;
+        $postParams = $this->request->getParsedBody();
+        $searchString = $postParams['searchString'];
+        $productSets = $this->productSetRepository->findBySearchString($searchString, $limit);
 
         $productSetsArr = [];
 
         foreach ($productSets as $productSet) {
 
             $accessoryKitUids = [];
-            $pageUid          = 0;
+            $pageUid = 0;
             if ($productSet->getPages()) {
                 $pageUid = $productSet->getPages()->getUid();
 
                 if ($pageUid) {
                     $productSetsArr[$productSet->getUid()] = [
-                        'name'    => $productSet->getName(),
+                        'name' => $productSet->getName(),
                         'pageUid' => $pageUid,
                     ];
                 }
 
-                $accessorykitGroups    = $productSet->getAccessorykitGroups();
+                $accessorykitGroups = $productSet->getAccessorykitGroups();
                 $accessorykitGroupUids = [];
                 if ($accessorykitGroups) {
                     foreach ($accessorykitGroups as $accessorykitGroup) {
@@ -125,7 +154,7 @@ final class ProductController extends AbstractController
                     if ($productSetAccessoryKits instanceof QueryResultInterface) {
                         foreach ($productSetAccessoryKits as $productSetAccessoryKit) {
                             $productSetsArr[$productSet->getUid()]['accessoryKits'][$productSetAccessoryKit->getUid()] = [
-                                'name'   => $productSetAccessoryKit->getName(),
+                                'name' => $productSetAccessoryKit->getName(),
                                 'anchor' => $productSetAccessoryKit->getAnchor(),
                             ];
                         }
@@ -144,6 +173,20 @@ final class ProductController extends AbstractController
 
     }
 
+    /**
+     * Returns the translation of $key from the specified language file
+     *
+     * @param string $key The key from the localization file
+     * @param string $language The language to use (default is 'default')
+     * @return string The translated string
+     */
+    public function translate($key, $language = 'default')
+    {
+        $localizationReference = 'LLL:LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf';
+        $translation = $this->localizationFactory->getParsedData($localizationReference, $language)[0][$key][0]['target'];
+        return $translation ?: $key;
+    }
+
     public function productFinderAction(): ResponseInterface
     {
         // todo-a: Lösung: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/9.4/Deprecation-85543-Language-relatedPropertiesInTypoScriptFrontendControllerAndPageRepository.html
@@ -152,17 +195,20 @@ final class ProductController extends AbstractController
         return $this->htmlResponse();
     }
 
+    /**
+     * @throws AspectNotFoundException
+     */
     public function ajaxListProductsAction(): ResponseInterface
     {
 
-        $postParams          = $this->request->getParsedBody();
+        $postParams = $this->request->getParsedBody();
         $productFinderFilter = $postParams['productFinderFilter'];
 
-        $sysLanguageUid      = $postParams['sysLanguageUid'];
+        $sysLanguageUid = $postParams['sysLanguageUid'];
 
         $offset = $postParams['offset'] ?: $this->settings['ajaxListProducts']['offset'];
 
-        $productSets      = $this->productSetRepository->findByFilter(
+        $productSets = $this->productSetRepository->findByFilter(
             $sysLanguageUid,
             $productFinderFilter,
             $offset,
@@ -171,9 +217,8 @@ final class ProductController extends AbstractController
         $productSetsCount = $this->productSetRepository->findByFilter($sysLanguageUid, $productFinderFilter)->count();
 
         $vatTextTranslationKey = 'priceInclVat';
-
-        $feUserData = $GLOBALS['TSFE']->fe_user->user;
-        $user = $this->feUserRepository->findByUid($feUserData['uid']);
+        $feUserId = $this->context->getPropertyFromAspect('frontend.user', 'id');
+        $user = $this->feUserRepository->findByUid($feUserId);
 
         if ($user) {
             $feUserGroupsObj = $user->getUserGroup();
@@ -204,28 +249,17 @@ final class ProductController extends AbstractController
     }
 
     /**
-     * Returns the translation of $key from the specified language file
-     *
-     * @param string $key The key from the localization file
-     * @param string $language The language to use (default is 'default')
-     * @return string The translated string
+     * @throws AspectNotFoundException
      */
-    public function translate($key, $language = 'default')
-    {
-        $localizationReference = 'LLL:LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf';
-        $translation = $this->localizationFactory->getParsedData($localizationReference, $language)[0][$key][0]['target'];
-        return $translation ?: $key;
-    }
-
     public function ajaxGetProductSetVariantAction(): ResponseInterface
     {
         $json = [];
         $productSetVariantListPrice = 0;
-        $feUserDiscount             = 0;
+        $feUserDiscount = 0;
 
-        $postParams                = $this->request->getParsedBody();
+        $postParams = $this->request->getParsedBody();
         $productSetVariantGroupUid = $postParams['productSetVariantGroupUid'];
-        $productSetVariantFilter   = [];
+        $productSetVariantFilter = [];
 
         if ($postParams['productSetVariantFilterTypValueNoFilterTyp']) {
             $productSetVariantFilter['noFilterTyp'] = $postParams['productSetVariantFilterTypValueNoFilterTyp'];
@@ -250,8 +284,8 @@ final class ProductController extends AbstractController
 
         if ($productSetVariant instanceof ProductSetVariant) {
 
-            $feUserData                 = $GLOBALS['TSFE']->fe_user->user;
-            $feUserObj                  = $this->feUserRepository->findByUid($feUserData['uid']);
+            $feUserId = $this->context->getPropertyFromAspect('frontend.user', 'id');
+            $feUserObj = $this->feUserRepository->findByUid($feUserId);
             $productSetVariantListPrice = $productSetVariant->getPrice() + ($productSetVariant->getPrice() * $productSetVariant->getTax() / 100);
 
             if ($feUserObj) {
@@ -272,16 +306,16 @@ final class ProductController extends AbstractController
                 $feUserDiscount = max($discounts);
             }
 
-            $json['productSetVariantUid']           = $productSetVariant->getUid();
+            $json['productSetVariantUid'] = $productSetVariant->getUid();
             $json['productSetVariantArticleNumber'] = $productSetVariant->getArticleNumber();
         }
 
         if ($feUserDiscount) {
-            $productSetVariantBuyPrice         = $productSetVariantListPrice - ($productSetVariantListPrice * $feUserDiscount / 100);
+            $productSetVariantBuyPrice = $productSetVariantListPrice - ($productSetVariantListPrice * $feUserDiscount / 100);
             $json['productSetVariantBuyPrice'] = number_format($productSetVariantBuyPrice, 2, ',', '.');
         }
 
-        $json['productSetVariantGroupUid']  = $productSetVariantGroupUid;
+        $json['productSetVariantGroupUid'] = $productSetVariantGroupUid;
         $json['productSetVariantListPrice'] = number_format($productSetVariantListPrice, 2, ',', '.');
 
         return $this->jsonResponse(json_encode($json));

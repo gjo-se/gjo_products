@@ -11,5 +11,6 @@ mod.wizards.newContentElement.wizardItems.ext-gjoproducts {
             }
         }
     }
+
     show = *
 }
