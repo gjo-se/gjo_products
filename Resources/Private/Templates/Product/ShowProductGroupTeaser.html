@@ -13,7 +13,7 @@
                 <div class="col-12 p-0 px-16 pt-16">
                     <div class="card">
                         <div class="view overlay">
-                            <f:link.typolink parameter="{productGroup.pages.uid}">
+                            <f:link.typolink parameter="{productGroup.page.uid}">
                                 <picture>
                                     {f:variable(name: 'file', value: '{productGroup.image}')}
                                     <f:for each="{breakpoints}" as="breakpoint" iteration="iteration">
@@ -23,7 +23,7 @@
                                     <img class="img-fluid " src="{f:uri.image(image: file)}" alt="{file.alternative}"
                                          title="{file.alternative}"/>
                                 </picture>
-                                <f:if condition="{productGroup.pages.uid}">
+                                <f:if condition="{productGroup.page.uid}">
                                     <div class="mask rgba-orange-light"></div>
                                 </f:if>
                             </f:link.typolink>
@@ -41,7 +41,7 @@
                         </f:format.raw>
 
                         <div class="clearfix">
-                            <f:link.typolink parameter="{productGroup.pages.uid}">
+                            <f:link.typolink parameter="{productGroup.page.uid}">
                                 <button type="button"
                                         class="btn btn-products-default float-right waves-effect waves-light">
                                     <f:translate

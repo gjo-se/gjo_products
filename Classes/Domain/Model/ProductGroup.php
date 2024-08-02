@@ -107,7 +107,7 @@ class ProductGroup extends GjoBaseAbstractModel
         return $this->productSetTypes;
     }
 
-    public function getPages(): Pages
+    public function getPage(): Pages
     {
         return $this->page;
     }
