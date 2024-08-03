@@ -33,6 +33,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
+use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 final class ProductController extends AbstractController
@@ -106,16 +107,39 @@ final class ProductController extends AbstractController
         $productSetTypeUid = $this->productSetTypeRepository->findProductSetTypeUidByProductSetUid((int)$this->settings['productSet'], 1);
         $productSetType = $this->productSetTypeRepository->findByUid($productSetTypeUid);
 
+        // todo-a: move to MediaUtility
+        $breakpoints = [
+            0 => ['cropVariant' => 'wideScreen', 'media' => '(min-width: 1200px)', 'srcset' => [0 => 1100]],
+            1 => ['cropVariant' => 'desktop', 'media' => '(min-width: 992px)', 'srcset' => [0 => 950]],
+            2 => ['cropVariant' => 'laptop', 'media' => '(min-width: 768px)', 'srcset' => [0 => 720]],
+            3 => ['cropVariant' => 'tablet', 'media' => '(min-width: 576px)', 'srcset' => [0 => 540]],
+            4 => ['cropVariant' => 'mobile', 'media' => '(min-width: 300px)', 'srcset' => [0 => 350]],
+        ];
+
+        // todo-a: move to __constuct()
+        /**
+         * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
+         */
+        $currentContentObject = $this->request->getAttribute('currentContentObject');
+
         $productGroup = null;
         if ($productSetType) {
             $productGroup = $productSetType->getProductGroup();
         }
 
+        /**
+         * @var PageArguments $siteRoute
+         */
+        $siteRoute = $this->request->getAttribute('routing');
+        $pageUid = $siteRoute->getPageId();
+
         $this->view->assignMultiple([
+            'data' => $currentContentObject->data,
+            'breakpoints' => $breakpoints,
             'productSet' => $productSet,
             'productGroup' => $productGroup,
-            'is_shop' => $this->request->getQueryParams()['is_shop'],
-            'pageUid' => $this->request->getAttribute('routing')->getPageId(),
+            'is_shop' => $this->request->getQueryParams()['is_shop'] ?? false,
+            'pageUid' => $pageUid,
         ]);
         return $this->htmlResponse();
     }

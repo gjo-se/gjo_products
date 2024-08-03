@@ -128,9 +128,9 @@ return call_user_func(function (): array {
                 ],
             ],
 
-            'pages' => [
-                'label' => $lll . $table . '.pages',
-                'description' => $lll . $table . '.pages',
+            'page' => [
+                'label' => $lll . $table . '.page',
+                'description' => $lll . $table . '.page',
                 'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
                 'config' => [
                     'type' => 'group',
@@ -473,9 +473,9 @@ return call_user_func(function (): array {
                 ],
             ],
 
-            'download' => [
-                'label' => $lll . $table . '.download',
-                'description' => $lll . $table . '.download',
+            'downloads' => [
+                'label' => $lll . $table . '.downloads',
+                'description' => $lll . $table . '.downloads',
                 'config' => [
                     'type' => 'file',
                     'maxitems' => 99,
@@ -483,9 +483,9 @@ return call_user_func(function (): array {
                 ],
             ],
 
-            'download_engineering_drawing' => [
-                'label' => $lll . $table . '.download_engineering_drawing',
-                'description' => $lll . $table . '.download_engineering_drawing',
+            'download_engineering_drawings' => [
+                'label' => $lll . $table . '.download_engineering_drawings',
+                'description' => $lll . $table . '.download_engineering_drawings',
                 'config' => [
                     'type' => 'file',
                     'maxitems' => 99,
@@ -493,9 +493,9 @@ return call_user_func(function (): array {
                 ],
             ],
 
-            'image_engineering_drawing' => [
-                'label' => $lll . $table . '.image_engineering_drawing',
-                'description' => $lll . $table . '.image_engineering_drawing',
+            'image_engineering_drawings' => [
+                'label' => $lll . $table . '.image_engineering_drawings',
+                'description' => $lll . $table . '.image_engineering_drawings',
                 'config' => [
                     'type' => 'file',
                     'maxitems' => 10,
@@ -746,7 +746,7 @@ return call_user_func(function (): array {
                               description,                                                            
                               image,
                               icon,
-                              pages,
+                              page,
                               anchor,
                         --div--;' . $lll . $table . '.tabs.variants,  
                               product_set_variant_groups,
@@ -778,9 +778,9 @@ return call_user_func(function (): array {
                         --div--;' . $lll . $table . '.tabs.invitation_to_tender,
                               invitation_to_tender,
                         --div--;' . $lll . $table . '.tabs.downloads,
-                              image_engineering_drawing,
-                              download,  
-                              download_engineering_drawing,
+                              image_engineering_drawings,
+                              downloads,  
+                              download_engineering_drawings,
                         --div--;' . $lll . $table . '.tabs.accessory_kit,
                               accessorykit_groups,
                         --div--;' . $lll . $table . '.tabs.filter,

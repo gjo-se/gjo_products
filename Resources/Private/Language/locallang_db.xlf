@@ -240,13 +240,13 @@
             <trans-unit id="tx_gjoproducts_domain_model_productset.invitation_to_tender">
                 <source>Ausschreibungstext</source>
             </trans-unit>
-            <trans-unit id="tx_gjoproducts_domain_model_productset.download">
+            <trans-unit id="tx_gjoproducts_domain_model_productset.downloads">
                 <source>Downloads Produktinformationen</source>
             </trans-unit>
-            <trans-unit id="tx_gjoproducts_domain_model_productset.download_engineering_drawing">
+            <trans-unit id="tx_gjoproducts_domain_model_productset.download_engineering_drawings">
                 <source>Downloads Technische Zeichnungen</source>
             </trans-unit>
-            <trans-unit id="tx_gjoproducts_domain_model_productset.image_engineering_drawing">
+            <trans-unit id="tx_gjoproducts_domain_model_productset.image_engineering_drawings">
                 <source>Bilder Technische Zeichnungen</source>
             </trans-unit>
             <trans-unit id="tx_gjoproducts_domain_model_productset.product_set_type">

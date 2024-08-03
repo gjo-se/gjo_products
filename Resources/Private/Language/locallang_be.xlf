@@ -23,25 +23,18 @@
             <trans-unit id="plugin.gjoproducts_productgroup.description">
                 <source>GjoSe - Product Group</source>
             </trans-unit>
-
-            ***************************
-            **** SCA               ****
-            ***************************
-
-
-            <trans-unit id="flexforms.sca.Product.showProductGroupTeaser" >
-                <source>Product -> showProductGroupTeaser</source>
+            <trans-unit id="plugin.gjoproducts_productset.title">
+                <source>GjoSe - Product Set</source>
             </trans-unit>
-            <trans-unit id="flexforms.sca.Product.showProductGroup" >
-                <source>Product->showProductGroup</source>
+            <trans-unit id="plugin.gjoproducts_productset.description">
+                <source>GjoSe - Product Set</source>
             </trans-unit>
-            <trans-unit id="flexforms.sca.Product.showProductSet" >
-                <source>Product->showProductSet</source>
+            <trans-unit id="plugin.gjoproducts_productFinder.title">
+                <source>GjoSe - Product Finder</source>
             </trans-unit>
-            <trans-unit id="flexforms.sca.Product.productFinder" >
-                <source>Product->productFinder</source>
+            <trans-unit id="plugin.gjoproducts_productFinder.description">
+                <source>GjoSe - Product Finder</source>
             </trans-unit>
-
 
 
             ***************************

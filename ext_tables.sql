@@ -38,9 +38,9 @@ CREATE TABLE tx_gjoproducts_domain_model_productset
     door_type                          varchar(150)     NOT NULL DEFAULT '',
     initial_friction                   varchar(150)     NOT NULL DEFAULT '',
     invitation_to_tender               text             NULL,
-    download                           int(11) unsigned NOT NULL DEFAULT '0',
-    download_engineering_drawing       int(11) unsigned NOT NULL DEFAULT '0',
-    image_engineering_drawing          int(11) unsigned NOT NULL DEFAULT '0',
+    downloads                          int(11) unsigned NOT NULL DEFAULT '0',
+    download_engineering_drawings      int(11) unsigned NOT NULL DEFAULT '0',
+    image_engineering_drawings         int(11) unsigned NOT NULL DEFAULT '0',
     filter_material_wood               int(11)          NOT NULL DEFAULT '0',
     filter_material_glas               int(11)          NOT NULL DEFAULT '0',
     filter_wingcount                   varchar(150)     NOT NULL DEFAULT '',
@@ -61,7 +61,7 @@ CREATE TABLE tx_gjoproducts_domain_model_productset
 
     product_set_variant_groups         int(11) unsigned NOT NULL DEFAULT '0',
     accessorykit_groups                int(11) unsigned NOT NULL DEFAULT '0',
-    pages                              int(11) unsigned NOT NULL DEFAULT '0'
+    page                               int(11) unsigned NOT NULL DEFAULT '0'
 );
 
 CREATE TABLE tx_gjoproducts_domain_model_productsetvariant

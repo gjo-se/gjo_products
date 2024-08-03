@@ -10,12 +10,22 @@ mod.wizards.newContentElement.wizardItems.ext-gjoproducts {
                 CType = gjoproducts_productgroupteaser
             }
         }
+
         gjoproducts_productgroup {
             iconIdentifier = plugin-products
             title = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productgroup.title
             description = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productgroup.description
             tt_content_defValues {
                 CType = gjoproducts_productgroup
+            }
+        }
+
+        gjoproducts_productset {
+            iconIdentifier = plugin-products
+            title = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productset.title
+            description = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productset.description
+            tt_content_defValues {
+                CType = gjoproducts_productset
             }
         }
     }

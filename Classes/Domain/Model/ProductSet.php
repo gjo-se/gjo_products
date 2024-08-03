@@ -97,11 +97,20 @@ class ProductSet extends GjoBaseAbstractModel
 
     protected string $filterWingcount = '';
 
-    protected ?FileReference $download = null;
+    /**
+     * @var ObjectStorage<FileReference>
+     */
+    protected ObjectStorage $downloads;
 
-    protected ?FileReference $downloadEngineeringDrawing = null;
+    /**
+     * @var ObjectStorage<FileReference>
+     */
+    protected ObjectStorage $downloadEngineeringDrawings;
 
-    protected ?FileReference $imageEngineeringDrawing = null;
+    /**
+     * @var ObjectStorage<FileReference>
+     */
+    protected ObjectStorage $imageEngineeringDrawings;
 
     protected bool $filterDesignCustomer = false;
 
@@ -141,10 +150,7 @@ class ProductSet extends GjoBaseAbstractModel
      */
     protected ObjectStorage $accessorykitGroups;
 
-    /**
-     * @var ObjectStorage<Pages>
-     */
-    protected ObjectStorage $pages;
+    protected Pages $page;
 
     public function __construct()
     {
@@ -155,7 +161,9 @@ class ProductSet extends GjoBaseAbstractModel
     {
         $this->productSetVariantGroups = new ObjectStorage();
         $this->accessorykitGroups = new ObjectStorage();
-        $this->pages = new ObjectStorage();
+        $this->downloads = new ObjectStorage();
+        $this->downloadEngineeringDrawings = new ObjectStorage();
+        $this->imageEngineeringDrawings = new ObjectStorage();
     }
 
     public function getName(): string
@@ -298,19 +306,28 @@ class ProductSet extends GjoBaseAbstractModel
         return $this->invitationToTender;
     }
 
-    public function getDownload(): ?FileReference
+    /**
+     * @return ObjectStorage<FileReference>
+     */
+    public function getDownloads(): ObjectStorage
     {
-        return $this->download;
+        return $this->downloads;
     }
 
-    public function getDownloadEngineeringDrawing(): ?FileReference
+    /**
+     * @return ObjectStorage<FileReference>
+     */
+    public function getDownloadEngineeringDrawings(): ObjectStorage
     {
-        return $this->downloadEngineeringDrawing;
+        return $this->downloadEngineeringDrawings;
     }
 
-    public function getImageEngineeringDrawing(): ?FileReference
+    /**
+     * @return ObjectStorage<FileReference>
+     */
+    public function getImageEngineeringDrawings(): ObjectStorage
     {
-        return $this->imageEngineeringDrawing;
+        return $this->imageEngineeringDrawings;
     }
 
     public function isIsFeatured(): bool
@@ -419,11 +436,8 @@ class ProductSet extends GjoBaseAbstractModel
         return $this->accessorykitGroups;
     }
 
-    /**
-     * @return ObjectStorage<Pages>
-     */
-    public function getPages(): ObjectStorage
+    public function getPage(): Pages
     {
-        return $this->pages;
+        return $this->page;
     }
 }
