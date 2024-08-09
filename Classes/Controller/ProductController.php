@@ -34,6 +34,9 @@ use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
 use TYPO3\CMS\Core\Routing\PageArguments;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 final class ProductController extends AbstractController
@@ -226,66 +229,35 @@ final class ProductController extends AbstractController
         return $translation ?: $key;
     }
 
-    public function productFinderAction(): ResponseInterface
-    {
-        // todo-a: Lösung: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/9.4/Deprecation-85543-Language-relatedPropertiesInTypoScriptFrontendControllerAndPageRepository.html
-        $this->view->assign('sysLanguageUid', $GLOBALS['TSFE']->sys_language_uid);
-        $this->view->assign('sysLanguage', $GLOBALS['TSFE']->lang);
-        return $this->htmlResponse();
-    }
-
     /**
      * @throws AspectNotFoundException
      */
-    public function ajaxListProductsAction(): ResponseInterface
+    public function productFinderAction(): ResponseInterface
     {
+//        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+//        $config = $configurationManager->getConfiguration(
+//            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+//            'gjoproducts'
+//        );
 
-        $postParams = $this->request->getParsedBody();
-        $productFinderFilter = $postParams['productFinderFilter'];
 
-        $sysLanguageUid = $postParams['sysLanguageUid'];
+//       debug($config, '$config ausController');
 
-        $offset = $postParams['offset'] ?: $this->settings['ajaxListProducts']['offset'];
+        // todo-a: move to __constuct()
+        /**
+         * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
+         */
+        $currentContentObject = $this->request->getAttribute('currentContentObject');
+        $sysLanguageUid = $this->context->getPropertyFromAspect('language', 'id');
 
-        $productSets = $this->productSetRepository->findByFilter(
-            $sysLanguageUid,
-            $productFinderFilter,
-            $offset,
-            $this->settings['ajaxListProducts']['limit']
-        );
-        $productSetsCount = $this->productSetRepository->findByFilter($sysLanguageUid, $productFinderFilter)->count();
+        $this->view->assignMultiple([
+            'data' => $currentContentObject->data,
+            'sysLanguageUid' => $sysLanguageUid,
+        ]);
 
-        $vatTextTranslationKey = 'priceInclVat';
-        $feUserId = $this->context->getPropertyFromAspect('frontend.user', 'id');
-        $user = $this->feUserRepository->findByUid($feUserId);
-
-        if ($user) {
-            $feUserGroupsObj = $user->getUserGroup();
-
-            foreach ($feUserGroupsObj as $feUserGroupObj) {
-                if (!$feUserGroupObj->isTxGjoExtendsFemanagerVatIncl()) {
-                    $vatTextTranslationKey = 'priceExclVat';
-                }
-            }
-        }
-
-        $this->view->assign('sysLanguageUid', $sysLanguageUid);
-        $this->view->assign('productFinderListWings', $this->translate('productFinder.list.wings'));
-        $this->view->assign('productFinderListDoorWidth', $this->translate('productFinder.list.doorWidth'));
-        $this->view->assign('productFinderListDoorThickness', $this->translate('productFinder.list.doorThickness'));
-        $this->view->assign('productFinderListDoorWeight', $this->translate('productFinder.list.doorWeight'));
-        $this->view->assign('productsSeeProduct', $this->translate('products.seeProduct'));
-        $this->view->assign('productFinderListPriceFrom', $this->translate('productFinder.list.price.from'));
-        $this->view->assign('productFinderListPriceAvailableOnRequest', $this->translate('productFinder.list.price.availableOnRequest'));
-        $this->view->assign('productSetVariantGroupPrice', $this->translate('productSetVariantGroup.price'));
-        $this->view->assign('productSetVariantGroupDiscount', $this->translate('productSetVariantGroup.discount'));
-        $this->view->assign('productSetVariantGroupVatText', $this->translate('productSetVariantGroup.' . $vatTextTranslationKey));
-
-        $this->view->assign('productSets', $productSets);
-        $this->view->assign('productSetsCount', $productSetsCount);
-        $this->view->assign('isShop', (int)$postParams['isShop']);
         return $this->htmlResponse();
     }
+
 
     /**
      * @throws AspectNotFoundException

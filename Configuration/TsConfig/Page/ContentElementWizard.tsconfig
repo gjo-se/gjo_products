@@ -28,6 +28,15 @@ mod.wizards.newContentElement.wizardItems.ext-gjoproducts {
                 CType = gjoproducts_productset
             }
         }
+
+        gjoproducts_productfinder {
+            iconIdentifier = plugin-products
+            title = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productFinder.title
+            description = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productFinder.description
+            tt_content_defValues {
+                CType = gjoproducts_productfinder
+            }
+        }
     }
 
     show = *

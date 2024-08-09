@@ -33,6 +33,14 @@ function configurePlugins(): void
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
+    ExtensionUtility::configurePlugin(
+        'GjoProducts',
+        'ProductFinder',
+        [ProductController::class => 'productFinder'],
+        [],
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    );
+
 }
 
 configurePlugins();

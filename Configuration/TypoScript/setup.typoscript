@@ -4,6 +4,7 @@ plugin.tx_gjoproducts {
         layoutRootPaths {
             10 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.layoutRootPath}
         }
+
         partialRootPaths {
             10 = {$plugin.tx_gjoproducts.view.partialRootPath}
             20 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.partialRootPath}
@@ -28,49 +29,10 @@ plugin.tx_gjoproducts {
             imageDisabled150 = https://via.placeholder.com/150/dee2e6/?text=disabled
         }
 
-        // Konfigurator-Filter-Button Bedingungen
-        productset {
-            alu-80 {
-                softClose {
-                    minimumDoorWidthWood = 640
-                    telescop2 = 1
-                    telescop3 = 1
-                }
-
-                synchron {
-                    maximumDoorWidth = 1000
-                    softClose = 1
-                    telescop2 = 1
-                    telescop3 = 1
-                }
-
-                telescop2 {
-                    minimumDoorWidth = 600
-                    maximumDoorWidth = 1200
-                    minimumDoorThickness = 35
-                    maximumDoorThickness = 50
-                }
-
-                telescop3 {
-                    minimumDoorWidth = 600
-                    maximumDoorWidth = 1200
-                    minimumDoorThickness = 35
-                    maximumDoorThickness = 50
-                    maximumDoorWeight = 55
-                }
-            }
-
-            alu-250 {
-                synchron {
-                    maximumDoorWeight = 200
-                }
-            }
-        }
-
         site {
             pid {
-                shop = {$plugin.tx_gjointroduction.settings.site.pid.shop}
-                shippingCosts = {$plugin.tx_gjointroduction.settings.site.pid.shippingCosts}
+                shop = {$plugin.tx_gjositepackage.settings.site.pid.shop}
+#                shippingCosts = {$plugin.tx_gjositepackage.settings.site.pid.shippingCosts}
             }
         }
 
@@ -79,19 +41,7 @@ plugin.tx_gjoproducts {
 
 
     }
-
-    persistence {
-
-
-    }
-}
-
-config.tx_extbase {
-    objects {
-
-    }
 }
 
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:gjo_products/Configuration/TypoScript/_autocomplete.ts">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:gjo_products/Configuration/TypoScript/_ajaxListProducts.ts">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:gjo_products/Configuration/TypoScript/_ajaxGetProductSetVariant.ts">

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg1392"
+   width="240"
+   height="240"
+   viewBox="0 0 240 240"
+   sodipodi:docname="Glas-Dämpfung-Neu.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata1398">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1396" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
+     id="namedview1394"
+     showgrid="false"
+     inkscape:zoom="2.7812867"
+     inkscape:cx="79.634294"
+     inkscape:cy="115.27775"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1392"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <path
+     style="fill:#000000"
+     d="M 75,120 V 21 h 46 46 v 99 99 H 121 75 Z m 88,0 V 25 H 121 79 v 95 95 h 42 42 z M 83.36917,173.82925 82.58792,173.06267 81.50741,171.99305 82,171.4875 l 30.0007,-29.9882 30.00069,-29.98819 1.41562,1.32409 1.36795,1.27642 0.97758,0.99556 0.771,0.82079 L 116.0936,145.75 86.16212,175 85.4264,175.61231 84.5,174.8422 l -0.60646,-0.56 z M 112.2,157.8 111,156.6 109.92744,155.4642 111,154.3284 l 23.48231,-22.7372 23.59468,-22.81585 1.35477,1.26959 0.88287,0.7977 0.86516,0.89845 L 162,112.51596 138.74218,135.75798 115.48437,159 114.47396,159.90572 113.4,159 Z M 64,120 V 96 h 2.5 2.5 v 24 24 H 66.5 64 Z M 47.766847,139.54724 46.937694,138.8584 46,138.03911 c 0,0 0.933263,-1.17826 1.36592,-1.79229 0.499991,-0.70959 0.968758,-1.44142 1.419352,-2.18336 0.54224,-0.89284 1.051728,-1.80572 1.543881,-2.72712 0.539667,-1.01036 1.128226,-2.00261 1.544091,-3.06991 0.673784,-1.72923 1.186855,-3.53006 1.522942,-5.35524 0.176362,-0.95776 0.264852,-1.9367 0.254238,-2.91051 -0.01168,-1.0718 -0.157927,-2.14193 -0.349577,-3.19652 -0.231984,-1.27653 -0.542675,-2.54404 -0.965268,-3.77073 -0.544898,-1.58171 -1.243111,-3.11225 -2.013996,-4.59699 -0.527338,-1.01566 -1.103852,-2.01236 -1.779436,-2.93608 -0.617736,-0.84461 -2.065453,-2.36404 -2.065453,-2.36404 l 1.239406,-1.10419 1.080508,-1.04064 0.87593,-0.82541 1.066609,-1.079645 c 0,0 1.416614,1.222875 2.02978,1.925575 0.763407,0.87488 1.422177,1.84109 2.032974,2.82858 0.669067,1.08169 1.295222,2.19941 1.777865,3.37617 0.705452,1.72 1.230588,3.51934 1.614835,5.33825 0.467886,2.21483 0.849332,4.4765 0.83071,6.74014 -0.02549,3.0981 -0.462916,6.21869 -1.28856,9.20485 -0.541978,1.96021 -1.406373,3.83216 -2.378298,5.61864 -0.615535,1.13141 -1.377662,2.18163 -2.169336,3.19761 -1.033553,1.32639 -3.35575,3.76655 -3.35575,3.76655 l -0.928878,-0.69808 z M 24,120 v -15 l -0.002,-0.99999 1.469857,0.99999 11.251195,6.75 11.251194,6.75 1.412195,0.98411 L 47.966213,120.5 36.611089,127.75 25.25588,135 23.998735,135.76965 24,135 Z"
+     id="path1945"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccaaaaaaaaaacccccaaaaaaaacccaccccccccccca" />
+</svg>

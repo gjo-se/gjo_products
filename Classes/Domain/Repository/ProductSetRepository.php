@@ -26,6 +26,8 @@ namespace GjoSe\GjoProducts\Domain\Repository;
 use GjoSe\GjoBase\Domain\Repository\AbstractRepository;
 use GjoSe\GjoBase\Utility\SettingsUtility;
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\LanguageAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -107,6 +109,7 @@ class ProductSetRepository extends AbstractRepository
      */
     public function findAccessoryKitByProductSetAndSearchString(array $accessoryKitUidList, string $searchString, int $limit): ?QueryResultInterface
     {
+        // todo-a: TSFE
         $sysLanguageUid = $GLOBALS['TSFE']->sys_language_uid;
 
         $query = $this->createQuery();
@@ -164,13 +167,10 @@ class ProductSetRepository extends AbstractRepository
      *
      * @throws InvalidQueryException
      */
-    public function findByFilter(int $sysLanguageUid, array $productFinderFilter = [], int $offset = 0, int $limit = 0): ?QueryResultInterface
+    public function findByFilter(array $siteSettings, array $productFinderFilter = [], int $offset = 0, int $limit = 0): ?QueryResultInterface
     {
-        // todo-b: Settings aus typoscript in yaml
-        $settings = GeneralUtility::makeInstance(SettingsUtility::class)->getSettings();
-        $pluginSignature = 'tx_gjoproducts_product[';
+        $pluginSignature = 'tx_gjoproducts_productfinder[';
         $query = $this->createQuery();
-
         $constraints = [];
         $constraints[] = $query->equals('is_accessory_kit', 0);
 
@@ -203,7 +203,7 @@ class ProductSetRepository extends AbstractRepository
                 );
                 $constraints[] = $query->greaterThanOrEqual(
                     'maximumDoorThickness',
-                    $productFinderFilter[$pluginSignature . 'doorThickness']
+                    (int)$productFinderFilter[$pluginSignature . 'doorThickness']
                 );
             }
 
@@ -236,13 +236,13 @@ class ProductSetRepository extends AbstractRepository
                 }
 
                 $constraintsAlu80SoftClose = $query->equals('filterSoftClose', 1);
-                if ($productFinderFilter[$pluginSignature . 'telescop2'] == $settings['productset']['alu-80']['softClose']['telescop2']) {
+                if (isset($productFinderFilter[$pluginSignature . 'telescop2']) && $productFinderFilter[$pluginSignature . 'telescop2'] == 1) {
                     $constraintsAlu80SoftClose = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
 
-                if ($productFinderFilter[$pluginSignature . 'telescop3'] == $settings['productset']['alu-80']['softClose']['telescop3']) {
+                if (isset($productFinderFilter[$pluginSignature . 'telescop3']) && $productFinderFilter[$pluginSignature . 'telescop3'] == 1) {
                     $constraintsAlu80SoftClose = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
@@ -265,32 +265,34 @@ class ProductSetRepository extends AbstractRepository
 
             if (isset($productFinderFilter[$pluginSignature . 'synchron']) && $productFinderFilter[$pluginSignature . 'synchron'] === '1') {
                 $constraintsAlu80Syncron = $query->equals('filterSynchron', 1);
-                if ($productFinderFilter[$pluginSignature . 'doorWidth'] > $settings['productset']['alu-80']['synchron']['maximumDoorWidth']) {
+                if (isset($siteSettings['gjoproducts_productfinder']['synchron']['alu-80']['maximumDoorWidth'])
+                    && (int)$productFinderFilter[$pluginSignature . 'doorWidth'] > (int)$siteSettings['gjoproducts_productfinder']['synchron']['alu-80']['maximumDoorWidth']) {
                     $constraintsAlu80Syncron = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
 
-                if ($productFinderFilter[$pluginSignature . 'soft-close'] == $settings['productset']['alu-80']['synchron']['softClose']) {
+                if (isset($productFinderFilter[$pluginSignature . 'soft-close']) && (int)$productFinderFilter[$pluginSignature . 'soft-close'] === 1) {
                     $constraintsAlu80Syncron = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
 
-                if ($productFinderFilter[$pluginSignature . 'telescop2'] == $settings['productset']['alu-80']['synchron']['telescop2']) {
+                if (isset($productFinderFilter[$pluginSignature . 'telescop2']) && (int)$productFinderFilter[$pluginSignature . 'telescop2'] === 1) {
                     $constraintsAlu80Syncron = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
 
-                if ($productFinderFilter[$pluginSignature . 'telescop3'] == $settings['productset']['alu-80']['synchron']['telescop3']) {
+                if (isset($productFinderFilter[$pluginSignature . 'telescop3']) && (int)$productFinderFilter[$pluginSignature . 'telescop3'] === 1) {
                     $constraintsAlu80Syncron = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
                     );
                 }
 
                 $constraintsAlu250Syncron = $query->equals('filterSynchron', 1);
-                if ($productFinderFilter[$pluginSignature . 'doorWeight'] > $settings['productset']['alu-250']['synchron']['maximumDoorWeight']) {
+                if (isset($siteSettings['gjoproducts_productfinder']['synchron']['alu-250']['maximumDoorWeight'])
+                    && (int)$productFinderFilter[$pluginSignature . 'doorWeight'] > (int)$siteSettings['gjoproducts_productfinder']['synchron']['alu-250']['maximumDoorWeight']) {
                     $constraintsAlu250Syncron = $query->logicalNot(
                         $query->like('name', '%Alu 250%')
                     );
@@ -303,15 +305,22 @@ class ProductSetRepository extends AbstractRepository
                 );
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'telescop2']) && ($productFinderFilter[$pluginSignature . 'telescop2'] !== '' && $productFinderFilter[$pluginSignature . 'telescop2'] !== '0')) {
+            if (isset($productFinderFilter[$pluginSignature . 'telescop2']) && (int)$productFinderFilter[$pluginSignature . 'telescop2'] === 1) {
                 $constraintsAlu80Telescop2 = $query->equals('filterTelescop2', 1);
-                $doorWidth = $productFinderFilter[$pluginSignature . 'doorWidth'];
-                $minimumDoorWidth = $settings['productset']['alu-80']['telescop2']['minimumDoorWidth'];
-                $maximumDoorWidth = $settings['productset']['alu-80']['telescop2']['maximumDoorWidth'];
-                $doorThickness = $productFinderFilter[$pluginSignature . 'doorThickness'];
-                $minimumDoorThickness = $settings['productset']['alu-80']['telescop2']['minimumDoorThickness'];
-                $maximumDoorThickness = $settings['productset']['alu-80']['telescop2']['maximumDoorThickness'];
-                if ($doorWidth > 0 && $doorWidth < $minimumDoorWidth || $doorWidth > 0 && $doorWidth > $maximumDoorWidth || $doorThickness > 0 && $doorThickness < $minimumDoorThickness || $doorThickness > 0 && $doorThickness > $maximumDoorThickness
+
+                $doorWidth = $productFinderFilter[$pluginSignature . 'doorWidth'] ?? 0;
+                $minimumDoorWidth = $siteSettings['gjoproducts_productfinder']['telescop2']['minimumDoorWidth'] ?? 0;
+                $maximumDoorWidth = $siteSettings['gjoproducts_productfinder']['telescop2']['maximumDoorWidth'] ?? 0;
+
+                $doorThickness = $productFinderFilter[$pluginSignature . 'doorThickness'] ?? 0;
+                $minimumDoorThickness = $siteSettings['gjoproducts_productfinder']['telescop2']['minimumDoorThickness'] ?? 0;
+                $maximumDoorThickness = $siteSettings['gjoproducts_productfinder']['telescop2']['maximumDoorThickness'] ?? 0;
+
+                if (
+                    $doorWidth > 0 && $doorWidth < $minimumDoorWidth
+                    || $doorWidth > 0 && $doorWidth > $maximumDoorWidth
+                    || $doorThickness > 0 && $doorThickness < $minimumDoorThickness
+                    || $doorThickness > 0 && $doorThickness > $maximumDoorThickness
                 ) {
 
                     $constraintsAlu80Telescop2 = $query->logicalNot(
@@ -325,17 +334,26 @@ class ProductSetRepository extends AbstractRepository
                 );
             }
 
-            if (isset($productFinderFilter[$pluginSignature . 'telescop3']) && ($productFinderFilter[$pluginSignature . 'telescop3'] !== '' && $productFinderFilter[$pluginSignature . 'telescop3'] !== '0')) {
+            if (isset($productFinderFilter[$pluginSignature . 'telescop3']) && (int)$productFinderFilter[$pluginSignature . 'telescop3'] === 1) {
                 $constraintsAlu80Telescop3 = $query->equals('filterTelescop3', 1);
-                $doorWidth = $productFinderFilter[$pluginSignature . 'doorWidth'];
-                $minimumDoorWidth = $settings['productset']['alu-80']['telescop3']['minimumDoorWidth'];
-                $maximumDoorWidth = $settings['productset']['alu-80']['telescop3']['maximumDoorWidth'];
-                $doorThickness = $productFinderFilter[$pluginSignature . 'doorThickness'];
-                $minimumDoorThickness = $settings['productset']['alu-80']['telescop3']['minimumDoorThickness'];
-                $maximumDoorThickness = $settings['productset']['alu-80']['telescop3']['maximumDoorThickness'];
-                $doorWeight = $productFinderFilter[$pluginSignature . 'doorWeight'];
-                $maximumDoorWeight = $settings['productset']['alu-80']['telescop3']['maximumDoorWeight'];
-                if ($doorWidth > 0 && $doorWidth < $minimumDoorWidth || $doorWidth > 0 && $doorWidth > $maximumDoorWidth || $doorThickness > 0 && $doorThickness < $minimumDoorThickness || $doorThickness > 0 && $doorThickness > $maximumDoorThickness || $doorWeight > 0 && $doorWeight > $maximumDoorWeight
+
+                $doorWidth = $productFinderFilter[$pluginSignature . 'doorWidth'] ?? 0;
+                $minimumDoorWidth = $siteSettings['gjoproducts_productfinder']['telescop3']['minimumDoorWidth'] ?? 0;
+                $maximumDoorWidth = $siteSettings['gjoproducts_productfinder']['telescop3']['maximumDoorWidth'] ?? 0;
+
+                $doorThickness = $productFinderFilter[$pluginSignature . 'doorThickness'] ?? 0;
+                $minimumDoorThickness = $siteSettings['gjoproducts_productfinder']['telescop3']['minimumDoorThickness'] ?? 0;
+                $maximumDoorThickness = $siteSettings['gjoproducts_productfinder']['telescop3']['maximumDoorThickness'] ?? 0;
+
+                $doorWeight = $productFinderFilter[$pluginSignature . 'doorWeight'] ?? 0;
+                $maximumDoorWeight = $siteSettings['gjoproducts_productfinder']['telescop3']['maximumDoorWeight'] ?? 0;
+
+                if (
+                    $doorWidth > 0 && $doorWidth < $minimumDoorWidth
+                    || $doorWidth > 0 && $doorWidth > $maximumDoorWidth
+                    || $doorThickness > 0 && $doorThickness < $minimumDoorThickness
+                    || $doorThickness > 0 && $doorThickness > $maximumDoorThickness
+                    || $doorWeight > 0 && $doorWeight > $maximumDoorWeight
                 ) {
                     $constraintsAlu80Telescop3 = $query->logicalNot(
                         $query->equals('name', 'ALU 80 NEO')
@@ -347,6 +365,7 @@ class ProductSetRepository extends AbstractRepository
                     $constraintsAlu80Telescop3
                 );
             }
+
 
             if (isset($productFinderFilter[$pluginSignature . 't-close']) && $productFinderFilter[$pluginSignature . 't-close'] === '1') {
                 $constraints[] = $query->equals('filterTclose', 1);
@@ -382,15 +401,10 @@ class ProductSetRepository extends AbstractRepository
 
         $query->setOrderings(
             [
-                'is_featured' => QueryInterface::ORDER_DESCENDING,
+                'is_featured' => QueryInterface::ORDER_ASCENDING,
                 'name' => QueryInterface::ORDER_ASCENDING,
             ]
         );
-
-        //        $context = GeneralUtility::makeInstance(Context::class);
-        //        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
-        //        $context->setAspect('language', $languageAspect);
-        //        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
 
         return $query->execute();
     }

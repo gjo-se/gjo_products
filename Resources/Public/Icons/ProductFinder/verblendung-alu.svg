@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg817"
+   width="230.39999"
+   height="230.39999"
+   viewBox="0 0 230.39999 230.39999"
+   sodipodi:docname="Verblendung Alu-Neu.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata823">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs821" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
+     id="namedview819"
+     showgrid="false"
+     inkscape:zoom="2.8971737"
+     inkscape:cx="101.23892"
+     inkscape:cy="111.25642"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg817"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <path
+     style="fill:#000000;stroke-width:0.95999998"
+     d="M 71.46001,125.53998 V 89.05999 h -3.84 -3.84 v -10.08 -10.079999 h 51.36 H 166.5 v 10.079999 10.08 h -3.84 -3.84 v 36.47999 36.48 h -43.67999 -43.68 z m 86.39999,-0.48 V 89.05999 h -42.71999 -42.72 v 35.99999 36 h 42.72 42.71999 z"
+     id="path1370"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:#808080;stroke-width:0.34516397"
+     d="M 72.420013,125.10962 V 89.212574 l 42.807197,-0.152586 h 42.6328 v 36.049632 35.95036 h -42.6328 -42.807197 z"
+     id="path1372"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ccccccccc" />
+</svg>

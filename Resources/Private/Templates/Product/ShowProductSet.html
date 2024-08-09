@@ -67,26 +67,24 @@
                         <div class="view">
                             <f:render partial="Media/Type"
                                       arguments="{
-                                                      file: productSet.image,
-                                                      width: 1100,
-                                                      breakpoints: {
-                                                        0: {cropVariant: 'wideScreen', media: '(min-width: 1200px)', srcset: {0: 1100}},
-                                                        1: {cropVariant: 'desktop', media: '(min-width: 992px)', srcset: {0: 950}},
-                                                        2: {cropVariant: 'laptop', media: '(min-width: 768px)', srcset: {0: 720}},
-                                                        3: {cropVariant: 'tablet', media: '(min-width: 576px)', srcset: {0: 540}},
-                                                        4: {cropVariant: 'mobile', media: '(min-width: 300px)', srcset: {0: 350}}
-                                                      },
-                                                      data: slide.data
-                                                  }"
+                                          file: productSet.image,
+                                          width: 1100,
+                                          breakpoints: {
+                                            0: {cropVariant: 'wideScreen', media: '(min-width: 1200px)', srcset: {0: 1100}},
+                                            1: {cropVariant: 'desktop', media: '(min-width: 992px)', srcset: {0: 950}},
+                                            2: {cropVariant: 'laptop', media: '(min-width: 768px)', srcset: {0: 720}},
+                                            3: {cropVariant: 'tablet', media: '(min-width: 576px)', srcset: {0: 540}},
+                                            4: {cropVariant: 'mobile', media: '(min-width: 300px)', srcset: {0: 350}}
+                                          },
+                                          data: slide.data
+                                      }"
                             />
                         </div>
                     </div>
 
                     <div class="card-body">
                         <f:if condition="{is_shop} == 0">
-                            <f:format.raw>
-                                {productSet.description}
-                            </f:format.raw>
+                            <f:format.raw>{productSet.description}</f:format.raw>
                         </f:if>
                     </div>
                 </div>

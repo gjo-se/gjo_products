@@ -150,7 +150,7 @@ class ProductSet extends GjoBaseAbstractModel
      */
     protected ObjectStorage $accessorykitGroups;
 
-    protected Pages $page;
+    protected ?Pages $page = null;
 
     public function __construct()
     {
@@ -436,7 +436,7 @@ class ProductSet extends GjoBaseAbstractModel
         return $this->accessorykitGroups;
     }
 
-    public function getPage(): Pages
+    public function getPage(): ?Pages
     {
         return $this->page;
     }

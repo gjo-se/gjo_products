@@ -3,506 +3,546 @@
       xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-    <f:layout name="Default"/>
+<f:layout name="CeDefaultLayout"/>
 
-    <f:section name="main">
+<f:section name="CeMainSection">
 
-        <f:render section="javaScriptInternal" arguments="{_all}"/>
-        <f:render section="javaScriptExternal"/>
+    <f:render section="javaScriptInternal" arguments="{_all}"/>
+    <f:render section="javaScriptExternal"/>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-4 p-0">
-                    <f:render section="filter" arguments="{_all}"/>
-                </div>
-                <div class="col-12 col-lg-8 p-0">
-                    <f:render section="list" arguments="{_all}"/>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-4 p-0">
+                <f:render section="filter" arguments="{_all}"/>
+            </div>
+            <div class="col-12 col-lg-8 p-0">
+                <f:render section="list" arguments="{_all}"/>
             </div>
         </div>
+    </div>
 
-    </f:section>
+</f:section>
 
-    <f:section name="javaScriptInternal">
-        <script type="text/javascript">
-            var ajaxListProductsOffset = '{settings.ajaxListProducts.offset}';
-            var ajaxListProductsLimit = parseInt('{settings.ajaxListProducts.limit}');
-            var isShop = parseInt('{settings.isShop}');
-        </script>
-    </f:section>
+<f:section name="javaScriptInternal">
+    <script type="text/javascript">
+        const ajaxListProductsOffset = 0;
+        const ajaxListProductsLimit = 6;
+        const isShop = 0;
+    </script>
+</f:section>
 
-    <f:section name="javaScriptExternal">
-        <v:asset.script name="noUISlider.js"
-                        path="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"
-                        external="true"
-                        standalone="true"
-                        movable="1"
-        />
-        <v:asset.script name="loadAjaxList.js"
-                        path="{v:extension.path.resources(path: 'Component/LoadAjaxList/loadAjaxList.js', extensionName: 'gjo_base')}"
-                        external="true"
-                        standalone="true"
-                        movable="1"
-                        dependencies="jquery-3.2.1.min.js"
-        />
-    </f:section>
+<f:section name="javaScriptExternal">
+    <f:asset.script identifier="nouislider.min.js"
+                    src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"/>
+    <f:asset.script identifier="getProductFinderList.js"
+                    src="EXT:gjo_products/Resources/Public/JavaScript/getProductFinderList.js"/>
+</f:section>
 
-    <f:section name="filter">
+<f:section name="filter">
 
-        <f:if condition="{v:page.info(field: 'uid')} == {settings.pages.shop}">
-            <div class="mobile-subnav">
-                <ul class="pb-16">
-                    <li>
-                        <a id="button-collapse-product-finder"
-                           data-toggle="collapse"
-                           href="#productFinderAccordion"
-                           aria-expanded="false"
-                           aria-controls="collapseExample">
-                            <span>Produkte Konfigurator</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </f:if>
+    <f:if condition="{v:page.info(field: 'uid')} == {settings.pages.shop}">
+        <div class="mobile-subnav">
+            <ul class="pb-16">
+                <li>
+                    <a id="button-collapse-product-finder"
+                       data-toggle="collapse"
+                       href="#productFinderAccordion"
+                       aria-expanded="false"
+                       aria-controls="collapseExample">
+                        <span>Produkte Konfigurator</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </f:if>
 
-        <v:variable.set name="pageUid" value="{v:page.info(field: 'uid')}"/>
-        <div class="collapse {f:if(condition: '{pageUid} != {settings.pages.shop}', then:'show')}" id="productFinderAccordion"
-             role="tablist">
-            <div class="skin-gray font-size-16 px-24 pt-16">
-                <div>
-                    <a href="#" class="d-block" id="button-reset-filter" title="Produkt-Konfigurator">
+    <v:variable.set name="pageUid" value="{v:page.info(field: 'uid')}"/>
+    <div class="collapse {f:if(condition: '{pageUid} != {settings.pages.shop}', then:'show')}"
+         id="productFinderAccordion"
+         role="tablist">
+        <div class="skin-gray font-size-16 px-24 pt-16">
+            <div>
+                <a href="#" class="d-block" id="button-reset-filter" title="Produkt-Konfigurator">
                         <span>
                             <f:translate
                                     key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.deleteAllFilters"/>
                         </span>
-                    </a>
-                </div>
-            </div>
-
-            <f:form id="productFinder" action="productFinderXYZ">
-                <f:render section="material" arguments="{_all}"/>
-                <f:render section="measure" arguments="{_all}"/>
-                <f:render section="design" arguments="{_all}"/>
-                <f:render section="configuration" arguments="{_all}"/>
-                <f:render section="montage" arguments="{_all}"/>
-            </f:form>
-        </div>
-    </f:section>
-
-    <f:section name="material">
-
-
-        <div class="skin-gray">
-            <h2>
-                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.material"/>
-            </h2>
-
-            <div class="filter-material">
-                <div class="filter-material-body">
-                    <div class="d-flex justify-content-around pt-16 pb-16 ">
-                        <label>
-                            <f:form.checkbox class="d-none" name="wood" id="button-wood" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/holz.svg" width="120"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wood')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wood"/>
-                            </figcaption>
-
-                        </label>
-                        <label>
-                            <f:form.checkbox class="d-none" name="glass" id="button-glass" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/glas.svg" width="120"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.glass')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.glass"/>
-                            </figcaption>
-                        </label>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
 
-    </f:section>
+        <f:form id="productFinder" action="productFinder">
+            <f:render section="material" arguments="{_all}"/>
+            <f:render section="measure" arguments="{_all}"/>
+            <f:render section="design" arguments="{_all}"/>
+            <f:render section="configuration" arguments="{_all}"/>
+            <f:render section="montage" arguments="{_all}"/>
+        </f:form>
+    </div>
+</f:section>
 
-    <f:section name="measure">
+<f:section name="material">
 
-        <div class="locallang-helper d-none">
+
+    <div class="skin-gray">
+        <h2>
+            <f:translate
+                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.material"/>
+        </h2>
+
+        <div class="filter-material">
+            <div class="filter-material-body">
+                <div class="d-flex justify-content-around pt-16 pb-16 ">
+                    <label>
+                        <f:form.checkbox class="d-none" name="wood" id="button-wood" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/holz.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wood')}"
+                                         width="120"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wood"/>
+                        </figcaption>
+                    </label>
+
+                    <label>
+                        <f:form.checkbox class="d-none" name="glass" id="button-glass" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/glas.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.glass')}"
+                                         width="120"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.glass"/>
+                        </figcaption>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</f:section>
+
+<f:section name="measure">
+
+    <div class="locallang-helper d-none">
             <span id="locallang-helper-any"><f:translate
                     key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.any"/></span>
-        </div>
+    </div>
 
 
-        <div class="skin-gray">
-            <h2>
-                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.dimension"/>
-            </h2>
+    <div class="skin-gray">
+        <h2>
+            <f:translate
+                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.dimension"/>
+        </h2>
 
-            <div class="filter-measure">
-                <div class="filter-measure-body py-16 px-16">
+        <div class="filter-measure">
+            <div class="filter-measure-body py-16 px-16">
+                <div class="form-group mb-64 px-8">
+                    <label for="wingCountInput" class="mb-24">
+                        <f:translate
+                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wingCount"/>
+                        :
+                        <span id="wingCountText"></span></label>
+                    <f:form.textfield class="d-none input-text" name="wingCount" id="wingCountInput"/>
+                    <div id="wingCountSlider"></div>
+                </div>
+
+                <div class="form-group mb-64 px-8">
+                    <label for="doorWidthInput" class="mb-24">
+                        <f:translate
+                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.doorWidth"/>
+                        :
+                        <span id="doorWidthText"></span></label>
+                    <f:form.textfield class="d-none input-text" name="doorWidth" id="doorWidthInput"/>
+                    <div id="doorWidthSlider"></div>
+                </div>
+
+                <f:comment>
+                    <!--diente nur der Berechnung des Gewichts => kann aktuell raus-->
                     <div class="form-group mb-64 px-8">
-                        <label for="wingCountInput" class="mb-24">
-                            <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wingCount"/>
-                            :
-                            <span id="wingCountText"></span></label>
-                        <f:form.textfield class="d-none input-text" name="wingCount" id="wingCountInput"/>
-                        <div id="wingCountSlider"></div>
+                        <label for="doorHeightInput" class="mb-24">Tür-Höhe: <span id="doorHeightText"></span></label>
+                        <f:form.textfield class="d-none input-text" name="doorHeight" id="doorHeightInput"/>
+                        <div id="doorHeightSlider"></div>
                     </div>
+                </f:comment>
 
-                    <div class="form-group mb-64 px-8">
-                        <label for="doorWidthInput" class="mb-24">
-                            <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.doorWidth"/>
-                            :
-                            <span id="doorWidthText"></span></label>
-                        <f:form.textfield class="d-none input-text" name="doorWidth" id="doorWidthInput"/>
-                        <div id="doorWidthSlider"></div>
-                    </div>
+                <div class="form-group mb-64 px-8">
+                    <label for="doorThicknessInput" class="mb-24">
+                        <f:translate
+                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.doorThickness"/>
+                        :
+                        <span id="doorThicknessText"></span></label>
+                    <f:form.textfield class="d-none input-text" name="doorThickness" id="doorThicknessInput"/>
+                    <div id="doorThicknessSlider"></div>
+                </div>
+
+
+                <div class="form-group mb-48 px-8">
+                    <label for="doorWeightInput" class="mb-24">
+                        <f:translate
+                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.doorWeight"/>
+                        :
+                        <span id="doorWeightText"></span></label>
+                    <f:form.textfield class="d-none input-text" name="doorWeight" id="doorWeightInput"/>
+                    <div id="doorWeightSlider"></div>
 
                     <f:comment>
-                        <!--diente nur der Berechnung des Gewichts => kann aktuell raus-->
-                        <div class="form-group mb-64 px-8">
-                            <label for="doorHeightInput" class="mb-24">Tür-Höhe: <span id="doorHeightText"></span></label>
-                            <f:form.textfield class="d-none input-text" name="doorHeight" id="doorHeightInput"/>
-                            <div id="doorHeightSlider"></div>
+                        <!--auf Kundenwunsch entfernt-->
+                        <div class="col-12">
+                            <div class="form-check">
+                                <f:form.checkbox class="form-check-input pull-right"
+                                                 name="automaticCompute"
+                                                 id="automaticCompute"
+                                                 value="1"
+                                                 checked="false"/>
+                                <label class="form-check-label" for="automaticCompute">automatisch berechnen: </label>
+
+                            </div>
                         </div>
                     </f:comment>
 
-                    <div class="form-group mb-64 px-8">
-                        <label for="doorThicknessInput" class="mb-24">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</f:section>
+
+<f:section name="design">
+
+    <div class="skin-gray">
+        <h2>
+            <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.look"/>
+        </h2>
+
+        <div class="filter-design">
+            <div class="filter-design-body py-16 px-16">
+                <div class="d-flex justify-content-around">
+                    <label>
+                        <f:form.checkbox class="d-none" name="customer" id="button-design-customer" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/verblendung-bauseits.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.byCustomers')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
                             <f:translate
-                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.doorThickness"/>
-                            :
-                            <span id="doorThicknessText"></span></label>
-                        <f:form.textfield class="d-none input-text" name="doorThickness" id="doorThicknessInput"/>
-                        <div id="doorThicknessSlider"></div>
-                    </div>
-
-
-                    <div class="form-group mb-48 px-8">
-                        <label for="doorWeightInput" class="mb-24">
-                            <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.doorWeight"/>
-                            :
-                            <span id="doorWeightText"></span></label>
-                        <f:form.textfield class="d-none input-text" name="doorWeight" id="doorWeightInput"/>
-                        <div id="doorWeightSlider"></div>
-
-                        <f:comment>
-                            <!--auf Kundenwunsch entfernt-->
-                            <div class="col-12">
-                                <div class="form-check">
-                                    <f:form.checkbox class="form-check-input pull-right"
-                                                     name="automaticCompute"
-                                                     id="automaticCompute"
-                                                     value="1"
-                                                     checked="false"/>
-                                    <label class="form-check-label" for="automaticCompute">automatisch berechnen: </label>
-
-                                </div>
-                            </div>
-                        </f:comment>
-
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-    </f:section>
-
-    <f:section name="design">
-
-        <div class="skin-gray">
-            <h2>
-                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.look"/>
-            </h2>
-
-            <div class="filter-design">
-                <div class="filter-design-body py-16 px-16">
-                    <div class="d-flex justify-content-around">
-                        <label>
-                            <f:form.checkbox class="d-none" name="customer" id="button-design-customer" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/verblendung-bauseits.svg"
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.byCustomers"/>
+                        </figcaption>
+                    </label>
+                    <label>
+                        <f:form.checkbox class="d-none" name="alu" id="button-design-alu" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/verblendung-alu.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.alu')}"
                                          width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.byCustomers')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate
-                                        key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.byCustomers"/>
-                            </figcaption>
-                        </label>
-                        <label>
-                            <f:form.checkbox class="d-none" name="alu" id="button-design-alu" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/verblendung-alu.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.alu')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.alu"/>
-                            </figcaption>
-                        </label>
-                        <label>
-                            <f:form.checkbox class="d-none" name="design" id="button-design-design" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/verblendung-design.svg"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.alu"/>
+                        </figcaption>
+                    </label>
+                    <label>
+                        <f:form.checkbox class="d-none" name="design" id="button-design-design" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/verblendung-design.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.design')}"
                                          width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.design')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.design"/>
-                            </figcaption>
-                        </label>
-                    </div>
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.design"/>
+                        </figcaption>
+                    </label>
                 </div>
             </div>
         </div>
-    </f:section>
+    </div>
+</f:section>
 
-    <f:section name="configuration">
+<f:section name="configuration">
 
-        <div class="skin-gray">
-            <h2>
-                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.configuration"/>
-            </h2>
+    <div class="skin-gray">
+        <h2>
+            <f:translate
+                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.configuration"/>
+        </h2>
 
-            <div class="filter-configuration">
-                <div class="filter-configuration-body pt-16 pb-16 px-16">
-                    <div class="d-flex justify-content-around">
-                        <label>
-                            <f:form.checkbox class="d-none" name="soft-close" id="button-soft-close" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/holz-daempfung.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.damping')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.damping"/>
-                            </figcaption>
-                        </label>
-                        <label>
-                            <f:form.checkbox class="d-none" name="et3" id="button-et3" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/holz-et3.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.et3')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.et3"/>
-                            </figcaption>
-                        </label>
-                        <label>
-                            <f:form.checkbox class="d-none" name="t-fold" id="button-t-fold" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/t-fold.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tfold')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tfold"/>
-                            </figcaption>
-                        </label>
-                    </div>
-
-                    <div class="telescope-synchron d-flex justify-content-around">
-                        <label class="two-wings">
-                            <f:form.checkbox class="d-none" name="synchron" id="button-synchron" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/synchron.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.synchron')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate
-                                        key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.synchron"/>
-                            </figcaption>
-                        </label>
-                        <label class="two-wings">
-                            <f:form.checkbox class="d-none" name="telescop2" id="button-telescop2" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/teleskop.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tele2')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tele2"/>
-                            </figcaption>
-                        </label>
-                        <label class="three-wings">
-                            <f:form.checkbox class="d-none" name="telescop3" id="button-telescop3" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/teleskop.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tele3')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tele3"/>
-                            </figcaption>
-                        </label>
-                    </div>
-
-                    <div class="d-flex justify-content-around">
-                        <label>
-                            <f:form.checkbox class="d-none" name="t-close" id="button-t-close" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/t-close.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tclose')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tclose"/>
-                            </figcaption>
-
-                        </label>
-                        <label>
-                            <f:form.checkbox class="d-none" name="t-master" id="button-t-master" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/t-master.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tmaster')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tmaster"/>
-                            </figcaption>
-                        </label>
-                        <img class="" src="https://via.placeholder.com/75/fff?text=+" width="75" height="75">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </f:section>
-
-    <f:section name="montage">
-
-        <div class="skin-gray">
-            <h2>
-                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.mounting"/>
-            </h2>
-
-            <div class="filter-configuration pb-24">
-                <div class="filter-configuration-body py-16 px-16">
-
-                    <div class="d-flex justify-content-around">
-                        <label>
-                            <f:form.checkbox class="d-none" name="montage-wall" id="button-montage-wall" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/montage-wand.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wall')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wall"/>
-                            </figcaption>
-                        </label>
-                        <label>
-                            <f:form.checkbox class="d-none" name="montage-ceiling" id="button-montage-ceiling" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/montage-decke.svg" width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.ceiling')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.ceiling"/>
-                            </figcaption>
-                        </label>
-                        <label>
-                            <f:form.checkbox class="d-none" name="montage-in-wall" id="button-montage-in-wall" value="1"/>
-                            <div class="view overlay">
-                                <a>
-                                    <img class="" src="fileadmin/user_upload/productgroup/accessory_kit/svg/montae-in-der-wand.svg"
+        <div class="filter-configuration">
+            <div class="filter-configuration-body pt-16 pb-16 px-16">
+                <div class="d-flex justify-content-around">
+                    <label>
+                        <f:form.checkbox class="d-none" name="soft-close" id="button-soft-close" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/holz-daempfung.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.damping')}"
                                          width="75"
-                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wallPocket')}">
-                                    <div class="mask rgba-orange-light"></div>
-                                </a>
-                            </div>
-                            <figcaption class="figure-caption pl-4 pt-12">
-                                <f:translate
-                                        key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wallPocket"/>
-                            </figcaption>
-                        </label>
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.damping"/>
+                        </figcaption>
+                    </label>
+                    <label>
+                        <f:form.checkbox class="d-none" name="et3" id="button-et3" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/holz-et3.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.et3')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.et3"/>
+                        </figcaption>
+                    </label>
+                    <label>
+                        <f:form.checkbox class="d-none" name="t-fold" id="button-t-fold" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/t-fold.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tfold')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tfold"/>
+                        </figcaption>
+                    </label>
+                </div>
 
-                    </div>
+                <div class="telescope-synchron d-flex justify-content-around">
+                    <label class="two-wings">
+                        <f:form.checkbox class="d-none" name="synchron" id="button-synchron" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/synchron.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.synchron')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.synchron"/>
+                        </figcaption>
+                    </label>
+                    <label class="two-wings">
+                        <f:form.checkbox class="d-none" name="telescop2" id="button-telescop2" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/teleskop.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tele2')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tele2"/>
+                        </figcaption>
+                    </label>
+                    <label class="three-wings">
+                        <f:form.checkbox class="d-none" name="telescop3" id="button-telescop3" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/teleskop.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tele3')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tele3"/>
+                        </figcaption>
+                    </label>
+                </div>
+
+                <div class="d-flex justify-content-around">
+                    <label>
+                        <f:form.checkbox class="d-none" name="t-close" id="button-t-close" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/t-close.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tclose')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tclose"/>
+                        </figcaption>
+
+                    </label>
+                    <label>
+                        <f:form.checkbox class="d-none" name="t-master" id="button-t-master" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/t-master.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tmaster')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.tmaster"/>
+                        </figcaption>
+                    </label>
+                    <img class="" src="https://via.placeholder.com/75/fff?text=+" width="75" height="75" alt="">
                 </div>
             </div>
         </div>
+    </div>
+</f:section>
 
-    </f:section>
+<f:section name="montage">
 
-    <f:section name="list">
+    <div class="skin-gray">
+        <h2>
+            <f:translate
+                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.mounting"/>
+        </h2>
 
-        <div class="locallang-helper d-none">
-            <span id="locallang-helper-sysLanguageUid">{sysLanguageUid}</span>
-            <span id="locallang-helper-sysLanguage">{sysLanguage}</span>
-            <span id="locallang-helper-results"><f:translate
-                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.results"/></span>
-            <span id="locallang-helper-no-results"><f:translate
-                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.noResults"/></span>
+        <div class="filter-configuration pb-24">
+            <div class="filter-configuration-body py-16 px-16">
+
+                <div class="d-flex justify-content-around">
+                    <label>
+                        <f:form.checkbox class="d-none" name="montage-wall" id="button-montage-wall" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/montage-wand.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wall')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wall"/>
+                        </figcaption>
+                    </label>
+                    <label>
+                        <f:form.checkbox class="d-none" name="montage-ceiling" id="button-montage-ceiling" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/montage-decke.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.ceiling')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.ceiling"/>
+                        </figcaption>
+                    </label>
+                    <label>
+                        <f:form.checkbox class="d-none" name="montage-in-wall" id="button-montage-in-wall" value="1"/>
+                        <div class="view overlay">
+                            <a>
+                                <f:image src="EXT:gjo_products/Resources/Public/Icons/ProductFinder/montae-in-der-wand.svg"
+                                         alt="{f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wallPocket')}"
+                                         width="75"
+                                />
+                                <div class="mask rgba-orange-light"></div>
+                            </a>
+                        </div>
+                        <figcaption class="figure-caption pl-4 pt-12">
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.filter.wallPocket"/>
+                        </figcaption>
+                    </label>
+
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="skin-gray">
-            <div class="d-flex justify-content-around">
-                <h2 class="ajax-list-products-headline"></h2>
+</f:section>
 
-                <div class="py-24">
-                    <div class="preloader-wrapper big active">
-                        <div class="spinner-layer spinner-yellow-only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="gap-patch">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="circle-clipper right">
-                                <div class="circle"></div>
-                            </div>
+<f:section name="list">
+
+    <div class="locallang-helper d-none">
+        <span id="locallang-helper-sysLanguageUid">{sysLanguageUid}</span>
+        <span id="locallang-helper-results"><f:translate
+                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.results"/></span>
+        <span id="locallang-helper-no-results"><f:translate
+                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.noResults"/></span>
+    </div>
+
+    <div class="skin-gray">
+        <div class="d-flex justify-content-around">
+            <h2 class="ajax-list-products-headline"></h2>
+
+            <div class="py-24">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-yellow-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
+    </div>
 
-        <div class="ajax-lists-products"></div>
+    <div class="ajax-lists-products"></div>
 
-    </f:section>
+</f:section>
 
 
 </html>
