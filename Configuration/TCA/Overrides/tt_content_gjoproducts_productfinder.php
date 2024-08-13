@@ -12,7 +12,7 @@ function registerProductFinderPlugin(): void
         'ProductFinder',
         'GjoSe - ProductFinder',
         null,
-        'GjoSe'
+        'gjose-products'
     );
 }
 

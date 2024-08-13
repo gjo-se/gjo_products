@@ -8,7 +8,7 @@
             **** Plugins           ****
             ***************************
 
-            <trans-unit id="wizard.group.products">
+            <trans-unit id="plugin.group.products">
                 <source>GjoSe - Products</source>
             </trans-unit>
             <trans-unit id="plugin.gjoproducts_productgroupteaser.title">

@@ -12,7 +12,7 @@ function registerProductGroupPlugin(): void
         'ProductGroup',
         'GjoSe - ProductGroup',
         null,
-        'GjoSe'
+        'gjose-products'
     );
 
     ExtensionManagementUtility::addPiFlexFormValue(
@@ -21,21 +21,9 @@ function registerProductGroupPlugin(): void
         $pluginSignature
     );
 
-    $GLOBALS['TCA']['tt_content']['types'][$pluginSignature]['showitem'] = '
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-            --palette--;;general,
-            --palette--;;headers,
-        --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.plugin,
-            pi_flexform,
-        --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,
-            --palette--;;frames,
-            tx_gjositepackage_additional_css,
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
-            --palette--;;language,
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
-            --palette--;;hidden,
-            --palette--;;access,
-    ';
+    $table = 'tt_content';
+    $column = 'pi_flexform';
+    ExtensionManagementUtility::addToAllTCAtypes($table, $column, $pluginSignature, 'after:header');
 }
 
 registerProductGroupPlugin();
