@@ -1,6 +1,6 @@
-mod.wizards.newContentElement.wizardItems.ext-gjoproducts {
-    header = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:wizard.group.products
-    after = plugins
+mod.wizards.newContentElement.wizardItems.gjo_products {
+    header = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.group.products
+    after = gjo_site_package
     elements {
         gjoproducts_productgroupteaser {
             iconIdentifier = plugin-products

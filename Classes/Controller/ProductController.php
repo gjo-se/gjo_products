@@ -59,8 +59,6 @@ final class ProductController extends AbstractController
             4 => ['cropVariant' => 'mobile', 'media' => '(min-width: 300px)', 'srcset' => [0 => 350]],
         ];
 
-        debug($this->productGroupRepository->findByUid($this->settings['productGroup']));
-
         $this->view->assignMultiple([
             'data' => $this->getCurrentContentObjectData(),
             'breakpoints' => $breakpoints,
