@@ -1,5 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:gjoSe="http://typo3.org/ns/GjoSe/GjoBase/ViewHelpers"
+      xmlns:gjoSe="http://typo3.org/ns/GjoSe/GjoSitePackage/ViewHelpers"
       xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
@@ -11,11 +11,9 @@
 
     <div class="product-set">
         <f:render section="startTeaser" arguments="{_all}"/>
-        <f:if condition="{is_shop} === false">
-            <f:render section="carouselProducts" arguments="{_all}"/>
-            <f:render section="technicalnots" arguments="{_all}"/>
-            <f:render section="downloads" arguments="{productSet: productSet, accordionId: 'productSetaccordion'}"/>
-        </f:if>
+        <f:render section="carouselProducts" arguments="{_all}"/>
+        <f:render section="technicalnots" arguments="{_all}"/>
+        <f:render section="downloads" arguments="{productSet: productSet, accordionId: 'productSetaccordion'}"/>
         <f:render section="variants" arguments="{_all}"/>
         <f:render section="productGroupLinks" arguments="{_all}"/>
     </div>
@@ -28,18 +26,10 @@
 </f:section>
 
 <f:section name="javaScriptExternal">
-    <f:asset.script identifier="addToCartAjax.js"
-                    src="EXT:gjo_base/Resources/Public/Component/Shop/addToCartAjax.js"/>
     <f:asset.script identifier="handleAnchorLinks.js"
                     src="EXT:gjo_base/Resources/Public/Component/Products/handleAnchorLinks.js"/>
     <f:asset.script identifier="getProductSetVariantAjax.js"
                     src="EXT:gjo_base/Resources/Public/Component/Products/getProductSetVariantAjax.js"/>
-
-    <f:if condition="{is_shop}">
-        <f:asset.script identifier="setShopLinkActive.js"
-                        src="EXT:gjo_base/Resources/Public/Component/Products/setShopLinkActive.js"/>
-    </f:if>
-
 </f:section>
 
 <f:section name="startTeaser">
@@ -83,9 +73,7 @@
                     </div>
 
                     <div class="card-body">
-                        <f:if condition="{is_shop} == 0">
-                            <f:format.raw>{productSet.description}</f:format.raw>
-                        </f:if>
+                        <f:format.raw>{productSet.description}</f:format.raw>
                     </div>
                 </div>
             </div>
@@ -664,7 +652,7 @@
                             </f:if>
 
                             <!-- variants-filter-body -->
-                            <f:if condition="{gjoSe:GetProductSetVariantFilters(productSetVariantGroup: productSetVariantGroup)}">
+                            <f:if condition="{gjoSe:products.GetProductSetVariantFilters(productSetVariantGroup: productSetVariantGroup)}">
                                 <f:then>
                                     <div class="card skin-white">
                                         <div class="card-header p-0 px-16" role="tab"
@@ -700,22 +688,7 @@
                                                   value="noFilterTyp" checked="checked"/>
                                 </f:else>
                             </f:if>
-
-                            <!-- variants-buttons-body -->
-                            <div class="col card p-0 pb-16">
-                                <h4 class="card-header py-16 px-16 border-0">
-                                    <f:if condition="{is_shop}">
-                                        <f:translate
-                                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.variants.itemNo"/>
-                                        <span class="productSetVariantArticleNumber_{productSetVariantGroup.uid}">{articleNumber}</span>
-                                    </f:if>
-                                </h4>
-                                <div class="card-body p-0 px-16">
-                                    <f:render section="variants-buttons-body" arguments="{_all}"/>
-                                </div>
-                            </div>
                         </div>
-
 
                         <!-- Desktop -->
                         <div class="d-none d-lg-flex row">
@@ -731,7 +704,7 @@
                             </f:if>
 
                             <!-- variants-filter-body -->
-                            <f:if condition="{gjoSe:GetProductSetVariantFilters(productSetVariantGroup: productSetVariantGroup)}">
+                            <f:if condition="{gjoSe:products.GetProductSetVariantFilters(productSetVariantGroup: productSetVariantGroup)}">
                                 <f:then>
                                     <div class="col card skin-white p-0 pb-16 variants-filter">
                                         <h4 class="card-header py-16 px-16 border-0">
@@ -749,21 +722,6 @@
                                                   value="noFilterTyp" checked="checked"/>
                                 </f:else>
                             </f:if>
-
-                            <!-- variants-buttons-body -->
-                            <div class="col card p-0 pb-16">
-                                <h4 class="card-header py-16 px-16 border-0">
-                                    <f:if condition="{is_shop}">
-                                        <f:translate
-                                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.variants.itemNo"/>
-                                        <span class="productSetVariantArticleNumber_{productSetVariantGroup.uid}">{articleNumber}</span>
-                                    </f:if>
-                                </h4>
-                                <div class="card-body p-0 px-16 border-left-black">
-                                    <f:render section="variants-buttons-body" arguments="{_all}"/>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </f:for>
@@ -790,154 +748,28 @@
 </f:section>
 
 <f:section name="variants-filter-body">
-    <f:for each="{gjoSe:GetProductSetVariantFilters(productSetVariantGroup: productSetVariantGroup)}"
+    <f:for each="{gjoSe:products.GetProductSetVariantFilters(productSetVariantGroup: productSetVariantGroup)}"
            key="filterTyp" as="variantFilterTyp">
         <h5 class="mb-16">
             <f:translate
                     key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.variants.variantFilter.{filterTyp}"/>
         </h5>
-
-        <f:if condition="{is_shop}">
-            <f:then>
-                <div class="d-flex flex-wrap btn-group mb-24" data-toggle="buttons">
-                    <f:for each="{variantFilterTyp}" as="variantFilter" iteration="iteration">
-                        <label class="btn btn-sm btn-products-light-orange mr-8 mb-8 ml-0 mt-0 form-check-label {f:if(condition: '{iteration.cycle} == 1', then:' active')}">
-                            <f:form.radio class="form-check-input"
-                                          name="variantFilterTyp_{filterTyp}_{productSetVariantGroup.uid}"
-                                          value="{variantFilter}"
-                                          checked="{iteration.cycle} == 1"/>
-
-                            <f:if condition="{filterTyp} == 'length' ">
-                                <f:then>
-                                    {variantFilter}
-                                </f:then>
-                                <f:else>
-                                    <f:translate
-                                            key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.variants.variantFilter.{filterTyp}.{variantFilter}"/>
-                                </f:else>
-                            </f:if>
-                        </label>
-                    </f:for>
-                </div>
-            </f:then>
-            <f:else>
-                <ul class="ml-24 p-0">
-                    <f:for each="{variantFilterTyp}" as="variantFilter" iteration="iteration">
-                        <li>
-                            <f:if condition="{filterTyp} == 'length' ">
-                                <f:then>
-                                    {variantFilter}
-                                </f:then>
-                                <f:else>
-                                    <f:translate
-                                            key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.variants.variantFilter.{filterTyp}.{variantFilter}"/>
-                                </f:else>
-                            </f:if>
-                        </li>
-                    </f:for>
-                </ul>
-            </f:else>
-        </f:if>
-    </f:for>
-</f:section>
-
-<f:section name="variants-buttons-body">
-    <f:if condition="{is_shop}">
-        <f:then>
-            <div class="d-flex pb-8 border-0 ">
-                <p class="productSetVariant-price p-0 pt-12 only-with-price_{productSetVariantGroup.uid} d-none">
-                    <f:if condition="{gjoSe:feUser.discount()}">
+        <ul class="ml-24 p-0">
+            <f:for each="{variantFilterTyp}" as="variantFilter" iteration="iteration">
+                <li>
+                    <f:if condition="{filterTyp} == 'length' ">
                         <f:then>
-                            <small class="pr-16">
-                                <del>
-                                    <span class="productSetVariantListPrice_{productSetVariantGroup.uid}"></span>
-                                </del>
-                            </small>
-                            <span class="productSetVariantBuyPrice_{productSetVariantGroup.uid}"></span>
+                            {variantFilter}
                         </f:then>
                         <f:else>
-                            <span class="productSetVariantListPrice_{productSetVariantGroup.uid}"></span>
+                            <f:translate
+                                    key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.variants.variantFilter.{filterTyp}.{variantFilter}"/>
                         </f:else>
                     </f:if>
-                </p>
-                <div class="ml-auto only-with-price_{productSetVariantGroup.uid} d-none">
-                    <div class="md-form my-0">
-                        <f:form.hidden class="productSetVariantUid productSetVariantUid_{productSetVariantGroup.uid}"
-                                       name="productSetVariantUid"
-                                       value=""/>
-                        <f:form.select name="quantity"
-                                       options="{
-                                                                    1: '1',
-                                                                    2: '2',
-                                                                    3: '3',
-                                                                    4: '4',
-                                                                    5: '5'
-                                                                }"
-                                       value=""
-                                       class="mdb-select quantity text-right"
-                                       data="{
-                                                                            order-uid: openOrder.uid,
-                                                                            orderproduct-uid: product.productUid
-                                                                }"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div class="price-additional-informations pb-48 only-with-price_{productSetVariantGroup.uid} d-none">
-                    <span class="small">
-                            {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSetVariantGroup.{gjoSe:feUser.vatText()}')} |
-                            <f:link.page pageUid="{settings.site.pid.shippingCosts}"
-                                         additionalParams="{L: '{v:page.language()}'}">
-                                <f:translate
-                                        key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.variants.shippingCosts"/> &#8599;
-                            </f:link.page>
-
-                        </span>
-            </div>
-
-            <div class="d-none alert alert-success alert-success-add-to-cart" role="alert">
-                <f:translate
-                        key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.successfullyAddedToCart"/>
-            </div>
-
-            <div class="skin-white">
-                <button type="button"
-                        class="btn btn-products-primary add-to-cart-button btn-lg btn-block mb-16 only-with-price_{productSetVariantGroup.uid} d-none">
-                    <f:translate
-                            key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.addToCart"/>
-                </button>
-
-                <f:link.page pageUid="11"
-                             class="btn btn-products-primary btn-lg btn-block mb-16 only-without-price_{productSetVariantGroup.uid} productSetVariantArticleNumber_button_{productSetVariantGroup.uid}">
-                    <f:translate
-                            key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.availableOnRequest"/>
-                </f:link.page>
-
-                <f:link.page pageUid="{pageUid}" additionalParams="{L: '{v:page.language()}'}">
-                    <button type="button"
-                            class="btn btn-products-default btn-sm btn-block">
-                        <f:translate
-                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.seeArticleTechnic"/>
-                    </button>
-                </f:link.page>
-            </div>
-        </f:then>
-        <f:else>
-            <div class="skin-white">
-                <div class="d-none d-lg-flex mt-160"></div>
-                <div class="d-none d-lg-flex mt-20"></div>
-                <f:link.page pageUid="{pageUid}"
-                             additionalParams="{L: '{v:page.language()}', is_shop: 1}"
-                             section="{productSet.anchor}">
-                    <button type="button"
-                            class="btn btn-products-primary btn-block btn-lg">
-                        <f:translate
-                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSet.seeArticleInShop"/>
-                    </button>
-                </f:link.page>
-            </div>
-        </f:else>
-    </f:if>
+                </li>
+            </f:for>
+        </ul>
+    </f:for>
 </f:section>
 
 <f:section name="productGroupLinks">
@@ -1058,7 +890,7 @@
         <f:for each="{productSet.accessorykitGroups}" as="accessorykitGroup">
             <f:for each="{accessorykitGroup.accessoryKits}" as="accessoryKit">
                 <f:render section="accessoryKitTabPanesContent"
-                          arguments="{accessoryKit: accessoryKit, is_shop: is_shop}"/>
+                          arguments="{accessoryKit: accessoryKit}"/>
             </f:for>
         </f:for>
     </div>
@@ -1079,17 +911,13 @@
                   arguments="{
                                 productSet: accessoryKit
                         }"/>
-        <f:render section="variants"
-                  arguments="{
-                      productSet: accessoryKit,
-                      is_shop: is_shop
-                      }"/>
+        <f:render section="variants" arguments="{productSet: accessoryKit}"/>
         <f:render section="technicalnots" arguments="{productSet: accessoryKit}"/>
         <f:render section="downloads"
                   arguments="{
-                          productSet: accessoryKit,
-                          accordionId: 'accessoryKitaccordion_{accessoryKit.uid}'
-                      }"/>
+                    productSet: accessoryKit,
+                    accordionId: 'accessoryKitaccordion_{accessoryKit.uid}'
+                  }"/>
 
         <!--<div class="skin-gray pb-48"></div>-->
     </div>

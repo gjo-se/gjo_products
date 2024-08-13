@@ -47,9 +47,6 @@
             <trans-unit id="flexforms.settings.productSet" >
                 <source>ProductSet</source>
             </trans-unit>
-            <trans-unit id="flexforms.settings.isShop" >
-                <source>Bereich Shop</source>
-            </trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -23,13 +23,13 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Class Product
  */
-class Product extends GjoBaseAbstractModel
+class Product extends AbstractEntity
 {
     protected string $name = '';
 

@@ -23,15 +23,15 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use GjoSe\GjoBase\Domain\Model\Pages;
+use GjoSe\GjoSitePackage\Domain\Model\Pages;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Class ProductSet
  */
-class ProductSet extends GjoBaseAbstractModel
+class ProductSet extends AbstractEntity
 {
     protected string $name = '';
 

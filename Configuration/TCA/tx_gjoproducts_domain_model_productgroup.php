@@ -29,19 +29,6 @@ return call_user_func(function (): array {
     $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
     $table = 'tx_gjoproducts_domain_model_productgroup';
 
-    $defaultCropSettings = CroppingUtility::getDefaultCropSettings();
-
-    $mobileCropSettings = $defaultCropSettings;
-    $mobileCropSettings['title'] = $lll . 'cropVariant.mobile';
-    $tabletCropSettings = $defaultCropSettings;
-    $tabletCropSettings['title'] = $lll . 'cropVariant.tablet';
-    $laptopCropSettings = $defaultCropSettings;
-    $laptopCropSettings['title'] = $lll . 'cropVariant.laptop';
-    $desktopCropSettings = $defaultCropSettings;
-    $desktopCropSettings['title'] = $lll . 'cropVariant.desktop';
-    $wideScreenCropSettings = $defaultCropSettings;
-    $wideScreenCropSettings['title'] = $lll . 'cropVariant.wideScreen';
-
     return [
         'ctrl' => [
             'title' => $lll . $table,
@@ -145,22 +132,6 @@ return call_user_func(function (): array {
                     'type' => 'file',
                     'maxitems' => 1,
                     'allowed' => 'common-media-types',
-                    'overrideChildTca' => [
-                        'columns' => [
-                            'crop' => [
-                                'config' => [
-                                    'cropVariants' => [
-                                        'mobile' => $mobileCropSettings,
-                                        'tablet' => $tabletCropSettings,
-                                        'laptop' => $laptopCropSettings,
-                                        'desktop' => $desktopCropSettings,
-                                        'wideScreen' => $wideScreenCropSettings,
-                                    ],
-                                ],
-                            ],
-
-                        ],
-                    ],
                 ],
             ],
 
@@ -191,22 +162,6 @@ return call_user_func(function (): array {
                     'type' => 'file',
                     'maxitems' => 1,
                     'allowed' => 'common-media-types',
-                    'overrideChildTca' => [
-                        'columns' => [
-                            'crop' => [
-                                'config' => [
-                                    'cropVariants' => [
-                                        'mobile' => $mobileCropSettings,
-                                        'tablet' => $tabletCropSettings,
-                                        'laptop' => $laptopCropSettings,
-                                        'desktop' => $desktopCropSettings,
-                                        'wideScreen' => $wideScreenCropSettings,
-                                    ],
-                                ],
-                            ],
-
-                        ],
-                    ],
                 ],
             ],
 
@@ -272,7 +227,7 @@ return call_user_func(function (): array {
         'types' => [
             '0' => [
                 'showitem' => '
-                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
                             header,
                             sub_header,
                             description,
@@ -284,7 +239,7 @@ return call_user_func(function (): array {
                             teaser_image,
                         --div--;' . $lll . $table . '.product_set_type,
                             product_set_types,
-                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                             hidden,
             ',
             ],

@@ -23,14 +23,14 @@ namespace GjoSe\GjoProducts\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBase\Domain\Model\AbstractModel as GjoBaseAbstractModel;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class AccessorykitGroup
  */
-class AccessorykitGroup extends GjoBaseAbstractModel
+class AccessorykitGroup extends AbstractEntity
 {
     protected string $headline = '';
 

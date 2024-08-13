@@ -29,19 +29,6 @@ return call_user_func(function (): array {
     $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
     $table = 'tx_gjoproducts_domain_model_productset';
 
-    $defaultCropSettings = CroppingUtility::getDefaultCropSettings();
-
-    $mobileCropSettings = $defaultCropSettings;
-    $mobileCropSettings['title'] = $lll . 'cropVariant.mobile';
-    $tabletCropSettings = $defaultCropSettings;
-    $tabletCropSettings['title'] = $lll . 'cropVariant.tablet';
-    $laptopCropSettings = $defaultCropSettings;
-    $laptopCropSettings['title'] = $lll . 'cropVariant.laptop';
-    $desktopCropSettings = $defaultCropSettings;
-    $desktopCropSettings['title'] = $lll . 'cropVariant.desktop';
-    $wideScreenCropSettings = $defaultCropSettings;
-    $wideScreenCropSettings['title'] = $lll . 'cropVariant.wideScreen';
-
     return [
 
         'ctrl' => [
@@ -196,22 +183,6 @@ return call_user_func(function (): array {
                     'type' => 'file',
                     'maxitems' => 2,
                     'allowed' => 'common-media-types',
-                    'overrideChildTca' => [
-                        'columns' => [
-                            'crop' => [
-                                'config' => [
-                                    'cropVariants' => [
-                                        'mobile' => $mobileCropSettings,
-                                        'tablet' => $tabletCropSettings,
-                                        'laptop' => $laptopCropSettings,
-                                        'desktop' => $desktopCropSettings,
-                                        'wideScreen' => $wideScreenCropSettings,
-                                    ],
-                                ],
-                            ],
-
-                        ],
-                    ],
                 ],
             ],
 
@@ -223,22 +194,6 @@ return call_user_func(function (): array {
                     'type' => 'file',
                     'maxitems' => 1,
                     'allowed' => 'common-media-types',
-                    'overrideChildTca' => [
-                        'columns' => [
-                            'crop' => [
-                                'config' => [
-                                    'cropVariants' => [
-                                        'mobile' => $mobileCropSettings,
-                                        'tablet' => $tabletCropSettings,
-                                        'laptop' => $laptopCropSettings,
-                                        'desktop' => $desktopCropSettings,
-                                        'wideScreen' => $wideScreenCropSettings,
-                                    ],
-                                ],
-                            ],
-
-                        ],
-                    ],
                 ],
             ],
 
@@ -500,22 +455,6 @@ return call_user_func(function (): array {
                     'type' => 'file',
                     'maxitems' => 10,
                     'allowed' => 'common-media-types',
-                    'overrideChildTca' => [
-                        'columns' => [
-                            'crop' => [
-                                'config' => [
-                                    'cropVariants' => [
-                                        'mobile' => $mobileCropSettings,
-                                        'tablet' => $tabletCropSettings,
-                                        'laptop' => $laptopCropSettings,
-                                        'desktop' => $desktopCropSettings,
-                                        'wideScreen' => $wideScreenCropSettings,
-                                    ],
-                                ],
-                            ],
-
-                        ],
-                    ],
                 ],
             ],
 
@@ -740,15 +679,15 @@ return call_user_func(function (): array {
         'types' => [
             '0' => [
                 'showitem' => '
-                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
                               --palette--;' . $lll . $table . '.palettes.basics;basics,
                               is_featured,
-                              description,                                                            
+                              description,
                               image,
                               icon,
                               page,
                               anchor,
-                        --div--;' . $lll . $table . '.tabs.variants,  
+                        --div--;' . $lll . $table . '.tabs.variants,
                               product_set_variant_groups,
                         --div--;' . $lll . $table . '.tabs.technicalNotes,
                               show_technicalnots,
@@ -779,7 +718,7 @@ return call_user_func(function (): array {
                               invitation_to_tender,
                         --div--;' . $lll . $table . '.tabs.downloads,
                               image_engineering_drawings,
-                              downloads,  
+                              downloads,
                               download_engineering_drawings,
                         --div--;' . $lll . $table . '.tabs.accessory_kit,
                               accessorykit_groups,
@@ -789,7 +728,7 @@ return call_user_func(function (): array {
                               --palette--;' . $lll . $table . '.palettes.design;design,
                               --palette--;' . $lll . $table . '.palettes.configuration;configuration,
                               --palette--;' . $lll . $table . '.palettes.montage;montage,
-                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                             hidden,
             ',
             ]
@@ -813,7 +752,7 @@ return call_user_func(function (): array {
                 filter_design_customer,
                 filter_design_alu,
                 filter_design_design
-      
+
          '
             ],
             'configuration' => [

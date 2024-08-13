@@ -23,7 +23,7 @@ namespace GjoSe\GjoProducts\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBase\Controller\AbstractController;
+use GjoSe\GjoSitePackage\Controller\AbstractController;
 use GjoSe\GjoProducts\Domain\Repository\AccessorykitGroupRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
@@ -34,9 +34,6 @@ use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
 use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 final class ProductController extends AbstractController
@@ -53,7 +50,7 @@ final class ProductController extends AbstractController
 
     public function showProductGroupTeaserAction(): ResponseInterface
     {
-        // todo-a: move to MediaUtility
+        // todo-a: move to MediaUtility, TS dabei aufräumen
         $breakpoints = [
             0 => ['cropVariant' => 'wideScreen', 'media' => '(min-width: 1200px)', 'srcset' => [0 => 1100]],
             1 => ['cropVariant' => 'desktop', 'media' => '(min-width: 992px)', 'srcset' => [0 => 950]],
@@ -62,14 +59,10 @@ final class ProductController extends AbstractController
             4 => ['cropVariant' => 'mobile', 'media' => '(min-width: 300px)', 'srcset' => [0 => 350]],
         ];
 
-        // todo-a: move to __constuct()
-        /**
-         * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
-         */
-        $currentContentObject = $this->request->getAttribute('currentContentObject');
+        debug($this->productGroupRepository->findByUid($this->settings['productGroup']));
 
         $this->view->assignMultiple([
-            'data' => $currentContentObject->data,
+            'data' => $this->getCurrentContentObjectData(),
             'breakpoints' => $breakpoints,
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
@@ -88,14 +81,8 @@ final class ProductController extends AbstractController
             4 => ['cropVariant' => 'mobile', 'media' => '(min-width: 300px)', 'srcset' => [0 => 350]],
         ];
 
-        // todo-a: move to __constuct()
-        /**
-         * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
-         */
-        $currentContentObject = $this->request->getAttribute('currentContentObject');
-
         $this->view->assignMultiple([
-            'data' => $currentContentObject->data,
+            'data' => $this->getCurrentContentObjectData(),
             'breakpoints' => $breakpoints,
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
@@ -119,13 +106,7 @@ final class ProductController extends AbstractController
             4 => ['cropVariant' => 'mobile', 'media' => '(min-width: 300px)', 'srcset' => [0 => 350]],
         ];
 
-        // todo-a: move to __constuct()
-        /**
-         * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
-         */
-        $currentContentObject = $this->request->getAttribute('currentContentObject');
-
-        $productGroup = null;
+       $productGroup = null;
         if ($productSetType) {
             $productGroup = $productSetType->getProductGroup();
         }
@@ -137,11 +118,10 @@ final class ProductController extends AbstractController
         $pageUid = $siteRoute->getPageId();
 
         $this->view->assignMultiple([
-            'data' => $currentContentObject->data,
+            'data' => $this->getCurrentContentObjectData(),
             'breakpoints' => $breakpoints,
             'productSet' => $productSet,
             'productGroup' => $productGroup,
-            'is_shop' => $this->request->getQueryParams()['is_shop'] ?? false,
             'pageUid' => $pageUid,
         ]);
         return $this->htmlResponse();
@@ -234,24 +214,10 @@ final class ProductController extends AbstractController
      */
     public function productFinderAction(): ResponseInterface
     {
-//        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-//        $config = $configurationManager->getConfiguration(
-//            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
-//            'gjoproducts'
-//        );
-
-
-//       debug($config, '$config ausController');
-
-        // todo-a: move to __constuct()
-        /**
-         * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $currentContentObject
-         */
-        $currentContentObject = $this->request->getAttribute('currentContentObject');
         $sysLanguageUid = $this->context->getPropertyFromAspect('language', 'id');
 
         $this->view->assignMultiple([
-            'data' => $currentContentObject->data,
+            'data' => $this->getCurrentContentObjectData(),
             'sysLanguageUid' => $sysLanguageUid,
         ]);
 

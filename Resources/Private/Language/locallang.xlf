@@ -241,9 +241,6 @@
             <trans-unit id="productSet.addToCart" >
                 <source>Add to Cart</source>
             </trans-unit>
-            <trans-unit id="productSet.seeArticleInShop" >
-                <source>Shop</source>
-            </trans-unit>
             <trans-unit id="productSet.seeArticleTechnic" >
                 <source>See technical details</source>
             </trans-unit>

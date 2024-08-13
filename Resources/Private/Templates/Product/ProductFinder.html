@@ -27,7 +27,6 @@
     <script type="text/javascript">
         const ajaxListProductsOffset = 0;
         const ajaxListProductsLimit = 6;
-        const isShop = 0;
     </script>
 </f:section>
 
@@ -40,24 +39,8 @@
 
 <f:section name="filter">
 
-    <f:if condition="{v:page.info(field: 'uid')} == {settings.pages.shop}">
-        <div class="mobile-subnav">
-            <ul class="pb-16">
-                <li>
-                    <a id="button-collapse-product-finder"
-                       data-toggle="collapse"
-                       href="#productFinderAccordion"
-                       aria-expanded="false"
-                       aria-controls="collapseExample">
-                        <span>Produkte Konfigurator</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </f:if>
-
     <v:variable.set name="pageUid" value="{v:page.info(field: 'uid')}"/>
-    <div class="collapse {f:if(condition: '{pageUid} != {settings.pages.shop}', then:'show')}"
+    <div class="collapse show"
          id="productFinderAccordion"
          role="tablist">
         <div class="skin-gray font-size-16 px-24 pt-16">

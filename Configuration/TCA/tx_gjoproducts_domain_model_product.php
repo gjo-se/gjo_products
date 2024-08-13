@@ -28,19 +28,9 @@ return call_user_func(function (): array {
     $ext = 'gjo_products';
     $lll = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang_db.xlf:';
     $table = 'tx_gjoproducts_domain_model_product';
+    $column = 'image';
 
-    $defaultCropSettings = CroppingUtility::getDefaultCropSettings();
-
-    $mobileCropSettings = $defaultCropSettings;
-    $mobileCropSettings['title'] = $lll . 'cropVariant.mobile';
-    $tabletCropSettings = $defaultCropSettings;
-    $tabletCropSettings['title'] = $lll . 'cropVariant.tablet';
-    $laptopCropSettings = $defaultCropSettings;
-    $laptopCropSettings['title'] = $lll . 'cropVariant.laptop';
-    $desktopCropSettings = $defaultCropSettings;
-    $desktopCropSettings['title'] = $lll . 'cropVariant.desktop';
-    $wideScreenCropSettings = $defaultCropSettings;
-    $wideScreenCropSettings['title'] = $lll . 'cropVariant.wideScreen';
+    CroppingUtility::setCropVariants($table, $column);
 
     return [
 
@@ -104,22 +94,6 @@ return call_user_func(function (): array {
                     'type' => 'file',
                     'maxitems' => 6,
                     'allowed' => 'common-media-types',
-                    'overrideChildTca' => [
-                        'columns' => [
-                            'crop' => [
-                                'config' => [
-                                    'cropVariants' => [
-                                        'mobile' => $mobileCropSettings,
-                                        'tablet' => $tabletCropSettings,
-                                        'laptop' => $laptopCropSettings,
-                                        'desktop' => $desktopCropSettings,
-                                        'wideScreen' => $wideScreenCropSettings,
-                                    ],
-                                ],
-                            ],
-
-                        ],
-                    ],
                 ],
             ],
 
@@ -185,12 +159,12 @@ return call_user_func(function (): array {
         'types' => [
             '0' => [
                 'showitem' => '
-                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
                             name,
                             article_number,
                             additional_information,
                             image,
-                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                             hidden,
             ',
             ],

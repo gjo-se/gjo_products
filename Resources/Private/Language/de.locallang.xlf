@@ -328,10 +328,6 @@
                 <source>Add to Cart</source>
                 <target>In den Einkaufswagen</target>
             </trans-unit>
-            <trans-unit id="productSet.seeArticleInShop" >
-                <source>Shop</source>
-                <target>Zum Shop</target>
-            </trans-unit>
             <trans-unit id="productSet.seeArticleTechnic" >
                 <source>See technical details</source>
                 <target>Technische Details</target>

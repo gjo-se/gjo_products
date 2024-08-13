@@ -69,134 +69,23 @@
                         max. {productSet.maximumDoorWeight} kg
                     </div>
                 </div>
-                <div class="row m-0 mb-16">
-                    <div class="col-6 p-0 pr-8">
-                        <f:if condition="{isShop}">
-                            <f:if condition="{productSetVariantGroupPrice}">
-                                <f:then>
-                                    {productSetVariantGroupPrice}:
-                                </f:then>
-                                <f:else>
-                                    {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSetVariantGroup.price')}
-                                </f:else>
-                            </f:if>
-                            <f:if condition="{productSetVariantGroupVatText}">
-                                <f:then>
-                                    {productSetVariantGroupVatText}
-                                </f:then>
-                                <f:else>
-                                    {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSetVariantGroup.{gjoSe:feUser.vatText()}')}
-                                </f:else>
-                            </f:if>
-                            <f:if condition="{gjoSe:feUser.discount()}">
-                                |
-                                <f:if condition="{productSetVariantGroupDiscount}">
+
+                <div class="d-flex product-set-price">
+                    <div class="ml-auto py-16">
+                        <f:link.typolink parameter="{productSet.page.uid}">
+                            <button type="button"
+                                    class="btn btn-products-primary float-right m-0 waves-effect waves-light">
+                                <f:if condition="{productsSeeProduct}">
                                     <f:then>
-                                        {productSetVariantGroupDiscount}:
+                                        {productsSeeProduct}
                                     </f:then>
                                     <f:else>
-                                        {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productSetVariantGroup.discount')}:
+                                        <f:translate
+                                                key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:products.seeProduct"/>
                                     </f:else>
                                 </f:if>
-                                {gjoSe:feUser.discount() -> f:format.currency(decimalSeparator:',',
-                                thousandsSeparator: '.',
-                                currencySign: '%')}
-                            </f:if>
-                        </f:if>
-                    </div>
-
-                </div>
-                <div class="d-flex product-set-price">
-
-                    <f:if condition="{isShop}">
-                        <p class="p-0 py-8">
-                            <f:if condition="{gjoSe:getLowestPrice(productSetVariantGroups: '{productSet.productSetVariantGroups}')}">
-                                <f:then>
-                                    <f:if condition="{productFinderListPriceFrom}">
-                                        <f:then>
-                                            {productFinderListPriceFrom}
-                                        </f:then>
-                                        <f:else>
-                                            {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.price.from')}
-                                        </f:else>
-                                    </f:if>
-                                    <f:if condition="{gjoSe:feUser.discount()}">
-                                        <f:then>
-                                            <small class="pr-16">
-                                                <del>
-                                                    {gjoSe:feUser.vatPrice(productSetVariantGroups:
-                                                    '{productSet.productSetVariantGroups}',
-                                                    lowestPrice: 1) ->
-                                                    f:format.currency(decimalSeparator:',', thousandsSeparator: '.',
-                                                    currencySign: '€')}
-                                                </del>
-                                            </small>
-                                            <span>
-                                                    {gjoSe:feUser.vatPrice(productSetVariantGroups: '{productSet.productSetVariantGroups}',
-                                                    lowestPrice: 1, feUserDiscount: '{gjoSe:feUser.discount()}') ->
-                                                    f:format.currency(decimalSeparator:',', thousandsSeparator: '.', currencySign: '€')}
-                                                </span>
-                                        </f:then>
-                                        <f:else>
-                                            {gjoSe:feUser.vatPrice(productSetVariantGroups:
-                                            '{productSet.productSetVariantGroups}',
-                                            lowestPrice: 1) ->
-                                            f:format.currency(decimalSeparator:',', thousandsSeparator: '.',
-                                            currencySign: '€')}
-                                        </f:else>
-                                    </f:if>
-                                </f:then>
-                                <f:else>
-                                    <f:if condition="{productFinderListPriceAvailableOnRequest}">
-                                        <f:then>
-                                            {productFinderListPriceAvailableOnRequest}
-                                        </f:then>
-                                        <f:else>
-                                            {f:translate(key:'LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:productFinder.list.price.availableOnRequest')}
-                                        </f:else>
-                                    </f:if>
-                                </f:else>
-                            </f:if>
-                        </p>
-                    </f:if>
-
-                    <div class="ml-auto py-16">
-                        <f:if condition="{isShop}">
-                            <f:then>
-                                <f:link.typolink parameter="{productSet.pages.uid}"
-                                                 additionalParams="?is_shop=1">
-                                    <button type="button"
-                                            class="btn btn-products-primary float-right m-0 waves-effect waves-light">
-                                        <f:if condition="{productsSeeProduct}">
-                                            <f:then>
-                                                {productsSeeProduct}
-                                            </f:then>
-                                            <f:else>
-                                                <f:translate
-                                                        key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:products.seeProduct"/>
-                                            </f:else>
-                                        </f:if>
-                                    </button>
-                                </f:link.typolink>
-                                >
-                            </f:then>
-                            <f:else>
-                                <f:link.typolink parameter="{productSet.page.uid}">
-                                    <button type="button"
-                                            class="btn btn-products-primary float-right m-0 waves-effect waves-light">
-                                        <f:if condition="{productsSeeProduct}">
-                                            <f:then>
-                                                {productsSeeProduct}
-                                            </f:then>
-                                            <f:else>
-                                                <f:translate
-                                                        key="LLL:EXT:gjo_products/Resources/Private/Language/locallang.xlf:products.seeProduct"/>
-                                            </f:else>
-                                        </f:if>
-                                    </button>
-                                </f:link.typolink>
-                            </f:else>
-                        </f:if>
+                            </button>
+                        </f:link.typolink>
                     </div>
 
                 </div>

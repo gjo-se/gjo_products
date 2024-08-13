@@ -23,8 +23,8 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoBase\Domain\Repository\AbstractRepository;
-use GjoSe\GjoBase\Utility\SettingsUtility;
+use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
+use GjoSe\GjoSitePackage\Utility\SettingsUtility;
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\LanguageAspect;

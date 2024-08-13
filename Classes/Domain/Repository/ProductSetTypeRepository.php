@@ -24,10 +24,11 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  ***************************************************************/
 
 use Doctrine\DBAL\Exception;
-use GjoSe\GjoBase\Domain\Repository\AbstractRepository;
+use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class ProductSetTypeRepository extends AbstractRepository
 {
@@ -48,6 +49,9 @@ class ProductSetTypeRepository extends AbstractRepository
         if ($maxCount !== 0) {
             $queryBuilder->setMaxResults($maxCount);
         }
+
+        debug($queryBuilder->getSQL());
+        debug($queryBuilder->getParameters());
 
         /** @var array<array<string, int>> $rows */
         $rows = $queryBuilder->executeQuery()->fetchAllAssociative();

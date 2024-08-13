@@ -22,8 +22,6 @@
     var $locallangHelperAny = $('#locallang-helper-any');
     var $locallangHelperResults = $('#locallang-helper-results');
     var $locallangHelperNoResults = $('#locallang-helper-no-results');
-    var $isShop = $('.is_shop');
-
 
     var $buttonWood = $('#button-wood');
     var $buttonGlass = $('#button-glass');
@@ -475,8 +473,7 @@
                 offset: offset,
                 productFinderFilter: productFinderFilter,
                 sysLanguageUid: sysLanguageUid,
-                sysLanguage: sysLanguage,
-                isShop: isShop
+                sysLanguage: sysLanguage
             },
             success: function (response) {
                 ajaxListsProductsContainer.append(response);
@@ -484,7 +481,6 @@
                 preloader.removeClass('active');
                 ajaxListsProductsHeadline.show();
 
-                _setIsShop();
                 ignoreScroll = false;
             },
             error: function (error) {
@@ -563,18 +559,6 @@
         }
 
     };
-
-    var _setIsShop = function () {
-
-        if(isShop){
-            $isShop.removeClass('d-none');
-        }else{
-            $isShop.addClass('d-none');
-        }
-    };
-
-
-
 
     $(document).ready(function () {
 

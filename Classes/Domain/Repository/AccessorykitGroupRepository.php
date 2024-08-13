@@ -24,7 +24,7 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  ***************************************************************/
 
 use Doctrine\DBAL\Exception;
-use GjoSe\GjoBase\Domain\Repository\AbstractRepository;
+use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

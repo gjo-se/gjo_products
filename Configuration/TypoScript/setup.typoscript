@@ -28,18 +28,6 @@ plugin.tx_gjoproducts {
             imageDefault150 = https://via.placeholder.com/150/f8f9fa
             imageDisabled150 = https://via.placeholder.com/150/dee2e6/?text=disabled
         }
-
-        site {
-            pid {
-                shop = {$plugin.tx_gjositepackage.settings.site.pid.shop}
-#                shippingCosts = {$plugin.tx_gjositepackage.settings.site.pid.shippingCosts}
-            }
-        }
-
-        #            wird nicht genutzt?!
-        #            pages.productDetail = 80
-
-
     }
 }
 
