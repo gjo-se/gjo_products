@@ -166,7 +166,7 @@ return call_user_func(function (): array {
                             image,
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                             hidden,
-            ',
+                ',
             ],
         ],
     ];

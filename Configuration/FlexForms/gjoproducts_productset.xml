@@ -3,7 +3,9 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <sheetTitle>LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.settings</sheetTitle>
+                <sheetTitle>
+                    LLL:EXT:gjo_base/Resources/Private/Language/locallang_be.xlf:flexforms_tab.settings
+                </sheetTitle>
                 <type>array</type>
                 <el>
                     <settings.productSet>
@@ -22,7 +24,9 @@
                                 </numIndex>
                             </items>
                             <foreign_table>tx_gjoproducts_domain_model_productset</foreign_table>
-                            <foreign_table_where>AND tx_gjoproducts_domain_model_productset.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productset.name</foreign_table_where>
+                            <foreign_table_where>AND tx_gjoproducts_domain_model_productset.sys_language_uid =
+                                ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productset.name
+                            </foreign_table_where>
                         </config>
                     </settings.productSet>
                 </el>
