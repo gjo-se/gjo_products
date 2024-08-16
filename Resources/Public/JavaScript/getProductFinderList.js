@@ -17,8 +17,6 @@
     var $containerProductFinderAccordion = $('#productFinderAccordion');
     var preloader = $('.preloader-wrapper');
     var ajaxListProductsCountInit = 0;
-    var sysLanguageUid = $('#locallang-helper-sysLanguageUid').text();
-    var sysLanguage = $('#locallang-helper-sysLanguage').text();
     var $locallangHelperAny = $('#locallang-helper-any');
     var $locallangHelperResults = $('#locallang-helper-results');
     var $locallangHelperNoResults = $('#locallang-helper-no-results');
@@ -471,9 +469,7 @@
             method: 'POST',
             data: {
                 offset: offset,
-                productFinderFilter: productFinderFilter,
-                sysLanguageUid: sysLanguageUid,
-                sysLanguage: sysLanguage
+                productFinderFilter: productFinderFilter
             },
             success: function (response) {
                 ajaxListsProductsContainer.append(response);
