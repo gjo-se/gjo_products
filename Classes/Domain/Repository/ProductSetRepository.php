@@ -23,12 +23,8 @@ namespace GjoSe\GjoProducts\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
-use GjoSe\GjoSitePackage\Utility\SettingsUtility;
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
-use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Context\LanguageAspect;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -36,129 +32,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 class ProductSetRepository extends AbstractRepository
 {
     private const int SYS_LANGUAGE_UID_DE = 0;
-
-    /**
-     *
-     * @return QueryResultInterface<ProductSet>|null
-     *
-     * @throws InvalidQueryException
-     */
-    public function findBySearchString(string $searchString = '', int $limit = 0): ?QueryResultInterface
-    {
-        $query = $this->createQuery();
-        $query->getQuerySettings()
-            ->setRespectStoragePage(false);
-
-        $productSetName = [];
-        $accessorykitName = [];
-        $searchStringArr = explode(' ', $searchString);
-        foreach ($searchStringArr as $searchStringArrVal) {
-            $productSetName[] = $query->like('name', '%' . $searchStringArrVal . '%');
-            $accessorykitName[] = $query->like('accessorykitGroups.accessoryKits.name', '%' . $searchStringArrVal . '%');
-        }
-
-        $query->matching(
-            $query->logicalAnd(
-                $query->logicalOr(
-                    // productSet
-                    $query->logicalAnd(...$productSetName),
-                    $query->like('productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
-                    $query->like('productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
-                    $query->like('productSetVariantGroups.products.name', '%' . $searchString . '%'),
-                    $query->like('productSetVariantGroups.products.articleNumber', '%' . $searchString . '%'),
-                    // accessoryKit
-                    $query->logicalAnd(...$accessorykitName),
-                    $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
-                    $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
-                    $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.products.name', '%' . $searchString . '%'),
-                    $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.products.articleNumber', '%' . $searchString . '%')
-                ),
-                $query->equals('is_accessory_kit', 0)
-            )
-        );
-
-        $query->setOrderings(
-            [
-                'is_featured' => QueryInterface::ORDER_DESCENDING,
-                'name' => QueryInterface::ORDER_ASCENDING,
-            ]
-        );
-
-        if ($limit !== 0) {
-            $query->setLimit($limit);
-        }
-
-        // TODO-a: - Notwenigkeit prüfen
-        //        /** @var Context $context */
-        //        $context = GeneralUtility::makeInstance(Context::class);
-        //        $languageUid = $GLOBALS['TSFE']->sys_language_uid;
-        //        /** @var LanguageAspect $languageAspect */
-        //        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $languageUid);
-        //        $context->setAspect('language', $languageAspect);
-        //        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
-
-        return $query->execute();
-    }
-
-    /**
-     * @param array<int> $accessoryKitUidList
-     *
-     * @return QueryResultInterface<ProductSet>|null
-     *
-     * @throws InvalidQueryException
-     */
-    public function findAccessoryKitByProductSetAndSearchString(array $accessoryKitUidList, string $searchString, int $limit): ?QueryResultInterface
-    {
-        // todo-a: TSFE
-        $sysLanguageUid = $GLOBALS['TSFE']->sys_language_uid;
-
-        $query = $this->createQuery();
-        $query->getQuerySettings()
-            ->setRespectStoragePage(false);
-
-        if ($sysLanguageUid != self::SYS_LANGUAGE_UID_DE) {
-            $accessoryKitList = $query->in('l10n_parent', $accessoryKitUidList);
-        } else {
-            $accessoryKitList = $query->in('uid', $accessoryKitUidList);
-        }
-
-        $accessoryKitName = [];
-        $searchStringArr = explode(' ', $searchString);
-        foreach ($searchStringArr as $searchStringArrVal) {
-            $accessoryKitName[] = $query->like('name', '%' . $searchStringArrVal . '%');
-        }
-
-        $query->matching(
-            $query->logicalAnd(
-                $query->equals('is_accessory_kit', 1),
-                $accessoryKitList,
-                $query->logicalOr(
-                    $query->logicalAnd(...$accessoryKitName),
-                    $query->like('productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
-                    $query->like('productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
-                    $query->like('productSetVariantGroups.products.name', '%' . $searchString . '%'),
-                    $query->like('productSetVariantGroups.products.articleNumber', '%' . $searchString . '%')
-                )
-            )
-        );
-
-        $query->setOrderings(
-            [
-                'productSetVariantGroups.products.name' => QueryInterface::ORDER_ASCENDING,
-            ]
-        );
-
-        if ($limit !== 0) {
-            $query->setLimit($limit);
-        }
-
-        //        $context = GeneralUtility::makeInstance(Context::class);
-        //        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
-        //        $context->setAspect('language', $languageAspect);
-        //        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
-
-        return $query->execute();
-    }
 
     /**
      * @param array<string> $productFinderFilter
@@ -169,8 +42,11 @@ class ProductSetRepository extends AbstractRepository
      */
     public function findByFilter(array $siteSettings, array $productFinderFilter = [], int $offset = 0, int $limit = 0): ?QueryResultInterface
     {
-        $pluginSignature = 'tx_gjoproducts_productfinder[';
         $query = $this->createQuery();
+        $query->getQuerySettings()
+            ->setRespectStoragePage(false);
+
+        $pluginSignature = 'tx_gjoproducts_productfinder[';
         $constraints = [];
         $constraints[] = $query->equals('is_accessory_kit', 0);
 
@@ -366,7 +242,6 @@ class ProductSetRepository extends AbstractRepository
                 );
             }
 
-
             if (isset($productFinderFilter[$pluginSignature . 't-close']) && $productFinderFilter[$pluginSignature . 't-close'] === '1') {
                 $constraints[] = $query->equals('filterTclose', 1);
             }
@@ -405,6 +280,128 @@ class ProductSetRepository extends AbstractRepository
                 'name' => QueryInterface::ORDER_ASCENDING,
             ]
         );
+
+        return $query->execute();
+    }
+
+    /**
+     * @return QueryResultInterface<ProductSet>|null
+     *
+     * @throws InvalidQueryException
+     */
+    public function findBySearchString(string $searchString = '', int $limit = 0): ?QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()
+            ->setRespectStoragePage(false);
+
+        $productSetName = [];
+        $accessorykitName = [];
+        $searchStringArr = explode(' ', $searchString);
+        foreach ($searchStringArr as $searchStringArrVal) {
+            $productSetName[] = $query->like('name', '%' . $searchStringArrVal . '%');
+            $accessorykitName[] = $query->like('accessorykitGroups.accessoryKits.name', '%' . $searchStringArrVal . '%');
+        }
+
+        $query->matching(
+            $query->logicalAnd(
+                $query->logicalOr(
+                    // productSet
+                    $query->logicalAnd(...$productSetName),
+                    $query->like('productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
+                    $query->like('productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
+                    $query->like('productSetVariantGroups.products.name', '%' . $searchString . '%'),
+                    $query->like('productSetVariantGroups.products.articleNumber', '%' . $searchString . '%'),
+                    // accessoryKit
+                    $query->logicalAnd(...$accessorykitName),
+                    $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
+                    $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
+                    $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.products.name', '%' . $searchString . '%'),
+                    $query->like('accessorykitGroups.accessoryKits.productSetVariantGroups.products.articleNumber', '%' . $searchString . '%')
+                ),
+                $query->equals('is_accessory_kit', 0)
+            )
+        );
+
+        $query->setOrderings(
+            [
+                'is_featured' => QueryInterface::ORDER_DESCENDING,
+                'name' => QueryInterface::ORDER_ASCENDING,
+            ]
+        );
+
+        if ($limit !== 0) {
+            $query->setLimit($limit);
+        }
+
+        // TODO-a: - Notwenigkeit prüfen
+        //        /** @var Context $context */
+        //        $context = GeneralUtility::makeInstance(Context::class);
+        //        $languageUid = $GLOBALS['TSFE']->sys_language_uid;
+        //        /** @var LanguageAspect $languageAspect */
+        //        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $languageUid);
+        //        $context->setAspect('language', $languageAspect);
+        //        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
+
+        return $query->execute();
+    }
+
+    /**
+     * @param array<int> $accessoryKitUidList
+     *
+     * @return QueryResultInterface<ProductSet>|null
+     *
+     * @throws InvalidQueryException
+     */
+    public function findAccessoryKitByProductSetAndSearchString(array $accessoryKitUidList, string $searchString, int $limit): ?QueryResultInterface
+    {
+        // todo-a: TSFE
+        $sysLanguageUid = $GLOBALS['TSFE']->sys_language_uid;
+
+        $query = $this->createQuery();
+        $query->getQuerySettings()
+            ->setRespectStoragePage(false);
+
+        if ($sysLanguageUid != self::SYS_LANGUAGE_UID_DE) {
+            $accessoryKitList = $query->in('l10n_parent', $accessoryKitUidList);
+        } else {
+            $accessoryKitList = $query->in('uid', $accessoryKitUidList);
+        }
+
+        $accessoryKitName = [];
+        $searchStringArr = explode(' ', $searchString);
+        foreach ($searchStringArr as $searchStringArrVal) {
+            $accessoryKitName[] = $query->like('name', '%' . $searchStringArrVal . '%');
+        }
+
+        $query->matching(
+            $query->logicalAnd(
+                $query->equals('is_accessory_kit', 1),
+                $accessoryKitList,
+                $query->logicalOr(
+                    $query->logicalAnd(...$accessoryKitName),
+                    $query->like('productSetVariantGroups.productSetVariants.name', '%' . $searchString . '%'),
+                    $query->like('productSetVariantGroups.productSetVariants.articleNumber', '%' . $searchString . '%'),
+                    $query->like('productSetVariantGroups.products.name', '%' . $searchString . '%'),
+                    $query->like('productSetVariantGroups.products.articleNumber', '%' . $searchString . '%')
+                )
+            )
+        );
+
+        $query->setOrderings(
+            [
+                'productSetVariantGroups.products.name' => QueryInterface::ORDER_ASCENDING,
+            ]
+        );
+
+        if ($limit !== 0) {
+            $query->setLimit($limit);
+        }
+
+        //        $context = GeneralUtility::makeInstance(Context::class);
+        //        $languageAspect = GeneralUtility::makeInstance(LanguageAspect::class, $sysLanguageUid);
+        //        $context->setAspect('language', $languageAspect);
+        //        $query->getQuerySettings()->setLanguageAspect($context->getAspect('language'));
 
         return $query->execute();
     }

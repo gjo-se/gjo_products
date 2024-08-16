@@ -2,19 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
- */
-
 namespace GjoSe\GjoProducts\Middleware;
 
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
@@ -29,15 +16,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 
-/**
- * This middleware can be used to retrieve a list of seasons with their according translation.
- * To get the correct translation the URL must be within a base path defined in site
- * handling. Some examples:
- * "/en/haiku-season-list.json" for English translation (if /en is the configured base path)
- * "/de/haiku-season-list.json" for German translation (if /de is the configured base path)
- * If the base path is not available in the according site the default language will be used.
- */
 final class GetProductFinderListMiddleware implements MiddlewareInterface
 {
     private const string QUERY_PARAM_KEY = 'middleware';
@@ -96,14 +76,6 @@ final class GetProductFinderListMiddleware implements MiddlewareInterface
         );
         $productSetsCount = $filteredProductSets->count();
 
-        $breakpoints = [
-            0 => ['cropVariant' => 'wideScreen', 'media' => '(min-width: 1200px)', 'srcset' => [0 => 1100]],
-            1 => ['cropVariant' => 'desktop', 'media' => '(min-width: 992px)', 'srcset' => [0 => 950]],
-            2 => ['cropVariant' => 'laptop', 'media' => '(min-width: 768px)', 'srcset' => [0 => 720]],
-            3 => ['cropVariant' => 'tablet', 'media' => '(min-width: 576px)', 'srcset' => [0 => 540]],
-            4 => ['cropVariant' => 'mobile', 'media' => '(min-width: 300px)', 'srcset' => [0 => 350]],
-        ];
-
         /** @var StandaloneView $standAloneView */
         $standAloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standAloneView->setTemplatePathAndFilename(
@@ -116,7 +88,7 @@ final class GetProductFinderListMiddleware implements MiddlewareInterface
         ]);
         $standAloneView->assign('productSets', $productSets);
         $standAloneView->assign('productSetsCount', $productSetsCount);
-        $standAloneView->assign('breakpoints', $breakpoints);
+        $standAloneView->assign('breakpoints', CroppingUtility::getDefaultBreakpoints());
 
         return new HtmlResponse($standAloneView->render());
     }

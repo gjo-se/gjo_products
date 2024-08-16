@@ -10,7 +10,6 @@ use GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository;
 use GjoSe\GjoSitePackage\Controller\AbstractController;
 use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 
 final class ProductController extends AbstractController
@@ -19,7 +18,6 @@ final class ProductController extends AbstractController
         private readonly ProductGroupRepository $productGroupRepository,
         private readonly ProductSetRepository $productSetRepository,
         private readonly ProductSetTypeRepository $productSetTypeRepository,
-        private readonly Context $context,
     ) {}
 
     public function showProductGroupTeaserAction(): ResponseInterface

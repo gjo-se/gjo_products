@@ -1,34 +1,38 @@
 plugin.tx_gjoproducts {
-    view {
-        templateRootPath = {$plugin.tx_gjoproducts.view.templateRootPath}
-        layoutRootPaths {
-            10 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.layoutRootPath}
-        }
-
-        partialRootPaths {
-            10 = {$plugin.tx_gjoproducts.view.partialRootPath}
-            20 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.partialRootPath}
-            30 = {$plugin.tx_gjobase.view.partialRootPath}
-        }
+  view {
+    templateRootPath = {$plugin.tx_gjoproducts.view.templateRootPath}
+    layoutRootPaths {
+      10 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.layoutRootPath}
     }
 
-    settings {
-
-        placeholder {
-            imageActive75 = https://via.placeholder.com/75/000
-            imageDefault75 = https://via.placeholder.com/75/f8f9fa
-            imageDisabled75 = https://via.placeholder.com/75/dee2e6/?text=disabled
-
-            imageDefault100 = https://via.placeholder.com/100/f8f9fa
-            imageDisabled100 = https://via.placeholder.com/100/dee2e6/?text=disabled
-
-            imageDefault120 = https://via.placeholder.com/120/f8f9fa
-            imageDisabled120 = https://via.placeholder.com/120/dee2e6/?text=disabled
-
-            imageDefault150 = https://via.placeholder.com/150/f8f9fa
-            imageDisabled150 = https://via.placeholder.com/150/dee2e6/?text=disabled
-        }
+    partialRootPaths {
+      10 = {$plugin.tx_gjoproducts.view.partialRootPath}
+      20 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.partialRootPath}
+      30 = {$plugin.tx_gjobase.view.partialRootPath}
     }
+  }
+
+#  persistence {
+#    storagePid = 46
+#  }
+
+  settings {
+
+    placeholder {
+      imageActive75 = https://via.placeholder.com/75/000
+      imageDefault75 = https://via.placeholder.com/75/f8f9fa
+      imageDisabled75 = https://via.placeholder.com/75/dee2e6/?text=disabled
+
+      imageDefault100 = https://via.placeholder.com/100/f8f9fa
+      imageDisabled100 = https://via.placeholder.com/100/dee2e6/?text=disabled
+
+      imageDefault120 = https://via.placeholder.com/120/f8f9fa
+      imageDisabled120 = https://via.placeholder.com/120/dee2e6/?text=disabled
+
+      imageDefault150 = https://via.placeholder.com/150/f8f9fa
+      imageDisabled150 = https://via.placeholder.com/150/dee2e6/?text=disabled
+    }
+  }
 }
 
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:gjo_products/Configuration/TypoScript/_autocomplete.ts">
