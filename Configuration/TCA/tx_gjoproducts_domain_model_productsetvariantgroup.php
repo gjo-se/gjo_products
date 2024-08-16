@@ -21,6 +21,8 @@ declare(strict_types=1);
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use GjoSe\GjoSitePackage\Utility\TcaUtility;
+
 return call_user_func(function (): array {
 
     $ext = 'gjo_products';
@@ -129,8 +131,8 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.headline',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'description' => [
@@ -141,7 +143,7 @@ return call_user_func(function (): array {
                     'type' => 'text',
                     'cols' => 40,
                     'rows' => 6,
-                    'enableRichtext' => true
+                    'enableRichtext' => true,
                 ],
             ],
 
@@ -150,80 +152,25 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.table_headline',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
-            ],
-
-
-            ###############################################################################
-
-            'sys_language_uid' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
-                'config' => [
-                    'type' => 'language',
-                ]
-            ],
-
-            'l10n_parent' => [
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        [
-                            'label' => '',
-                            'value' => 0
-                        ],
-                    ],
-                    'foreign_table' => $table,
-                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
-                    'default' => 0,
-                ],
-
-            ],
-
-            'l10n_source' => [
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'label' => 'Translation source',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        ['label' => '', 'value' => 0],
-                    ],
-                    'foreign_table' => $table,
-                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
-                    'default' => 0,
+                    'type' => 'input',
                 ],
             ],
 
-            'l10n_diffsource' => [
-                'config' => [
-                    'type' => 'passthrough',
-                    'default' => '',
-                ],
-            ],
+            ...TcaUtility::getDefaultTcaColumns($table),
 
-            'hidden' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-                'config' => [
-                    'type' => 'check',
-                ],
-            ],
         ],
 
         'types' => [
             '0' => [
                 'showitem' => '
-                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, 
-                            table_headline, 
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
+                            table_headline,
                             products,
                             product_set_variants,
-                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                             hidden,
             ',
-            ]
+            ],
         ],
     ];
 });

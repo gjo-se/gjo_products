@@ -21,6 +21,8 @@ declare(strict_types=1);
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use GjoSe\GjoSitePackage\Utility\TcaUtility;
+
 return call_user_func(function (): array {
 
     $ext = 'gjo_products';
@@ -66,8 +68,8 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.name',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'article_number' => [
@@ -75,8 +77,8 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.article_number',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'price' => [
@@ -97,7 +99,7 @@ return call_user_func(function (): array {
                 'config' => [
                     'type' => 'input',
                     'default' => 0,
-                ]
+                ],
             ],
 
             'material' => [
@@ -148,7 +150,7 @@ return call_user_func(function (): array {
                 'config' => [
                     'type' => 'input',
                     'default' => 0,
-                ]
+                ],
             ],
 
             'version' => [
@@ -264,65 +266,11 @@ return call_user_func(function (): array {
                         ],
                     ],
                     'default' => 0,
-                ]
-            ],
-
-            ###############################################################################
-
-            'sys_language_uid' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
-                'config' => [
-                    'type' => 'language',
-                ]
-            ],
-
-            'l10n_parent' => [
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        [
-                            'label' => '',
-                            'value' => 0
-                        ],
-                    ],
-                    'foreign_table' => $table,
-                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
-                    'default' => 0,
-                ],
-
-            ],
-
-            'l10n_source' => [
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'label' => 'Translation source',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        ['label' => '', 'value' => 0],
-                    ],
-                    'foreign_table' => $table,
-                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
-                    'default' => 0,
                 ],
             ],
 
-            'l10n_diffsource' => [
-                'config' => [
-                    'type' => 'passthrough',
-                    'default' => '',
-                ],
-            ],
+            ...TcaUtility::getDefaultTcaColumns($table),
 
-            'hidden' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-                'config' => [
-                    'type' => 'check',
-                ],
-            ],
         ],
 
         'types' => [
@@ -340,7 +288,7 @@ return call_user_func(function (): array {
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, 
                             hidden,
             ',
-            ]
+            ],
         ],
     ];
 });

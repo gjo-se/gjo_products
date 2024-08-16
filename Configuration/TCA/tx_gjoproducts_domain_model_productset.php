@@ -21,7 +21,7 @@ declare(strict_types=1);
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoSitePackage\Utility\CroppingUtility;
+use GjoSe\GjoSitePackage\Utility\TcaUtility;
 
 return call_user_func(function (): array {
 
@@ -133,8 +133,8 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.name',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'anchor' => [
@@ -143,8 +143,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:is_accessory_kit:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'is_accessory_kit' => [
@@ -172,7 +172,7 @@ return call_user_func(function (): array {
                     'type' => 'text',
                     'cols' => 40,
                     'rows' => 6,
-                    'enableRichtext' => true
+                    'enableRichtext' => true,
                 ],
             ],
 
@@ -214,7 +214,7 @@ return call_user_func(function (): array {
                 'config' => [
                     'type' => 'input',
 
-                ]
+                ],
             ],
 
             'maximum_door_weight' => [
@@ -225,7 +225,7 @@ return call_user_func(function (): array {
                 'config' => [
                     'type' => 'input',
 
-                ]
+                ],
             ],
 
             'height' => [
@@ -234,8 +234,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'minimum_door_thickness' => [
@@ -244,8 +244,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'maximum_door_thickness' => [
@@ -254,8 +254,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'minimum_door_width' => [
@@ -264,8 +264,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'maximum_door_width' => [
@@ -274,8 +274,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'minimum_door_width_soft_close' => [
@@ -284,8 +284,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'minimum_door_width_soft_close_long' => [
@@ -294,8 +294,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'minimum_door_width_soft_close_both' => [
@@ -304,8 +304,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'voltage' => [
@@ -314,8 +314,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_technicalnots:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'show_din' => [
@@ -333,8 +333,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'durability' => [
@@ -343,8 +343,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'door_weight' => [
@@ -353,8 +353,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'fire_resistance' => [
@@ -363,8 +363,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'safety' => [
@@ -373,8 +373,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'corrosion_resistance' => [
@@ -383,8 +383,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'security' => [
@@ -393,8 +393,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'door_type' => [
@@ -403,8 +403,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'initial_friction' => [
@@ -413,8 +413,8 @@ return call_user_func(function (): array {
                 'l10n_mode' => 'prefixLangTitle',
                 'displayCond' => 'FIELD:show_din:REQ:true',
                 'config' => [
-                    'type' => 'input'
-                ]
+                    'type' => 'input',
+                ],
             ],
 
             'invitation_to_tender' => [
@@ -424,7 +424,7 @@ return call_user_func(function (): array {
                     'type' => 'text',
                     'cols' => 40,
                     'rows' => 6,
-                    'enableRichtext' => true
+                    'enableRichtext' => true,
                 ],
             ],
 
@@ -490,8 +490,8 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.filter_material_wood',
                 'displayCond' => 'FIELD:is_accessory_kit:REQ:false',
                 'config' => [
-                    'type' => 'check'
-                ]
+                    'type' => 'check',
+                ],
             ],
 
             'filter_material_glas' => [
@@ -513,7 +513,7 @@ return call_user_func(function (): array {
                     'items' => [
                         ['label' => '1-flügelig', 'value' => 1],
                         ['label' => '2-flügelig', 'value' => 2],
-                        ['label' => '3-flügelig', 'value' => 3]
+                        ['label' => '3-flügelig', 'value' => 3],
                     ],
                 ],
             ],
@@ -617,62 +617,7 @@ return call_user_func(function (): array {
                 ],
             ],
 
-            ###############################################################################
-
-            'sys_language_uid' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
-                'config' => [
-                    'type' => 'language',
-                ]
-            ],
-
-            'l10n_parent' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        [
-                            'label' => '',
-                            'value' => 0
-                        ],
-                    ],
-                    'foreign_table' => $table,
-                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
-                    'default' => 0,
-                ],
-
-            ],
-
-            'l10n_source' => [
-                'label' => 'Translation source',
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        ['label' => '', 'value' => 0],
-                    ],
-                    'foreign_table' => $table,
-                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
-                    'default' => 0,
-                ],
-            ],
-
-            'l10n_diffsource' => [
-                'config' => [
-                    'type' => 'passthrough',
-                    'default' => '',
-                ],
-            ],
-
-            'hidden' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-                'config' => [
-                    'type' => 'check',
-                ],
-            ],
+            ...TcaUtility::getDefaultTcaColumns($table),
 
         ],
 
@@ -731,7 +676,7 @@ return call_user_func(function (): array {
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                             hidden,
             ',
-            ]
+            ],
         ],
 
         'palettes' => [
@@ -739,13 +684,13 @@ return call_user_func(function (): array {
                 'showitem' => '
                 name,
                 is_accessory_kit
-        '
+        ',
             ],
             'material' => [
                 'showitem' => '
                 filter_material_wood,
                 filter_material_glas
-        '
+        ',
             ],
             'design' => [
                 'showitem' => '
@@ -753,7 +698,7 @@ return call_user_func(function (): array {
                 filter_design_alu,
                 filter_design_design
 
-         '
+         ',
             ],
             'configuration' => [
                 'showitem' => '
@@ -765,14 +710,14 @@ return call_user_func(function (): array {
                   filter_telescop3,
                   filter_tclose,
                   filter_tmaster
-        '
+        ',
             ],
             'montage' => [
                 'showitem' => '
                 filter_montage_wall,
                 filter_montage_ceiling,
                 filter_montage_in
-        '
+        ',
             ],
         ],
     ];

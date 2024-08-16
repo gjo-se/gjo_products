@@ -21,7 +21,7 @@ declare(strict_types=1);
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use GjoSe\GjoSitePackage\Utility\CroppingUtility;
+use GjoSe\GjoSitePackage\Utility\TcaUtility;
 
 return call_user_func(function (): array {
 
@@ -101,7 +101,7 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.header',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
+                    'type' => 'input',
                 ],
             ],
 
@@ -110,7 +110,7 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.sub_header',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
+                    'type' => 'input',
                 ],
             ],
 
@@ -140,7 +140,7 @@ return call_user_func(function (): array {
                 'description' => $lll . $table . '.teaser_header',
                 'l10n_mode' => 'prefixLangTitle',
                 'config' => [
-                    'type' => 'input'
+                    'type' => 'input',
                 ],
             ],
 
@@ -151,7 +151,7 @@ return call_user_func(function (): array {
                     'type' => 'text',
                     'cols' => 40,
                     'rows' => 6,
-                    'enableRichtext' => true
+                    'enableRichtext' => true,
                 ],
             ],
 
@@ -165,62 +165,7 @@ return call_user_func(function (): array {
                 ],
             ],
 
-            ###############################################################################
-
-            'sys_language_uid' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
-                'config' => [
-                    'type' => 'language',
-                ]
-            ],
-
-            'l10n_parent' => [
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        [
-                            'label' => '',
-                            'value' => 0
-                        ],
-                    ],
-                    'foreign_table' => $table,
-                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.sys_language_uid IN (-1,0)',
-                    'default' => 0,
-                ],
-
-            ],
-
-            'l10n_source' => [
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'label' => 'Translation source',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        ['label' => '', 'value' => 0],
-                    ],
-                    'foreign_table' => $table,
-                    'foreign_table_where' => 'AND' . $table . '.pid=###CURRENT_PID### AND ' . $table . '.uid!=###THIS_UID###',
-                    'default' => 0,
-                ],
-            ],
-
-            'l10n_diffsource' => [
-                'config' => [
-                    'type' => 'passthrough',
-                    'default' => '',
-                ],
-            ],
-
-            'hidden' => [
-                'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-                'config' => [
-                    'type' => 'check',
-                ],
-            ],
+            ...TcaUtility::getDefaultTcaColumns($table),
 
         ],
 
