@@ -7,9 +7,9 @@ return [
             'after' => [
                 'typo3/cms-frontend/backend-user-authentication',
             ],
-//            'before' => [
-//                'typo3/cms-frontend/authentication',
-//            ],
+            //            'before' => [
+            //                'typo3/cms-frontend/authentication',
+            //            ],
         ],
     ],
 ];

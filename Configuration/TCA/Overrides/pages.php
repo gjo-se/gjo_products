@@ -9,7 +9,7 @@ call_user_func(function (): void {
 
     ExtensionManagementUtility::registerPageTSConfigFile(
         $extensionKey,
-        'Configuration/TsConfig/Page/Page.tsconfig',
+        'Configuration/TsConfig/Page/_Page.tsconfig',
         'GjoSe Products'
     );
 });
