@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 
+// @todo-methodClean:
+// foreach file in folder
+
 return (function (): array {
     $iconList = [];
     foreach ([

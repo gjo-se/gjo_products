@@ -28,6 +28,11 @@ final class GetProductFinderListMiddleware implements MiddlewareInterface
 
     private const int OFFSET = 0;
 
+    public function __construct(
+        private readonly ProductSetRepository $productSetRepository,
+        private readonly StandaloneView $standAloneView
+    ) {}
+
     /**
      * @throws InvalidQueryException
      */
@@ -58,11 +63,8 @@ final class GetProductFinderListMiddleware implements MiddlewareInterface
             $offset = (int)$postParams['offset'];
         }
 
-        /** @var ProductSetRepository $productSetRepository */
-        $productSetRepository = GeneralUtility::makeInstance(ProductSetRepository::class);
-
         /** @var QueryResultInterface<ProductSet> $productSets */
-        $productSets = $productSetRepository->findByFilter(
+        $productSets = $this->productSetRepository->findByFilter(
             $siteSettings,
             $productFinderFilter,
             (int)$offset,
@@ -70,26 +72,24 @@ final class GetProductFinderListMiddleware implements MiddlewareInterface
         );
 
         /** @var QueryResultInterface<ProductSet> $filteredProductSets */
-        $filteredProductSets = $productSetRepository->findByFilter(
+        $filteredProductSets = $this->productSetRepository->findByFilter(
             $siteSettings,
             $productFinderFilter
         );
         $productSetsCount = $filteredProductSets->count();
 
-        /** @var StandaloneView $standAloneView */
-        $standAloneView = GeneralUtility::makeInstance(StandaloneView::class);
-        $standAloneView->setTemplatePathAndFilename(
+        $this->standAloneView->setTemplatePathAndFilename(
             GeneralUtility::getFileAbsFileName($siteView['templateRootPaths'][0] . 'Product/ProductFinderList.html')
         );
-        $standAloneView->setPartialRootPaths([
+        $this->standAloneView->setPartialRootPaths([
             GeneralUtility::getFileAbsFileName($siteView['partialRootPaths'][0]),
             GeneralUtility::getFileAbsFileName($siteView['partialRootPaths'][1] . 'ContentElements/'),
             GeneralUtility::getFileAbsFileName($siteView['partialRootPaths'][2]),
         ]);
-        $standAloneView->assign('productSets', $productSets);
-        $standAloneView->assign('productSetsCount', $productSetsCount);
-        $standAloneView->assign('breakpoints', CroppingUtility::getDefaultBreakpoints());
+        $this->standAloneView->assign('productSets', $productSets);
+        $this->standAloneView->assign('productSetsCount', $productSetsCount);
+        $this->standAloneView->assign('breakpoints', CroppingUtility::getDefaultBreakpoints());
 
-        return new HtmlResponse($standAloneView->render());
+        return new HtmlResponse($this->standAloneView->render());
     }
 }
