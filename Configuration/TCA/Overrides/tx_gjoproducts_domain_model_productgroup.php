@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 
-call_user_func(function (): void {
+(function (): void {
 
     $table = 'tx_gjoproducts_domain_model_productgroup';
 
@@ -13,4 +13,4 @@ call_user_func(function (): void {
     $column = 'teaser_image';
     CroppingUtility::setCropVariants($table, $column);
 
-});
+})();

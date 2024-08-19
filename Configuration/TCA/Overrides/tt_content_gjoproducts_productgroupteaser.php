@@ -5,10 +5,11 @@ declare(strict_types=1);
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-function registerProductGroupTeaserPlugin(): void
-{
+(function (): void {
+    $extensionKey = 'gjo_products';
+
     $pluginSignature = ExtensionUtility::registerPlugin(
-        'GjoProducts',
+        $extensionKey,
         'ProductGroupTeaser',
         'GjoSe - ProductGroupTeaser',
         null,
@@ -23,7 +24,10 @@ function registerProductGroupTeaserPlugin(): void
 
     $table = 'tt_content';
     $column = 'pi_flexform';
-    ExtensionManagementUtility::addToAllTCAtypes($table, $column, $pluginSignature, 'after:header');
-}
-
-registerProductGroupTeaserPlugin();
+    ExtensionManagementUtility::addToAllTCAtypes(
+        $table,
+        $column,
+        $pluginSignature,
+        'after:header'
+    );
+})();

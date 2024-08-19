@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-call_user_func(function (): void {
+(function (): void {
     $extensionKey = 'gjo_products';
 
     ExtensionManagementUtility::registerPageTSConfigFile(
@@ -12,4 +12,4 @@ call_user_func(function (): void {
         'Configuration/TsConfig/Page/_Page.tsconfig',
         'GjoSe Products'
     );
-});
+})();

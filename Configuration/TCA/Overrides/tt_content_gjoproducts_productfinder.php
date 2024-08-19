@@ -2,18 +2,16 @@
 
 declare(strict_types=1);
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-function registerProductFinderPlugin(): void
-{
-    $pluginSignature = ExtensionUtility::registerPlugin(
-        'GjoProducts',
+(function (): void {
+    $extensionKey = 'gjo_products';
+
+    ExtensionUtility::registerPlugin(
+        $extensionKey,
         'ProductFinder',
         'GjoSe - ProductFinder',
         null,
         'gjose-products'
     );
-}
-
-registerProductFinderPlugin();
+})();
