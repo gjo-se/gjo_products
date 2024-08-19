@@ -33,12 +33,12 @@ final class ProductGroup extends AbstractEntity
     protected ?FileReference $teaserImage = null;
 
 
-    public function __construct()
+    private function __construct()
     {
         $this->initStorageObjects();
     }
 
-    protected function initStorageObjects(): void
+    private function initStorageObjects(): void
     {
         $this->productSetTypes = new ObjectStorage();
     }

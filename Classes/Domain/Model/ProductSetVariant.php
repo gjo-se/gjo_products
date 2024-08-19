@@ -28,12 +28,12 @@ final class ProductSetVariant extends AbstractEntity
 
     protected int $tax = 0;
 
-    public function __construct()
+    private function __construct()
     {
         $this->initStorageObjects();
     }
 
-    protected function initStorageObjects(): void
+    private function initStorageObjects(): void
     {
         $this->productSetVariantGroup = new ObjectStorage();
     }
