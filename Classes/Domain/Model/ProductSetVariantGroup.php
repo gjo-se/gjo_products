@@ -4,53 +4,28 @@ declare(strict_types=1);
 
 namespace GjoSe\GjoProducts\Domain\Model;
 
-/***************************************************************
- *  created: 04.09.17 - 15:45
- *  Copyright notice
- *  (c) 2017 Gregory Jo Erdmann <gregory.jo@gjo-se.com>
- *  All rights reserved
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-/**
- * Class ProductSetVariantGroup
- */
-class ProductSetVariantGroup extends AbstractEntity
+final class ProductSetVariantGroup extends AbstractEntity
 {
+    /** @var ObjectStorage<ProductSetVariant> */
+    #[Lazy()]
+    protected ObjectStorage $productSetVariants;
+
+    /** @var ObjectStorage<Product> */
+    #[Lazy()]
+    protected ObjectStorage $products;
+
+    #[Lazy()]
+    protected ?ProductSet $productSet = null;
+
     protected string $headline = '';
 
     protected string $description = '';
 
     protected string $tableHeadline = '';
-
-    protected ?ProductSet $productSet = null;
-
-    /**
-     * @var ObjectStorage<ProductSetVariant>
-     */
-    #[Lazy]
-    protected ObjectStorage $productSetVariants;
-
-    /**
-     * @var ObjectStorage<Product>
-     */
-    #[Lazy]
-    protected ObjectStorage $products;
 
     public function __construct()
     {
@@ -83,17 +58,13 @@ class ProductSetVariantGroup extends AbstractEntity
         return $this->productSet;
     }
 
-    /**
-     * @return ObjectStorage<ProductSetVariant>
-     */
+    /** @return ObjectStorage<ProductSetVariant> */
     public function getProductSetVariants(): ObjectStorage
     {
         return $this->productSetVariants;
     }
 
-    /**
-     * @return ObjectStorage<Product>
-     */
+    /** @return ObjectStorage<Product> */
     public function getProducts(): ObjectStorage
     {
         return $this->products;

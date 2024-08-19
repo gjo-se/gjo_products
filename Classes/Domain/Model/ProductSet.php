@@ -4,25 +4,7 @@ declare(strict_types=1);
 
 namespace GjoSe\GjoProducts\Domain\Model;
 
-/***************************************************************
- *  created: 04.09.17 - 14:50
- *  Copyright notice
- *  (c) 2017 Gregory Jo Erdmann <gregory.jo@gjo-se.com>
- *  All rights reserved
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use GjoSe\GjoSitePackage\Domain\Model\Pages;
@@ -33,6 +15,16 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class ProductSet extends AbstractEntity
 {
+    /** @var ObjectStorage<ProductSetVariantGroup> */
+    #[Lazy()]
+    protected ObjectStorage $productSetVariantGroups;
+
+    /** @var ObjectStorage<AccessorykitGroup> */
+    #[Lazy()]
+    protected ObjectStorage $accessorykitGroups;
+
+    protected ?Pages $page = null;
+
     protected string $name = '';
 
     protected string $anchor = '';
@@ -97,19 +89,16 @@ class ProductSet extends AbstractEntity
 
     protected string $filterWingcount = '';
 
-    /**
-     * @var ObjectStorage<FileReference>
-     */
+    /** @var ObjectStorage<FileReference> */
+    #[Lazy()]
     protected ObjectStorage $downloads;
 
-    /**
-     * @var ObjectStorage<FileReference>
-     */
+    /** @var ObjectStorage<FileReference> */
+    #[Lazy()]
     protected ObjectStorage $downloadEngineeringDrawings;
 
-    /**
-     * @var ObjectStorage<FileReference>
-     */
+    /** @var ObjectStorage<FileReference> */
+    #[Lazy()]
     protected ObjectStorage $imageEngineeringDrawings;
 
     protected bool $filterDesignCustomer = false;
@@ -139,18 +128,6 @@ class ProductSet extends AbstractEntity
     protected bool $filterMontageWall = false;
 
     protected bool $filterMontageCeiling = false;
-
-    /**
-     * @var ObjectStorage<ProductSetVariantGroup>
-     */
-    protected ObjectStorage $productSetVariantGroups;
-
-    /**
-     * @var ObjectStorage<AccessorykitGroup>
-     */
-    protected ObjectStorage $accessorykitGroups;
-
-    protected ?Pages $page = null;
 
     public function __construct()
     {
@@ -306,25 +283,19 @@ class ProductSet extends AbstractEntity
         return $this->invitationToTender;
     }
 
-    /**
-     * @return ObjectStorage<FileReference>
-     */
+    /** @return ObjectStorage<FileReference> */
     public function getDownloads(): ObjectStorage
     {
         return $this->downloads;
     }
 
-    /**
-     * @return ObjectStorage<FileReference>
-     */
+    /** @return ObjectStorage<FileReference> */
     public function getDownloadEngineeringDrawings(): ObjectStorage
     {
         return $this->downloadEngineeringDrawings;
     }
 
-    /**
-     * @return ObjectStorage<FileReference>
-     */
+    /** @return ObjectStorage<FileReference> */
     public function getImageEngineeringDrawings(): ObjectStorage
     {
         return $this->imageEngineeringDrawings;
@@ -420,17 +391,13 @@ class ProductSet extends AbstractEntity
         return $this->filterTelescop3;
     }
 
-    /**
-     * @return ObjectStorage<ProductSetVariantGroup>
-     */
+    /** @return ObjectStorage<ProductSetVariantGroup> */
     public function getProductSetVariantGroups(): ObjectStorage
     {
         return $this->productSetVariantGroups;
     }
 
-    /**
-     * @return ObjectStorage<AccessorykitGroup>
-     */
+    /** @return ObjectStorage<AccessorykitGroup> */
     public function getAccessorykitGroups(): ObjectStorage
     {
         return $this->accessorykitGroups;
