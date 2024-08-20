@@ -21,7 +21,7 @@ final class ProductSetType extends AbstractEntity
 
     protected string $description = '';
 
-    private function __construct()
+    public function __construct()
     {
         $this->initStorageObjects();
     }

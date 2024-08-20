@@ -129,7 +129,7 @@ class ProductSet extends AbstractEntity
 
     protected bool $filterMontageCeiling = false;
 
-    private function __construct()
+    public function __construct()
     {
         $this->initStorageObjects();
     }

@@ -6,23 +6,19 @@ namespace GjoSe\GjoProducts\Middleware;
 
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
+use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
-use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
-use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 
-final class GetProductFinderListMiddleware implements MiddlewareInterface
+final class GetProductFinderListMiddleware extends AbstractMiddleware implements MiddlewareInterface
 {
-    private const string QUERY_PARAM_KEY = 'middleware';
-
-    private const string QUERY_PARAM_VALUE = 'getProductFinderList';
+    private const string QUERY_PARAM_SEARCH_VALUE = 'getProductFinderList';
 
     private const int LIMIT = 6;
 
@@ -30,7 +26,7 @@ final class GetProductFinderListMiddleware implements MiddlewareInterface
 
     public function __construct(
         private readonly ProductSetRepository $productSetRepository,
-        private readonly StandaloneView $standAloneView
+        private readonly StandaloneView $standaloneView
     ) {}
 
     /**
@@ -41,55 +37,58 @@ final class GetProductFinderListMiddleware implements MiddlewareInterface
         RequestHandlerInterface $handler
     ): ResponseInterface {
 
-        /** @var string $queryParamValue */
-        $queryParamValue = $request->getQueryParams()[self::QUERY_PARAM_KEY] ?? '';
-        if ($queryParamValue !== self::QUERY_PARAM_VALUE) {
-            return $handler->handle($request);
+        $this->request = $request;
+
+        if (!$this->checkRequestHasQueryParamSearchValue(self::QUERY_PARAM_SEARCH_VALUE)) {
+            return $handler->handle($this->request);
         }
 
-        /** @var array<string, array<string>> $postParams */
-        $postParams = $request->getParsedBody();
+        $this->configureStandaloneView($this->standaloneView);
+        $this->standaloneView->assign('productSets', $this->getProductSets());
+        $this->standaloneView->assign('productSetsCount', $this->getProductSetsCount());
+        $this->standaloneView->assign('breakpoints', CroppingUtility::getDefaultBreakpoints());
 
-        /** @var array<string> $productFinderFilter */
-        $productFinderFilter = $postParams['productFinderFilter'] ?? [];
+        return new HtmlResponse($this->standaloneView->render());
+    }
 
-        /** @var Site $site */
-        $site = $request->getAttribute('site');
-        $siteSettings = $site->getConfiguration()['settings'] ?? [];
-        $siteView = $site->getConfiguration()['view'] ?? [];
+    /** @return array */
+    private function getProductFinderFilter(): array
+    {
+        $postParams = $this->getPostParams();
+        return is_array($postParams) ? ($postParams['productFinderFilter'] ?? []) : [];
+    }
 
-        $offset = self::OFFSET;
-        if (isset($postParams['offset']) && $postParams['offset'] !== 'NaN') {
-            $offset = (int)$postParams['offset'];
-        }
+    private function getOffset(): int
+    {
+        $postParams = $this->getPostParams();
+        return is_array($postParams) && isset($postParams['offset']) && $postParams['offset'] !== 'NaN' ? (int)$postParams['offset'] : self::OFFSET;
+    }
 
-        /** @var QueryResultInterface<ProductSet> $productSets */
-        $productSets = $this->productSetRepository->findByFilter(
-            $siteSettings,
-            $productFinderFilter,
-            (int)$offset,
+    /**
+     * @throws InvalidQueryException
+     *
+     * @return ?QueryResultInterface<ProductSet>
+     */
+    private function getProductSets(): ?QueryResultInterface
+    {
+        return $this->productSetRepository->findByFilter(
+            $this->getSiteSettings(),
+            $this->getProductFinderFilter(),
+            $this->getOffset(),
             self::LIMIT
         );
+    }
 
-        /** @var QueryResultInterface<ProductSet> $filteredProductSets */
+    /**
+     * @throws InvalidQueryException
+     */
+    private function getProductSetsCount(): int
+    {
         $filteredProductSets = $this->productSetRepository->findByFilter(
-            $siteSettings,
-            $productFinderFilter
+            $this->getSiteSettings(),
+            $this->getProductFinderFilter()
         );
-        $productSetsCount = $filteredProductSets->count();
 
-        $this->standAloneView->setTemplatePathAndFilename(
-            GeneralUtility::getFileAbsFileName($siteView['templateRootPaths'][0] . 'Product/ProductFinderList.html')
-        );
-        $this->standAloneView->setPartialRootPaths([
-            GeneralUtility::getFileAbsFileName($siteView['partialRootPaths'][0]),
-            GeneralUtility::getFileAbsFileName($siteView['partialRootPaths'][1] . 'ContentElements/'),
-            GeneralUtility::getFileAbsFileName($siteView['partialRootPaths'][2]),
-        ]);
-        $this->standAloneView->assign('productSets', $productSets);
-        $this->standAloneView->assign('productSetsCount', $productSetsCount);
-        $this->standAloneView->assign('breakpoints', CroppingUtility::getDefaultBreakpoints());
-
-        return new HtmlResponse($this->standAloneView->render());
+        return $filteredProductSets ? $filteredProductSets->count() : 0;
     }
 }

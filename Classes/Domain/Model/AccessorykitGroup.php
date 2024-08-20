@@ -19,7 +19,7 @@ final class AccessorykitGroup extends AbstractEntity
 
     protected string $headline = '';
 
-    private function __construct()
+    public function __construct()
     {
         $this->initStorageObjects();
     }

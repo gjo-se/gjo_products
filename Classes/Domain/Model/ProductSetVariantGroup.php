@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GjoSe\GjoProducts\Domain\Model;
 
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 final class ProductSetVariantGroup extends AbstractEntity
 {
@@ -27,7 +27,7 @@ final class ProductSetVariantGroup extends AbstractEntity
 
     protected string $tableHeadline = '';
 
-    private function __construct()
+    public function __construct()
     {
         $this->initStorageObjects();
     }

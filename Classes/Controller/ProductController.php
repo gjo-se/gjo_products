@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace GjoSe\GjoProducts\Controller;
 
+use Doctrine\DBAL\Exception;
 use GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository;
 use GjoSe\GjoSitePackage\Controller\AbstractController;
 use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 
 final class ProductController extends AbstractController
 {
@@ -22,9 +22,7 @@ final class ProductController extends AbstractController
 
     public function showProductGroupTeaserAction(): ResponseInterface
     {
-        $this->view->assignMultiple([
-            'data' => $this->getCurrentContentObjectData(),
-            'breakpoints' => CroppingUtility::getDefaultBreakpoints(),
+        $this->assignCommonViewVariables([
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
 
@@ -33,45 +31,31 @@ final class ProductController extends AbstractController
 
     public function showProductGroupAction(): ResponseInterface
     {
-        $this->view->assignMultiple([
-            'data' => $this->getCurrentContentObjectData(),
-            'breakpoints' => CroppingUtility::getDefaultBreakpoints(),
+        $this->assignCommonViewVariables([
             'productGroup' => $this->productGroupRepository->findByUid($this->settings['productGroup']),
         ]);
 
         return $this->htmlResponse();
     }
 
+    /**
+     * @throws Exception
+     */
     public function showProductSetAction(): ResponseInterface
     {
         $productSet = $this->productSetRepository->findByUid($this->settings['productSet']);
 
-        $productSetTypeUid = $this->productSetTypeRepository->findProductSetTypeUidByProductSetUid((int)$this->settings['productSet'], 1);
-        $productSetType = $this->productSetTypeRepository->findByUid($productSetTypeUid);
-
-        $productGroup = null;
-        if ($productSetType) {
-            $productGroup = $productSetType->getProductGroup();
-        }
-
-        $this->view->assignMultiple([
-            'data' => $this->getCurrentContentObjectData(),
-            'breakpoints' => CroppingUtility::getDefaultBreakpoints(),
+        $this->assignCommonViewVariables([
             'productSet' => $productSet,
-            'productGroup' => $productGroup,
+            'productGroup' => $this->productSetTypeRepository->findProductGroupByProductSet($productSet),
         ]);
 
         return $this->htmlResponse();
     }
 
-    /**
-     * @throws AspectNotFoundException
-     */
     public function productFinderAction(): ResponseInterface
     {
-        $this->view->assignMultiple([
-            'data' => $this->getCurrentContentObjectData(),
-        ]);
+        $this->assignCommonViewVariables();
 
         return $this->htmlResponse();
     }

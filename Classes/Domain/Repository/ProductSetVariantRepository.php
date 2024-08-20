@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace GjoSe\GjoProducts\Domain\Repository;
 
-use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
 use GjoSe\GjoProducts\Domain\Model\ProductSetVariant;
+use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 
 final class ProductSetVariantRepository extends AbstractRepository
 {
     /**
+     * @param int $productSetVariantGroupUid
      * @param array<string> $productSetVariantFilter
+     *
+     * @return ProductSetVariant|null
      *
      * @throws InvalidQueryException
      */

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 
-// @todo-methodClean:
+// @todo-next-iteration:
 // foreach file in folder
 
 return (function (): array {
