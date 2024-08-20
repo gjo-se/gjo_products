@@ -13,7 +13,9 @@ final class ProductSetTypeRepository extends AbstractRepository
 {
     public function __construct(
         private readonly ConnectionPool $connectionPool
-    ) {}
+    ) {
+        parent::__construct();
+    }
 
     /**
      * @throws Exception
