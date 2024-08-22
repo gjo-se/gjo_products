@@ -6,6 +6,8 @@ namespace GjoSe\GjoProducts\Middleware;
 
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
+use GjoSe\GjoSitePackage\Service\SiteSettingsService;
+use GjoSe\GjoSitePackage\Service\StandaloneViewService;
 use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,7 +16,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 
 final class GetProductFinderListMiddleware extends AbstractMiddleware implements MiddlewareInterface
 {
@@ -24,9 +25,12 @@ final class GetProductFinderListMiddleware extends AbstractMiddleware implements
 
     private const int OFFSET = 0;
 
+    private const string TEMPLATE = 'Product/ProductFinderList.html';
+
     public function __construct(
         private readonly ProductSetRepository $productSetRepository,
-        private readonly StandaloneView $standaloneView
+        private readonly StandaloneViewService $standaloneViewService,
+        private readonly SiteSettingsService $siteSettingsService,
     ) {}
 
     /**
@@ -43,12 +47,28 @@ final class GetProductFinderListMiddleware extends AbstractMiddleware implements
             return $handler->handle($this->request);
         }
 
-        $this->configureStandaloneView($this->standaloneView);
-        $this->standaloneView->assign('productSets', $this->getProductSets());
-        $this->standaloneView->assign('productSetsCount', $this->getProductSetsCount());
-        $this->standaloneView->assign('breakpoints', CroppingUtility::getDefaultBreakpoints());
+        $standaloneView = $this->standaloneViewService->configureStandaloneView(self::TEMPLATE);
+        $standaloneView->assignMultiple([
+            'productSets' => $this->getProductSets(),
+            'productSetsCount' => $this->getProductSetsCount(),
+            'breakpoints' => CroppingUtility::getDefaultBreakpoints(),
+        ]);
 
-        return new HtmlResponse($this->standaloneView->render());
+        return new HtmlResponse($standaloneView->render());
+    }
+
+    /**
+     * @return ?QueryResultInterface<ProductSet>
+     * @throws InvalidQueryException
+     */
+    private function getProductSets(): ?QueryResultInterface
+    {
+        return $this->productSetRepository->findByFilter(
+            $this->siteSettingsService->getSiteSettings(),
+            $this->getProductFinderFilter(),
+            $this->getOffset(),
+            self::LIMIT
+        );
     }
 
     /** @return array */
@@ -66,26 +86,11 @@ final class GetProductFinderListMiddleware extends AbstractMiddleware implements
 
     /**
      * @throws InvalidQueryException
-     *
-     * @return ?QueryResultInterface<ProductSet>
-     */
-    private function getProductSets(): ?QueryResultInterface
-    {
-        return $this->productSetRepository->findByFilter(
-            $this->getSiteSettings(),
-            $this->getProductFinderFilter(),
-            $this->getOffset(),
-            self::LIMIT
-        );
-    }
-
-    /**
-     * @throws InvalidQueryException
      */
     private function getProductSetsCount(): int
     {
         $filteredProductSets = $this->productSetRepository->findByFilter(
-            $this->getSiteSettings(),
+            $this->siteSettingsService->getSiteSettings(),
             $this->getProductFinderFilter()
         );
 
