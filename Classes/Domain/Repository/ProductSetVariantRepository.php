@@ -11,10 +11,8 @@ use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 final class ProductSetVariantRepository extends AbstractRepository
 {
     /**
-     * @param int $productSetVariantGroupUid
      * @param array<string> $productSetVariantFilter
      *
-     * @return ProductSetVariant|null
      *
      * @throws InvalidQueryException
      */

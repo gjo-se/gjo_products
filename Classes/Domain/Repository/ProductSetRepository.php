@@ -13,10 +13,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 final class ProductSetRepository extends AbstractRepository
 {
     /**
-     * @param array $siteSettings
-     * @param array $productFinderFilter
-     * @param int $offset
-     * @param int $limit
      *
      * @return QueryResultInterface<ProductSet>|null
      *

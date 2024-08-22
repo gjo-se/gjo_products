@@ -9,7 +9,6 @@ use GjoSe\GjoProducts\Domain\Repository\ProductGroupRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetTypeRepository;
 use GjoSe\GjoSitePackage\Controller\AbstractController;
-use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 use Psr\Http\Message\ResponseInterface;
 
 final class ProductController extends AbstractController

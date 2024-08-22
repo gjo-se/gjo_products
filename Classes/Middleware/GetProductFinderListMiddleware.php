@@ -37,14 +37,14 @@ final class GetProductFinderListMiddleware extends AbstractMiddleware implements
      * @throws InvalidQueryException
      */
     public function process(
-        ServerRequestInterface $request,
-        RequestHandlerInterface $handler
+        ServerRequestInterface $serverRequest,
+        RequestHandlerInterface $requestHandler
     ): ResponseInterface {
 
-        $this->request = $request;
+        $this->request = $serverRequest;
 
         if (!$this->checkRequestHasQueryParamSearchValue(self::QUERY_PARAM_SEARCH_VALUE)) {
-            return $handler->handle($this->request);
+            return $requestHandler->handle($this->request);
         }
 
         $standaloneView = $this->standaloneViewService->configureStandaloneView(self::TEMPLATE);
@@ -71,7 +71,6 @@ final class GetProductFinderListMiddleware extends AbstractMiddleware implements
         );
     }
 
-    /** @return array */
     private function getProductFinderFilter(): array
     {
         $postParams = $this->getPostParams();
@@ -94,6 +93,6 @@ final class GetProductFinderListMiddleware extends AbstractMiddleware implements
             $this->getProductFinderFilter()
         );
 
-        return $filteredProductSets ? $filteredProductSets->count() : 0;
+        return $filteredProductSets instanceof QueryResultInterface ? $filteredProductSets->count() : 0;
     }
 }
