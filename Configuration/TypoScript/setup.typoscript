@@ -1,15 +1,14 @@
 plugin.tx_gjoproducts {
-  view {
-    templateRootPath = {$plugin.tx_gjoproducts.view.templateRootPath}
+    view {
+        templateRootPath = {$plugin.tx_gjoproducts.view.templateRootPath}
 
-    layoutRootPaths {
-      10 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.layoutRootPath}
+        layoutRootPaths {
+            10 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.layoutRootPath}
+        }
+        partialRootPaths {
+            10 = {$plugin.tx_gjoproducts.view.partialRootPath}
+            20 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.partialRootPath}
+            30 = {$plugin.tx_gjobase.view.partialRootPath}
+        }
     }
-
-    partialRootPaths {
-      10 = {$plugin.tx_gjoproducts.view.partialRootPath}
-      20 = {$plugin.tx_gjositepackage.fluidtemplate.contentElement.partialRootPath}
-      30 = {$plugin.tx_gjobase.view.partialRootPath}
-    }
-  }
 }

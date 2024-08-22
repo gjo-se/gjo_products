@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <T3DataStructure>
     <sheets>
         <sDEF>
@@ -25,12 +25,12 @@
                             </items>
                             <foreign_table>tx_gjoproducts_domain_model_productset</foreign_table>
                             <foreign_table_where>AND tx_gjoproducts_domain_model_productset.sys_language_uid =
-                                ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productset.name
-                            </foreign_table_where>
-                        </config>
-                    </settings.productSet>
-                </el>
-            </ROOT>
-        </sDEF>
-    </sheets>
+                            ###REC_FIELD_sys_language_uid### ORDER BY tx_gjoproducts_domain_model_productset.name
+                        </foreign_table_where>
+                    </config>
+                </settings.productSet>
+            </el>
+        </ROOT>
+    </sDEF>
+</sheets>
 </T3DataStructure>

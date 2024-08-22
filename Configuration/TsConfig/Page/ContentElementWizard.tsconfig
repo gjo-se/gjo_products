@@ -10,7 +10,6 @@ mod.wizards.newContentElement.wizardItems.gjo_products {
                 CType = gjoproducts_productgroupteaser
             }
         }
-
         gjoproducts_productgroup {
             iconIdentifier = plugin-products
             title = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productgroup.title
@@ -19,7 +18,6 @@ mod.wizards.newContentElement.wizardItems.gjo_products {
                 CType = gjoproducts_productgroup
             }
         }
-
         gjoproducts_productset {
             iconIdentifier = plugin-products
             title = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productset.title
@@ -28,7 +26,6 @@ mod.wizards.newContentElement.wizardItems.gjo_products {
                 CType = gjoproducts_productset
             }
         }
-
         gjoproducts_productfinder {
             iconIdentifier = plugin-products
             title = LLL:EXT:gjo_products/Resources/Private/Language/locallang_be.xlf:plugin.gjoproducts_productFinder.title
@@ -38,6 +35,5 @@ mod.wizards.newContentElement.wizardItems.gjo_products {
             }
         }
     }
-
     show = *
 }
