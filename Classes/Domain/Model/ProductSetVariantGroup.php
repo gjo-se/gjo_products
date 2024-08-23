@@ -11,14 +11,14 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 final class ProductSetVariantGroup extends AbstractEntity
 {
     /** @var ObjectStorage<ProductSetVariant> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $productSetVariants;
 
     /** @var ObjectStorage<Product> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $products;
 
-    #[Lazy()]
+    #[Lazy]
     protected ?ProductSet $productSet = null;
 
     protected string $headline = '';

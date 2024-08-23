@@ -13,7 +13,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 final class ProductGroup extends AbstractEntity
 {
     /** @var ObjectStorage<ProductSetType> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $productSetTypes;
 
     protected ?Pages $page = null;

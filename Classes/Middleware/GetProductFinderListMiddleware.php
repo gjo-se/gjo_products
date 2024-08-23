@@ -37,14 +37,14 @@ final class GetProductFinderListMiddleware extends AbstractMiddleware implements
      * @throws InvalidQueryException
      */
     public function process(
-        ServerRequestInterface $serverRequest,
-        RequestHandlerInterface $requestHandler
+        ServerRequestInterface $request,
+        RequestHandlerInterface $handler
     ): ResponseInterface {
 
-        $this->request = $serverRequest;
+        $this->request = $request;
 
         if (!$this->checkRequestHasQueryParamSearchValue(self::QUERY_PARAM_SEARCH_VALUE)) {
-            return $requestHandler->handle($this->request);
+            return $handler->handle($this->request);
         }
 
         $standaloneView = $this->standaloneViewService->configureStandaloneView(self::TEMPLATE);

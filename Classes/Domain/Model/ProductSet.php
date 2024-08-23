@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GjoSe\GjoProducts\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use GjoSe\GjoSitePackage\Domain\Model\Pages;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class ProductSet
@@ -16,11 +16,11 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class ProductSet extends AbstractEntity
 {
     /** @var ObjectStorage<ProductSetVariantGroup> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $productSetVariantGroups;
 
     /** @var ObjectStorage<AccessorykitGroup> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $accessorykitGroups;
 
     protected ?Pages $page = null;
@@ -90,15 +90,15 @@ class ProductSet extends AbstractEntity
     protected string $filterWingcount = '';
 
     /** @var ObjectStorage<FileReference> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $downloads;
 
     /** @var ObjectStorage<FileReference> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $downloadEngineeringDrawings;
 
     /** @var ObjectStorage<FileReference> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $imageEngineeringDrawings;
 
     protected bool $filterDesignCustomer = false;

@@ -10,11 +10,11 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 final class AccessorykitGroup extends AbstractEntity
 {
-    #[Lazy()]
+    #[Lazy]
     protected ?ProductSet $productSet = null;
 
     /** @var ObjectStorage<ProductSet> */
-    #[Lazy()]
+    #[Lazy]
     protected ObjectStorage $accessoryKits;
 
     protected string $headline = '';

@@ -238,7 +238,7 @@ return (function (): array {
                             'value' => 'system-set',
                         ],
                         [
-                            'label' => 'Ergänzungs-Set',
+                            'label' => 'Ergänzungsset',
                             'value' => 'accessoryKit',
                         ],
                         [

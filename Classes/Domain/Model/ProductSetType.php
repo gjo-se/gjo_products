@@ -10,7 +10,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 final class ProductSetType extends AbstractEntity
 {
-    #[Lazy()]
+    #[Lazy]
     protected ?ProductGroup $productGroup = null;
 
     /** @var ObjectStorage<ProductSet> */
