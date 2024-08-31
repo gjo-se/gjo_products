@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GjoSe\GjoProducts\Domain\Repository;
 
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
-use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
+use GjoSe\GjoApi\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;

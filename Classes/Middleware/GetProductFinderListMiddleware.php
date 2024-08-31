@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GjoSe\GjoProducts\Middleware;
 
+use GjoSe\GjoApi\Service\Site\SiteSettingsService;
+use GjoSe\GjoApi\Service\Template\StandaloneViewService;
+use GjoSe\GjoApi\Utility\CroppingUtility;
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
 use GjoSe\GjoProducts\Domain\Repository\ProductSetRepository;
-use GjoSe\GjoSitePackage\Service\SiteSettingsService;
-use GjoSe\GjoSitePackage\Service\StandaloneViewService;
-use GjoSe\GjoSitePackage\Utility\CroppingUtility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -21,6 +21,8 @@ final class GetProductFinderListMiddleware extends AbstractMiddleware implements
 {
     private const string QUERY_PARAM_SEARCH_VALUE = 'getProductFinderList';
 
+    // @todo-next-iteration:
+    // - Move LIMIT and OFFSET to a configuration file
     private const int LIMIT = 6;
 
     private const int OFFSET = 0;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GjoSe\GjoProducts\Domain\Repository;
 
 use GjoSe\GjoProducts\Domain\Model\ProductSetVariant;
-use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
+use GjoSe\GjoApi\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 
 final class ProductSetVariantRepository extends AbstractRepository

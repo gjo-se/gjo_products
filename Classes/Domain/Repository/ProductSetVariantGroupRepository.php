@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace GjoSe\GjoProducts\Domain\Repository;
 
-use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
+use GjoSe\GjoApi\Domain\Repository\AbstractRepository;
 
 final class ProductSetVariantGroupRepository extends AbstractRepository {}

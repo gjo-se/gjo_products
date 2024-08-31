@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GjoSe\GjoProducts\Domain\Repository;
 
 use Doctrine\DBAL\Exception;
-use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
+use GjoSe\GjoApi\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 

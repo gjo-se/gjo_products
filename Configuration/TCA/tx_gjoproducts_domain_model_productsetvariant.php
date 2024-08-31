@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use GjoSe\GjoSitePackage\Utility\TcaUtility;
+use GjoSe\GjoApi\Utility\TcaUtility;
 
 return (function (): array {
 

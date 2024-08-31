@@ -8,7 +8,7 @@ use Doctrine\DBAL\Exception;
 use GjoSe\GjoProducts\Domain\Model\ProductGroup;
 use GjoSe\GjoProducts\Domain\Model\ProductSet;
 use GjoSe\GjoProducts\Domain\Model\ProductSetType;
-use GjoSe\GjoSitePackage\Domain\Repository\AbstractRepository;
+use GjoSe\GjoApi\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 

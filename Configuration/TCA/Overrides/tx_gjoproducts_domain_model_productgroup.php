@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use GjoSe\GjoSitePackage\Utility\CroppingUtility;
+use GjoSe\GjoApi\Utility\CroppingUtility;
 
 (function (): void {
 
